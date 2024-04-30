@@ -1,5 +1,9 @@
 #include "World.h"
 
+World::World(RenderWindow& renderWindow) : m_renderWindowReference(renderWindow), m_player(Vector2f(100, 100))
+{
+	m_firstLayerDrawables.push_back(&m_player);
+}
 void World::HandleInputs()
 {
 	m_player.HandleInputs();
@@ -7,11 +11,6 @@ void World::HandleInputs()
 
 void World::HandleEvents(const Event& event)
 {
-}
-
-World::World(RenderWindow& renderWindow) : m_renderWindowReference(renderWindow), m_player(Vector2f(100, 100))
-{
-	
 }
 
 void World::WorldUpdate(const Time& deltaTime, const Time& totalTimeElapsed)
