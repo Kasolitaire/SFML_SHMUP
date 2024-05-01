@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AssetManager.cpp" />
+    <ClCompile Include="src\Math.cpp" />
+    <ClCompile Include="src\ParallaxEntity.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -28,6 +30,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AssetManager.h" />
+    <ClInclude Include="src\Math.h" />
+    <ClInclude Include="src\ParallaxEntity.h" />
     <ClInclude Include="src\Entity.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Paths.h" />

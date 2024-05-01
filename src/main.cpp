@@ -9,8 +9,7 @@ int main()
     
     Game game;
     
-   /* sf::RenderWindow window(sf::VideoMode(320, 240), "SFML works!");
-    
+    /*sf::RenderWindow window(sf::VideoMode(320, 240), "SFML works!");
     Texture& texture = AssetManager::GetTexture("assets\\far-mountains.png");
     texture.setRepeated(true);
     
@@ -47,7 +46,7 @@ int main()
                 window.close();
         }
         std::cout << sprite.getGlobalBounds().left << std::endl;
-        if (sprite.getGlobalBounds().left <= -320)
+        if (sprite.getGlobalBounds().left <= -160)
             sprite.setPosition(0, 0);
         if (sprite2.getGlobalBounds().left <= -240)
             sprite2.setPosition(0, 0);
@@ -57,7 +56,7 @@ int main()
         window.draw(sprite2);
       
         window.display();
-    }
+    }*/
 
-    return 0;*/
+    return 0;
 }
