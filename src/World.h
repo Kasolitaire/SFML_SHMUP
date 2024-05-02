@@ -22,5 +22,7 @@ private:
 	std::vector<Entity*> m_firstLayerDrawables;
 	std::vector<Entity*> m_parallaxEntityVector;
 	std::unordered_map<string, ParallaxEntity> m_parallaxEntityMap;
+
+	RectangleShape r; //test
 };
 

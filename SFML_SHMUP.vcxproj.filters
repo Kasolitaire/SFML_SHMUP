@@ -36,15 +36,18 @@
     <ClCompile Include="src\Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Math.cpp">
+    <ClCompile Include="src\math.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HitboxEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\debug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AssetManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Paths.h">
@@ -62,7 +65,16 @@
     <ClInclude Include="src\Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Math.h">
+    <ClInclude Include="src\math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HitboxEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\debug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

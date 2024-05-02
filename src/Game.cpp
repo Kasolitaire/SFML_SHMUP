@@ -5,6 +5,7 @@ Game::Game() : m_renderWindow(sf::VideoMode(576, 324), "SFML works!"), m_clock()
 	//m_view.move(200, 200);
 	//m_view.setViewport(FloatRect(0.25, 0, 1.f, 1.f));
 	m_renderWindow.setMouseCursorVisible(false); 
+	// starts the game
 	Run();
 }
 
@@ -12,9 +13,13 @@ void Game::Run()
 {
 	while (m_renderWindow.isOpen()) 
 	{
+		// calculates delta time & total time elapsed
 		CalculateDeltaTime();
+		// polls all events
 		PollEvents();
+		// updates all logic
 		Update();
+		// renders the game
 		Render();
 	}
 }

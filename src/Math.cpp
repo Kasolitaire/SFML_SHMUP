@@ -1,4 +1,4 @@
-#include "Math.h"
+#include "math.h"
 // const lerp = (x, y, a) => ;
 float lerp(const float x1, const float x2, const float a)
 {
