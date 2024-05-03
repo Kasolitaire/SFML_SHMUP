@@ -28,10 +28,10 @@
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\Projectile.cpp" />
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="debug.h" />
     <ClInclude Include="src\AssetManager.h" />
     <ClInclude Include="src\debug.h" />
     <ClInclude Include="src\HitboxEntity.h" />
@@ -40,6 +40,8 @@
     <ClInclude Include="src\Entity.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Paths.h" />
+    <ClInclude Include="src\Player.h" />
+    <ClInclude Include="src\Projectile.h" />
     <ClInclude Include="src\World.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
