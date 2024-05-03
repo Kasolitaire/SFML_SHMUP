@@ -23,12 +23,12 @@ World::World(RenderWindow& renderWindow) : m_renderWindowReference(renderWindow)
 }
 void World::HandleInputs()
 {
-	m_player.HandleInputs(m_renderWindowReference);
+	m_player.HandleInputs();
 }
 
 void World::HandleEvents(const Event& event)
 {
-	switch (event.key.code)
+	switch (event.key.code) // test code !!!
 	{
 	case Keyboard::Num1:
 		m_player.ToggleHitBox(true);
@@ -37,6 +37,9 @@ void World::HandleEvents(const Event& event)
 		m_player.ToggleHitBox(false);
 		break;
 	}
+
+	m_player.HandleEvents(event);
+
 }
 
 void World::WorldUpdate(const Time& deltaTime, const Time& totalTimeElapsed)
@@ -44,6 +47,9 @@ void World::WorldUpdate(const Time& deltaTime, const Time& totalTimeElapsed)
 	m_player.Update(deltaTime, totalTimeElapsed);
 	if (m_player.CheckForIntersection(r.getGlobalBounds())) std::cout << "collision" << endl;
 	for (auto& entity : m_parallaxEntityVector) entity->Update(deltaTime, totalTimeElapsed);
+
+	// must always be the last function executed
+	Despawn();
 }
 
 void World::WorldRender()
@@ -52,4 +58,8 @@ void World::WorldRender()
 	for (auto& drawable : m_firstLayerDrawables) drawable->draw(m_renderWindowReference, RenderStates());
 	m_renderWindowReference.draw(r);
 	//m_player.draw(m_renderWindowReference, RenderStates()); // I have no idea where a render state come from or how to use it !!!
+}
+
+void World::Despawn()
+{
 }

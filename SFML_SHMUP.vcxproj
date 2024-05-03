@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="src\AssetManager.cpp" />
     <ClCompile Include="src\debug.cpp" />
+    <ClCompile Include="src\EventManager.cpp" />
     <ClCompile Include="src\HitboxEntity.cpp" />
     <ClCompile Include="src\math.cpp" />
     <ClCompile Include="src\ParallaxEntity.cpp" />
@@ -34,6 +35,7 @@
   <ItemGroup>
     <ClInclude Include="src\AssetManager.h" />
     <ClInclude Include="src\debug.h" />
+    <ClInclude Include="src\EventManager.h" />
     <ClInclude Include="src\HitboxEntity.h" />
     <ClInclude Include="src\math.h" />
     <ClInclude Include="src\ParallaxEntity.h" />

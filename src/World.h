@@ -16,6 +16,7 @@ public:
 	void HandleEvents(const Event& event);
 	void WorldUpdate(const Time& deltaTime, const Time& totalTimeElapsed);
 	void WorldRender();
+	void Despawn();
 private:
 	RenderWindow& m_renderWindowReference;
 	Player m_player;
