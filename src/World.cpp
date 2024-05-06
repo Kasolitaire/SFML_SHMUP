@@ -67,5 +67,5 @@ void World::WorldRender()
 void World::Despawn()
 {
 	m_player.DespawnProjectiles();
-	consoleBool(e.MarkedForDespawn(), "e despawn"); // test !!!
+	//consoleBool(e.MarkedForDespawn(), "e despawn"); // test !!!
 }

@@ -5,6 +5,7 @@
 #include "Math.h"
 #include "Projectile.h"
 #include <vector>
+#include "Animation.h"
 
 using namespace sf;
 class Player : public HitboxEntity
@@ -26,6 +27,9 @@ private:
 	// for fire logic
 	Time m_firedTimeStamp;
 	bool m_fire;
+
+	// animations
+	std::vector<Animation> m_animations;
 
 	// more variety !!!
 	std::vector<Projectile> m_projectiles;

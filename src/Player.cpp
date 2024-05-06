@@ -1,18 +1,18 @@
 #include "Player.h"
 
-Player::Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowConstant) : HitboxEntity(renderWindowConstant), m_speed(5), m_fire(false) // refactor !!!
+Player::Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowConstant) :
+	HitboxEntity(renderWindowConstant),
+	m_speed(5),
+	m_fire(false)
 {
 	m_hitbox.setFillColor(Color::Transparent);
 	m_hitbox.setOutlineColor(Color::Green);
 	m_hitbox.setOutlineThickness(0.5);
 	m_hitbox.setSize(Vector2f(28, 12));
-
-	Texture& texture = AssetManager::GetTexture(ASSETS_PATH + "ship.png");
-	m_sprite.setTexture(texture);
-	m_sprite.setScale(0.9, 0.9);
-	//m_sprite.setOrigin(texture.getSize().x / 2, texture.getSize().y / 2);
+	m_sprite.setScale(0.8, 0.8);
 	m_sprite.setPosition(spawnPosition);
 	
+	m_animations.push_back(Animation(ASSETS_PATH + "spacecraft_sheet.png", 4, 0.1f));
 }
 
 void Player::HandleInputs()
@@ -38,10 +38,15 @@ void Player::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 		m_sprite.setPosition(vec);
 	
 	//consoleVector2f(m_sprite.getPosition());
-	m_hitbox.setPosition(vec.x, vec.y+5);
+	m_hitbox.setPosition(vec.x, vec.y);
 
 	// update projectiles
 	for (auto& projectile : m_projectiles) projectile.Update(deltaTime, totalTimeElapsed);
+
+	//update animations
+	for (auto& animation : m_animations) animation.Update(deltaTime, m_sprite);
+
+	
 }
 
 void Player::HandleEvents(const Event& event)
