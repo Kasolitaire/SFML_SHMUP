@@ -1,5 +1,5 @@
 #pragma once
-class debug
+class Animation
 {
 };
 

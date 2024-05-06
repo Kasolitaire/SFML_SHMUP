@@ -3,13 +3,14 @@
 class Projectile : public HitboxEntity
 {
 public:
-	Projectile();
-	Projectile(Vector2f spawnPosition, float speed, const RenderWindow& renderWindowConstant);
+	Projectile(Vector2f spawnPosition, float speed, const RenderWindow& renderWindowConstant, Time timeStamp);
 	void Update(const Time& deltaTime, const Time& totalTimeElapsed);
-	void draw(RenderTarget& target, RenderStates states) const override;
+	void MarkForDespawn();
+	bool MarkedForDespawn();
 protected:
 	float m_speed;
+	bool m_alive;
+	Time m_timeStamp;
 private:
 	
 };
-

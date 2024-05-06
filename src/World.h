@@ -6,6 +6,8 @@
 #include "Player.h";
 #include "Entity.h";
 #include "ParallaxEntity.h";
+#include "Enemy.h";
+#include "debug.h"
 using namespace sf;
 
 class World
@@ -20,10 +22,10 @@ public:
 private:
 	RenderWindow& m_renderWindowReference;
 	Player m_player;
-	std::vector<Entity*> m_firstLayerDrawables;
+	std::vector<Entity*> m_LayerZeroDrawables;
 	std::vector<Entity*> m_parallaxEntityVector;
 	std::unordered_map<string, ParallaxEntity> m_parallaxEntityMap;
 
-	RectangleShape r; //test
+	Enemy e; //test
 };
 

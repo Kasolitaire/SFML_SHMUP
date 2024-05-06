@@ -14,3 +14,8 @@ void consoleVector2i(const Vector2i vector2i)
 {
 	std::cout << "x: " << vector2i.x << " y: " << vector2i.y << std::endl;
 }
+
+void consoleBool(const bool result, std::string str) 
+{
+	std::cout << str << " returned" << " : " << result << std::endl;
+}
