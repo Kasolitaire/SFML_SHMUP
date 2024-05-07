@@ -23,7 +23,8 @@
     <ClCompile Include="src\AssetManager.cpp" />
     <ClCompile Include="src\debug.cpp" />
     <ClCompile Include="src\Enemy.cpp" />
-    <ClCompile Include="src\EventManager.cpp" />
+    <ClCompile Include="src\EnemyGrunt.cpp" />
+    <ClCompile Include="src\EnemyManager.cpp" />
     <ClCompile Include="src\HitboxEntity.cpp" />
     <ClCompile Include="src\math.cpp" />
     <ClCompile Include="src\ParallaxEntity.cpp" />
@@ -39,7 +40,8 @@
     <ClInclude Include="src\AssetManager.h" />
     <ClInclude Include="src\debug.h" />
     <ClInclude Include="src\Enemy.h" />
-    <ClInclude Include="src\EventManager.h" />
+    <ClInclude Include="src\EnemyGrunt.h" />
+    <ClInclude Include="src\EnemyManager.h" />
     <ClInclude Include="src\HitboxEntity.h" />
     <ClInclude Include="src\math.h" />
     <ClInclude Include="src\ParallaxEntity.h" />

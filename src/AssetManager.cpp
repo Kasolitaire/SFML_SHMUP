@@ -45,4 +45,18 @@ Font& AssetManager::GetFont(const string& filename)
     else return r_fontMap.at(filename); //returning reference of data member, still in scope!!!
 }
 
+pair<Image&, string> AssetManager::GetImageFilenamePair(const string& filename)
+{
+    unordered_map<string, Image>& r_imageMap = s_assetManager.m_images;
+    Image& image = r_imageMap[filename];
+    pair<Image&, string> imageFilenamePair(image, filename);
+
+    if (r_imageMap.find(filename) == r_imageMap.end())
+    {
+        image.loadFromFile(filename);
+        return imageFilenamePair;
+    }
+    else return imageFilenamePair;
+}
+
 

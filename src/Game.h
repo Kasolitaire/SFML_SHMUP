@@ -21,5 +21,8 @@ private:
 	Clock m_clock;
 	Time m_totalTimeElapsed;
 	Time m_deltaTime;
+
+	// temp pause
+	bool m_pause = false;
 };
 

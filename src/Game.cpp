@@ -18,7 +18,7 @@ void Game::Run()
 		// polls all events
 		PollEvents();
 		// updates all logic
-		Update();
+		if (!m_pause) Update();
 		// renders the game
 		Render();
 	}
@@ -52,10 +52,16 @@ void Game::PollEvents()
 			break;
 		case Event::Closed :
 			m_renderWindow.close();
+		case Event::KeyPressed:
+			m_event.key.code == Keyboard::Escape;
+			std::cout << "pause" << std::endl;
+			m_pause = !m_pause;
+			break;
 		}
+
 		
 		// handles all events relevant to gameplay
-		m_world.HandleEvents(m_event); 
+		if (!m_pause)m_world.HandleEvents(m_event); 
 		//gui.HandleEventthe g
 	}
 }
