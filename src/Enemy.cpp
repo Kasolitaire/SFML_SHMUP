@@ -21,8 +21,23 @@ Enemy::~Enemy()
 
 void Enemy::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 {
-	if (CheckForProjectileIntersection())
+	// movement
+	SineMovement(deltaTime, 0.02, 100, 100);
+	
+	if (CheckForProjectileIntersection()) 
+	{
 		m_alive = false;
+		// should take damage or die here		
+	}
+}
+
+void Enemy::SineMovement(const Time& deltaTime, const float frequency, const float amplitude, float const speed)
+{
+	Vector2f playerPosition = m_sprite.getPosition();
+	float sin = sinf((playerPosition.x) * frequency) * amplitude;
+	//m_sprite.setPosition(playerPosition.x, playerPosition.y + sin);
+	m_sprite.move(-(speed * deltaTime.asSeconds()), sin * deltaTime.asSeconds());
+	std::cout << sin << std::endl;
 }
 
 bool Enemy::MarkedForDespawn()
