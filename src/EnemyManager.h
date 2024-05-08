@@ -1,9 +1,20 @@
 #pragma once
+#include <queue>
+#include "Squadron.h"
+#include "Enemy.h";
+#include <vector>
 #include "Player.h"
-class Enemy // I intend for this class to have a bunch of information about the states of other objects 
+class EnemyManager : public Drawable // I intend for this class to have a bunch of information about the states of other objects 
 {
 public:
-	//Create
+	EnemyManager(Player& player);
+	void Update(const Time deltaTime, const Time totalTimeElapsed);
+	void draw(RenderTarget& target, RenderStates states) const override;
+	void SpawnSquadron(Squadron squadron);
+	
 private:
-	//Player& m_player;
+	std::queue<Squadron> m_squadrons;
+	std::vector<Enemy> m_enemies;
+	Time m_timer;
+	Player& m_player;
 };

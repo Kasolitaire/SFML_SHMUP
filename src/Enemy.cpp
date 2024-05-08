@@ -33,9 +33,9 @@ void Enemy::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 
 void Enemy::SineMovement(const Time& deltaTime, const float frequency, const float amplitude, float const speed)
 {
-	Vector2f playerPosition = m_sprite.getPosition();
-	float sin = sinf((playerPosition.x) * frequency) * amplitude;
-	m_sprite.move(-(speed * deltaTime.asSeconds()), sin * deltaTime.asSeconds());
+	//Vector2f enemyPosition = m_sprite.getPosition();
+	//float sin = sinf((enemyPosition.x) * frequency) * amplitude;
+	//m_sprite.move(-(speed * deltaTime.asSeconds()), sin * deltaTime.asSeconds());
 }
 
 bool Enemy::MarkedForDespawn()

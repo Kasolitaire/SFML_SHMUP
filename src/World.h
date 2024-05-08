@@ -6,8 +6,8 @@
 #include "Player.h";
 #include "Entity.h";
 #include "ParallaxEntity.h";
-#include "Enemy.h";
 #include "debug.h"
+#include "EnemyManager.h"
 using namespace sf;
 
 class World
@@ -22,10 +22,9 @@ public:
 private:
 	RenderWindow& m_renderWindowReference;
 	Player m_player;
+	EnemyManager m_enemyManager;
 	std::vector<Entity*> m_LayerZeroDrawables;
 	std::vector<Entity*> m_parallaxEntityVector;
 	std::unordered_map<string, ParallaxEntity> m_parallaxEntityMap;
-
-	Enemy e; //test
 };
 

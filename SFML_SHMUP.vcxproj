@@ -33,6 +33,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Projectile.cpp" />
+    <ClCompile Include="src\Squadron.cpp" />
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -50,6 +51,7 @@
     <ClInclude Include="src\Paths.h" />
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\Projectile.h" />
+    <ClInclude Include="src\Squadron.h" />
     <ClInclude Include="src\World.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

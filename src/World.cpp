@@ -1,6 +1,9 @@
 #include "World.h"
 
-World::World(RenderWindow& renderWindow) : m_renderWindowReference(renderWindow), m_player(Vector2f(100, 100), m_renderWindowReference) , e(m_player, Vector2f(200,200))
+World::World(RenderWindow& renderWindow) : 
+	m_renderWindowReference(renderWindow), 
+	m_player(Vector2f(100, 100), m_renderWindowReference),
+	m_enemyManager(m_player)
 {
 	//test
 	
@@ -46,7 +49,7 @@ void World::WorldUpdate(const Time& deltaTime, const Time& totalTimeElapsed)
 	m_player.Update(deltaTime, totalTimeElapsed);
 	
 	//update enemies
-	e.Update(deltaTime, totalTimeElapsed);
+	m_enemyManager.Update(deltaTime, totalTimeElapsed);
 
 	// update parallax
 	for (auto& entity : m_parallaxEntityVector) entity->Update(deltaTime, totalTimeElapsed);
@@ -59,8 +62,8 @@ void World::WorldRender()
 {
 	for (auto& drawable : m_parallaxEntityVector) drawable->draw(m_renderWindowReference, RenderStates());
 	for (auto& drawable : m_LayerZeroDrawables) drawable->draw(m_renderWindowReference, RenderStates());
+	m_enemyManager.draw(m_renderWindowReference, RenderStates());
 	
-	e.draw(m_renderWindowReference, RenderStates());
 	//m_player.draw(m_renderWindowReference, RenderStates()); // I have no idea where a render state come from or how to use it !!!
 }
 
