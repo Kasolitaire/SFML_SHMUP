@@ -26,7 +26,7 @@
     <ClCompile Include="src\EnemyGrunt.cpp" />
     <ClCompile Include="src\EnemyManager.cpp" />
     <ClCompile Include="src\HitboxEntity.cpp" />
-    <ClCompile Include="src\math.cpp" />
+    <ClCompile Include="src\CustomMath.cpp" />
     <ClCompile Include="src\ParallaxEntity.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\Game.cpp" />
@@ -44,7 +44,7 @@
     <ClInclude Include="src\EnemyGrunt.h" />
     <ClInclude Include="src\EnemyManager.h" />
     <ClInclude Include="src\HitboxEntity.h" />
-    <ClInclude Include="src\math.h" />
+    <ClInclude Include="src\CustomMath.h" />
     <ClInclude Include="src\ParallaxEntity.h" />
     <ClInclude Include="src\Entity.h" />
     <ClInclude Include="src\Game.h" />

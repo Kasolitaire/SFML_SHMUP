@@ -2,16 +2,16 @@
 
 EnemyManager::EnemyManager(Player& player) : m_player(player)
 {
-	m_squadrons.push(Squadron(seconds(2.5), 5, 100, 50));
-	m_squadrons.push(Squadron(seconds(2.5), 5, 100, 50));
-	m_squadrons.push(Squadron(seconds(2.5), 5, 100, 50));
+	m_squadrons.push(Squadron(Time(), 5, 100, 100));
+	m_squadrons.push(Squadron(seconds(7), 5, 100, 100));
+	m_squadrons.push(Squadron(seconds(7), 5, 100, 100));
 }
 
 void EnemyManager::Update(const Time deltaTime, const Time totalTimeElapsed)
 {
 	m_timer += deltaTime;
 
-	if (m_timer >= m_squadrons.back().m_timeStamp && !m_squadrons.empty()) 
+	if (!m_squadrons.empty() && m_timer >= m_squadrons.back().m_timeStamp)
 	{
 		SpawnSquadron(m_squadrons.back());
 		m_squadrons.pop();
@@ -35,9 +35,8 @@ void EnemyManager::draw(RenderTarget& target, RenderStates states) const
 void EnemyManager::SpawnSquadron(Squadron squadron)
 {
 	float x = 500; // placeholder !!!
-	for (int index = 0; squadron.m_count; index++) 
+	for (int index = 0; index < squadron.m_count; index++) 
 	{
-		x += squadron.m_horizontalDistanceApart * index;
-		m_enemies.push_back(Enemy(m_player, Vector2f(x, squadron.m_spawnHeight)));
+		m_enemies.push_back(Enemy(m_player, Vector2f(x + squadron.m_horizontalDistanceApart * index, squadron.m_spawnHeight)));
 	}
 }

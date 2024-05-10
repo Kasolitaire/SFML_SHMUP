@@ -2,7 +2,7 @@
 #include "Paths.h"
 #include "AssetManager.h"
 #include "HitboxEntity.h"
-#include "Math.h"
+#include "CustomMath.h"
 #include "Projectile.h"
 #include <vector>
 #include "Animation.h"
