@@ -26,7 +26,7 @@ void EnemyTrooper::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 
 	//fire logic
 
-	if (totalTimeElapsed - m_firedTimeStamp >= seconds(1))
+	if (totalTimeElapsed - m_firedTimeStamp >= seconds(1.5))
 	{
 		m_firedTimeStamp = totalTimeElapsed;
 		m_directionalProjectiles.push_back(
@@ -34,7 +34,7 @@ void EnemyTrooper::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 				m_sprite.getPosition(),
 				*m_renderWindowConstant,
 				totalTimeElapsed,
-				100.f,
+				150,
 				angle - 90
 			));
 
@@ -49,6 +49,6 @@ void EnemyTrooper::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 
 void EnemyTrooper::draw(RenderTarget& target, RenderStates states) const
 {
-	Enemy::draw(target, states);
 	for (const DirectionalProjectile& projectile : m_directionalProjectiles) projectile.draw(target, states);
+	Enemy::draw(target, states);
 }

@@ -6,7 +6,10 @@ HitboxEntity::HitboxEntity()
 
 void HitboxEntity::ToggleHitBox(bool visible)
 {
+	// configure visible hitbox
 	m_hitboxVisible = visible;
+	m_hitbox.setFillColor(Color::Transparent);
+	m_hitbox.setOutlineColor(Color::Green);
 }
 
 bool HitboxEntity::CheckForIntersection(FloatRect transfrom)

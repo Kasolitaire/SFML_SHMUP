@@ -6,9 +6,13 @@ DirectionalProjectile::DirectionalProjectile(
 	const float speed,
 	const float rotation) : Projectile(spawnPosition, speed, renderWindowConstant, timeStamp), m_rotation(rotation)
 {
-	m_hitbox.setSize(Vector2f(10, 10));
+	Texture& texture = AssetManager::GetTexture(ASSETS_PATH + "projectile_2.png");
+	m_sprite.setTexture(texture);
+	m_sprite.setOrigin(texture.getSize().x / 2, texture.getSize().y / 2);
+	m_sprite.setRotation(rotation - 180);
 	consoleVector2f(m_hitbox.getPosition());
 	ToggleHitBox(true);
+	m_hitbox.setSize(Vector2f(5, 5));
 	
 }
 
