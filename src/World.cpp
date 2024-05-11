@@ -3,15 +3,13 @@
 World::World(RenderWindow& renderWindow) : 
 	m_renderWindowReference(renderWindow), 
 	m_player(Vector2f(100, 100), m_renderWindowReference),
-	m_enemyManager(m_player)
+	m_enemyManager(m_player),
+	trooper(m_player, Vector2f(200,200))
 {
-	//test
-	
 	View view = m_renderWindowReference.getView();
 	m_parallaxEntityMap["1"] = ParallaxEntity("1.png", view, 5, true);
 	m_parallaxEntityMap["2"] = ParallaxEntity("2.png", view, 50, true);
 	m_parallaxEntityMap["4"] = ParallaxEntity("4.png", view, 75, true);
-	
 	
 	m_LayerZeroDrawables.push_back(&m_player);
 
@@ -50,6 +48,7 @@ void World::WorldUpdate(const Time& deltaTime, const Time& totalTimeElapsed)
 	
 	//update enemies
 	m_enemyManager.Update(deltaTime, totalTimeElapsed);
+	trooper.Update(deltaTime, totalTimeElapsed);
 
 	// update parallax
 	for (auto& entity : m_parallaxEntityVector) entity->Update(deltaTime, totalTimeElapsed);
@@ -64,11 +63,13 @@ void World::WorldRender()
 	for (auto& drawable : m_LayerZeroDrawables) drawable->draw(m_renderWindowReference, RenderStates());
 	m_enemyManager.draw(m_renderWindowReference, RenderStates());
 	
+	trooper.draw(m_renderWindowReference, RenderStates());
+	
 	//m_player.draw(m_renderWindowReference, RenderStates()); // I have no idea where a render state come from or how to use it !!!
 }
 
 void World::Despawn()
 {
-	m_player.DespawnProjectiles();
-	//consoleBool(e.MarkedForDespawn(), "e despawn"); // test !!!
+	m_player.DespawnProjectiles(); 
+	m_enemyManager.Despawn();
 }

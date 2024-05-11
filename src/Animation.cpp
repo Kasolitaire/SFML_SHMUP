@@ -1,5 +1,9 @@
 #include "Animation.h"
 
+Animation::Animation()
+{
+}
+
 Animation::Animation(std::string filename, const unsigned int sectionCount, const float m_frameDuration) :
 	m_sectionCount(sectionCount),
 	m_frameDuration(m_frameDuration),
@@ -12,8 +16,10 @@ Animation::Animation(std::string filename, const unsigned int sectionCount, cons
 	m_intRect.height = textureSize.y;
 }
 
-void Animation::Update(const Time deltaTime, Sprite& sprite)
+bool Animation::Update(const Time deltaTime, Sprite& sprite)
 {
+	bool completed = false;
+	
 	if (m_currentSection == 0)
 		sprite.setTexture(m_texture);
 	
@@ -25,8 +31,10 @@ void Animation::Update(const Time deltaTime, Sprite& sprite)
 		if (m_currentSection == m_sectionCount) 
 		{
 			m_currentSection = 0;
+			completed = true;
 		}
 		m_intRect.left = m_currentSection * m_intRect.width;
 	}
 	sprite.setTextureRect(m_intRect);
+	return completed;
 }

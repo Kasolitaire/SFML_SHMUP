@@ -1,7 +1,13 @@
 #include "Entity.h"
+#include "Animation.h"
 
 Entity::Entity()
 {
+}
+
+FloatRect Entity::GetSpritePosition()
+{
+	return m_sprite.getGlobalBounds();
 }
 
 void Entity::draw(RenderTarget& target, RenderStates states) const

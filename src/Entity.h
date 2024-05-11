@@ -4,11 +4,13 @@
 #include "SFML/Graphics.hpp";
 #include "AssetManager.h";
 #include "Paths.h";
+#include "CustomMath.h"
 using namespace sf;
 class Entity : public Drawable
 {
 public:
 	Entity();
+	FloatRect GetSpritePosition();
 	virtual void draw(RenderTarget& target, RenderStates states) const;
 	virtual void Update(const Time& deltaTime, const Time& totalTimeElapsed);
 protected:

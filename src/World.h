@@ -8,6 +8,7 @@
 #include "ParallaxEntity.h";
 #include "debug.h"
 #include "EnemyManager.h"
+#include "EnemyTrooper.h"
 using namespace sf;
 
 class World
@@ -26,5 +27,8 @@ private:
 	std::vector<Entity*> m_LayerZeroDrawables;
 	std::vector<Entity*> m_parallaxEntityVector;
 	std::unordered_map<string, ParallaxEntity> m_parallaxEntityMap;
+
+	// test trooper
+	EnemyTrooper trooper;
 };
 

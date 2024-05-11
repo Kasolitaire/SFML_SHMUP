@@ -26,8 +26,9 @@ void Game::Run()
 
 void Game::Update()
 {
-	// handles input states
+	// real time inputs
 	m_world.HandleInputs(); 
+	// frame by frame logic
 	m_world.WorldUpdate(m_deltaTime, m_totalTimeElapsed);
 }
 
@@ -53,16 +54,13 @@ void Game::PollEvents()
 		case Event::Closed :
 			m_renderWindow.close();
 		case Event::KeyPressed:
-			m_event.key.code == Keyboard::Escape;
-			std::cout << "pause" << std::endl;
+			if (m_event.key.code == sf::Keyboard::Escape)
 			m_pause = !m_pause;
 			break;
 		}
-
 		
 		// handles all events relevant to gameplay
 		if (!m_pause)m_world.HandleEvents(m_event); 
-		//gui.HandleEventthe g
 	}
 }
 

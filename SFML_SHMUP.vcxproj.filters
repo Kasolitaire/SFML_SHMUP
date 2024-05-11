@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Enemy Headers">
+      <UniqueIdentifier>{fb924557-96e2-4064-98e2-ad7f405be935}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Projectile Headers">
+      <UniqueIdentifier>{2ae1fdd8-ab08-4012-8ee1-787c7cfba699}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Projectile Implementations">
+      <UniqueIdentifier>{f2748389-08b3-4eba-b8eb-55734b018002}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Enemy Implementations">
+      <UniqueIdentifier>{08c3ccf1-6b27-4d2b-b20f-81fb215b9d83}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -33,32 +45,44 @@
     <ClCompile Include="src\Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\math.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\HitboxEntity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\debug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Projectile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\EnemyManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\AssetManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Enemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Animation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\EnemyGrunt.cpp">
+    <ClCompile Include="src\CustomMath.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy.cpp">
+      <Filter>Source Files\Enemy Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EnemyGrunt.cpp">
+      <Filter>Source Files\Enemy Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EnemyManager.cpp">
+      <Filter>Source Files\Enemy Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EnemyTrooper.cpp">
+      <Filter>Source Files\Enemy Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Squadron.cpp">
+      <Filter>Source Files\Enemy Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Projectile.cpp">
+      <Filter>Source Files\Projectile Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="HorizontalProjectile.cpp">
+      <Filter>Source Files\Projectile Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DirectionalProjectile.cpp">
+      <Filter>Source Files\Projectile Implementations</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,32 +104,44 @@
     <ClInclude Include="src\Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\math.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\HitboxEntity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\debug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Projectile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\EnemyManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Enemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Animation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\EnemyGrunt.h">
+    <ClInclude Include="src\CustomMath.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EnemyGrunt.h">
+      <Filter>Header Files\Enemy Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Enemy.h">
+      <Filter>Header Files\Enemy Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EnemyManager.h">
+      <Filter>Header Files\Enemy Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EnemyTrooper.h">
+      <Filter>Header Files\Enemy Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DirectionalProjectile.h">
+      <Filter>Header Files\Projectile Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="HorizontalProjectile.h">
+      <Filter>Header Files\Projectile Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Projectile.h">
+      <Filter>Header Files\Projectile Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Squadron.h">
+      <Filter>Header Files\Enemy Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

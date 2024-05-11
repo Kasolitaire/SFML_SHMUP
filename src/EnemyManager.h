@@ -13,6 +13,7 @@ public:
 	void Update(const Time deltaTime, const Time totalTimeElapsed);
 	void draw(RenderTarget& target, RenderStates states) const override;
 	void SpawnSquadron(Squadron squadron);
+	void Despawn();
 	
 private:
 	std::queue<Squadron> m_squadrons;

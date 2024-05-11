@@ -20,31 +20,28 @@ void Player::HandleInputs()
 	m_mousePosition = Vector2f(m_renderWindowConstant->mapPixelToCoords(Mouse::getPosition(*m_renderWindowConstant)));
 	if (Mouse::isButtonPressed(Mouse::Left) && m_fire == false) m_fire = true;
 	else m_fire = false;
-
-		
 }
 
 void Player::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 {
+	
 	if (totalTimeElapsed.asSeconds() - m_firedTimeStamp.asSeconds() >= 0.2 && m_fire) 
 	{
 		m_projectiles.push_back(Projectile(Vector2f(m_sprite.getPosition()), 500, *m_renderWindowConstant, totalTimeElapsed));
 		m_firedTimeStamp = totalTimeElapsed;
 	}
 	
-	Vector2f viewSizeVec = m_renderWindowConstant->getView().getSize();
-	Vector2f vec = VectorLerp(m_sprite.getPosition(), m_mousePosition, m_speed * deltaTime.asSeconds());
-	if(!(vec.x >= viewSizeVec.x || vec.y >= viewSizeVec.y || vec.x <= 0|| vec.y <= 0)) // doesnt work very well !!!
-		m_sprite.setPosition(vec);
-	
-	//consoleVector2f(m_sprite.getPosition());
-	m_hitbox.setPosition(vec.x, vec.y);
+	//
+	Vector2f viewSize = m_renderWindowConstant->getView().getSize();
+	Vector2f lerp = vectorLerp(m_sprite.getPosition(), m_mousePosition, m_speed * deltaTime.asSeconds());
+	m_sprite.setPosition(std::clamp(lerp.x, 0.0f, viewSize.x), std::clamp(lerp.y, 0.0f, viewSize.y));
+	m_hitbox.setPosition(m_sprite.getPosition());
 
 	// update projectiles
 	for (auto& projectile : m_projectiles) projectile.Update(deltaTime, totalTimeElapsed);
 
 	//update animations
-	for (auto& animation : m_animations) animation.Update(deltaTime, m_sprite);
+	for (auto& animation : m_animations) animation.Update(deltaTime, m_sprite); // this doesn't make any sense this would just play all the animations !!!
 
 	
 }
@@ -70,7 +67,7 @@ void Player::DespawnProjectiles()
 	//	projectile.MarkedForDespawn(); // put your condition here
 	//	}),
 	//	m_projectiles.end());
-	std::erase_if(m_projectiles, [](Projectile& x) {return x.MarkedForDespawn();});
+	std::erase_if(m_projectiles, [](Projectile& x) {return x.MarkedForDespawn();}); // !!!
 }
 
 std::vector<Projectile>& Player::GetProjectiles()

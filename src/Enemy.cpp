@@ -1,8 +1,9 @@
 #include "Enemy.h"
 
-Enemy::Enemy(Player& player, Vector2f spawnPosition) : m_player(player), m_alive(true)
+Enemy::Enemy(Player& player, Vector2f spawnPosition) :
+	m_player(player), 
+	m_despawn(false)
 {
-
 }
 
 Enemy::~Enemy()
@@ -12,15 +13,6 @@ Enemy::~Enemy()
 
 void Enemy::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 {
-	// movement
-	SineMovement(deltaTime, totalTimeElapsed, 0.05, 1, 100);
-	
-	if (CheckForProjectileIntersection()) 
-	{
-		m_alive = false;
-		// should take damage or die here		
-	}
-	m_hitbox.setPosition(m_sprite.getPosition());
 }
 
 void Enemy::SineMovement(const Time& deltaTime, const Time& totalTimeElapsed,const float frequency, const float amplitude, float const speed)
@@ -34,12 +26,12 @@ void Enemy::SineMovement(const Time& deltaTime, const Time& totalTimeElapsed,con
 
 bool Enemy::MarkedForDespawn()
 {
-	return !m_alive;
+	return m_despawn;
 }
 
 void Enemy::MarkForDespawn()
 {
-	m_alive = false;
+	m_despawn = true;
 }
 
 bool Enemy::CheckForProjectileIntersection()

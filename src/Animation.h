@@ -7,8 +7,9 @@ using namespace sf;
 class Animation
 {
 public:
+	Animation();
 	Animation(std::string filename, const unsigned int sectionCount, const float m_frameDuration);
-	void Update(const Time deltaTime, Sprite& sprite);
+	bool Update(const Time deltaTime, Sprite& sprite);
 
 private:
 	unsigned int m_sectionCount;

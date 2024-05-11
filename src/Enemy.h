@@ -15,6 +15,6 @@ protected:
 	bool CheckForProjectileIntersection();
 	Player& m_player;
 	std::vector<Projectile> m_projectiles;
-	bool m_alive;
+	bool m_despawn;
 };
 
