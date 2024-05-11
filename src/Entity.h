@@ -5,6 +5,9 @@
 #include "AssetManager.h";
 #include "Paths.h";
 #include "CustomMath.h"
+#include "Animation.h"
+#include <vector>
+#include <memory>
 using namespace sf;
 class Entity : public Drawable
 {

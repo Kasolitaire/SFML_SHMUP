@@ -78,10 +78,10 @@
     <ClCompile Include="src\Projectile.cpp">
       <Filter>Source Files\Projectile Implementations</Filter>
     </ClCompile>
-    <ClCompile Include="HorizontalProjectile.cpp">
+    <ClCompile Include="src\DirectionalProjectile.cpp">
       <Filter>Source Files\Projectile Implementations</Filter>
     </ClCompile>
-    <ClCompile Include="src\DirectionalProjectile.cpp">
+    <ClCompile Include="src\HorizontalProjectile.cpp">
       <Filter>Source Files\Projectile Implementations</Filter>
     </ClCompile>
   </ItemGroup>
@@ -134,14 +134,14 @@
     <ClInclude Include="src\DirectionalProjectile.h">
       <Filter>Header Files\Projectile Headers</Filter>
     </ClInclude>
-    <ClInclude Include="HorizontalProjectile.h">
-      <Filter>Header Files\Projectile Headers</Filter>
-    </ClInclude>
     <ClInclude Include="src\Projectile.h">
       <Filter>Header Files\Projectile Headers</Filter>
     </ClInclude>
     <ClInclude Include="src\Squadron.h">
       <Filter>Header Files\Enemy Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HorizontalProjectile.h">
+      <Filter>Header Files\Projectile Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

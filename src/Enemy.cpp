@@ -37,13 +37,13 @@ void Enemy::MarkForDespawn()
 bool Enemy::CheckForProjectileIntersection()
 {
 	bool intersected = false;
-	auto& projectiles = m_player.GetProjectiles();
-	for (auto& projectile : projectiles) 
+	std::vector<Projectile*> projectiles = m_player.GetProjectiles();
+	for (Projectile* projectile : projectiles) 
 	{
-		if (projectile.CheckForIntersection(m_hitbox.getGlobalBounds())) 
+		if (projectile->CheckForIntersection(m_hitbox.getGlobalBounds())) 
 		{
 			intersected = true;
-			projectile.MarkForDespawn();
+			projectile->MarkForDespawn();
 		}
 	} 
 	return intersected;

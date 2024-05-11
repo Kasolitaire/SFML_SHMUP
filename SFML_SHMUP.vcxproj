@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="HorizontalProjectile.cpp" />
     <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\AssetManager.cpp" />
     <ClCompile Include="src\debug.cpp" />
@@ -30,6 +29,7 @@
     <ClCompile Include="src\EnemyTrooper.cpp" />
     <ClCompile Include="src\HitboxEntity.cpp" />
     <ClCompile Include="src\CustomMath.cpp" />
+    <ClCompile Include="src\HorizontalProjectile.cpp" />
     <ClCompile Include="src\ParallaxEntity.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\Game.cpp" />
@@ -40,7 +40,6 @@
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="HorizontalProjectile.h" />
     <ClInclude Include="src\Animation.h" />
     <ClInclude Include="src\AssetManager.h" />
     <ClInclude Include="src\debug.h" />
@@ -51,6 +50,7 @@
     <ClInclude Include="src\EnemyTrooper.h" />
     <ClInclude Include="src\HitboxEntity.h" />
     <ClInclude Include="src\CustomMath.h" />
+    <ClInclude Include="src\HorizontalProjectile.h" />
     <ClInclude Include="src\ParallaxEntity.h" />
     <ClInclude Include="src\Entity.h" />
     <ClInclude Include="src\Game.h" />

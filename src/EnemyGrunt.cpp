@@ -11,7 +11,7 @@ EnemyGrunt::EnemyGrunt(Player& player, Vector2f spawnPosition) : Enemy(player, s
 	m_hitbox.setOutlineColor(Color::Green);
 	m_hitbox.setOutlineThickness(0.5);
 	m_hitbox.setPosition(m_sprite.getPosition());
-
+	ToggleHitBox(true);
 	m_animations.insert({"explosion", Animation(ASSETS_PATH + "explosion-spritesheet.png", 8, 0.1f)});
 }
 

@@ -21,5 +21,4 @@ private:
 	Vector2u m_textureSize;
 	float m_speed;
 	bool m_repeat;
-
 };

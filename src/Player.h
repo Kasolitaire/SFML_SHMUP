@@ -5,7 +5,7 @@
 #include "CustomMath.h"
 #include "Projectile.h"
 #include <vector>
-#include "Animation.h"
+#include "HorizontalProjectile.h"
 
 using namespace sf;
 class Player : public HitboxEntity
@@ -17,7 +17,7 @@ public:
 	void HandleEvents(const Event& event);
 	void draw(RenderTarget& target, RenderStates states) const override;
 	void DespawnProjectiles();
-	std::vector<Projectile>& GetProjectiles(); // potentially worth making certain fucntions const within projectiles !!!
+	std::vector<Projectile*> GetProjectiles(); // potentially worth making certain fucntions const within projectiles !!!
 	FloatRect GetHitboxPosition();
 private:
 	void SpawnProjectile();
@@ -32,6 +32,6 @@ private:
 	std::vector<Animation> m_animations;
 
 	// more variety !!!
-	std::vector<Projectile> m_projectiles;
+	std::vector<HorizontalProjectile*> m_horizontalProjectiles;
 };
 

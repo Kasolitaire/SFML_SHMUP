@@ -24,10 +24,13 @@ void Player::HandleInputs()
 
 void Player::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 {
-	
 	if (totalTimeElapsed.asSeconds() - m_firedTimeStamp.asSeconds() >= 0.2 && m_fire) 
 	{
-		m_projectiles.push_back(Projectile(Vector2f(m_sprite.getPosition()), 500, *m_renderWindowConstant, totalTimeElapsed));
+		m_horizontalProjectiles.push_back(
+			new HorizontalProjectile(
+				Vector2f(m_sprite.getPosition()),
+				500, *m_renderWindowConstant,
+				totalTimeElapsed));
 		m_firedTimeStamp = totalTimeElapsed;
 	}
 	
@@ -38,41 +41,46 @@ void Player::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 	m_hitbox.setPosition(m_sprite.getPosition());
 
 	// update projectiles
-	for (auto& projectile : m_projectiles) projectile.Update(deltaTime, totalTimeElapsed);
+	for (auto& projectile : m_horizontalProjectiles) projectile->Update(deltaTime, totalTimeElapsed);
 
 	//update animations
 	for (auto& animation : m_animations) animation.Update(deltaTime, m_sprite); // this doesn't make any sense this would just play all the animations !!!
-
-	
 }
 
 void Player::HandleEvents(const Event& event)
 {
-	//if (event.key.code == Keyboard::Space && event.KeyReleased == Event::KeyReleased)
-		
 }
 
 void Player::draw(RenderTarget& target, RenderStates states) const
 {
 	target.draw(m_sprite);
 	if(m_hitboxVisible) target.draw(m_hitbox);
-	for (auto& projectile : m_projectiles) projectile.draw(target, states);
+	
+	for (HorizontalProjectile* projectile : m_horizontalProjectiles) projectile->draw(target, states);
 }
 
 void Player::DespawnProjectiles()
 {
-	//m_projectiles.erase(std::remove_if(m_projectiles.begin(),
-	//	m_projectiles.end(),
-	//	[](auto& projectile) {
-	//	projectile.MarkedForDespawn(); // put your condition here
-	//	}),
-	//	m_projectiles.end());
-	std::erase_if(m_projectiles, [](Projectile& x) {return x.MarkedForDespawn();}); // !!!
+	
+	std::erase_if(m_horizontalProjectiles, [](HorizontalProjectile* x) 
+		{
+			x->MarkedForDespawn();
+			if (x->MarkedForDespawn())
+			{
+				delete x;
+				return true;
+			}
+			return false;
+		});
 }
 
-std::vector<Projectile>& Player::GetProjectiles()
+std::vector<Projectile*> Player::GetProjectiles()
 {
-	return m_projectiles;
+	vector<Projectile*> projectiles;
+	for (Projectile* projectile : m_horizontalProjectiles)
+		projectiles.push_back(projectile);
+
+	return projectiles;
 }
 
 FloatRect Player::GetHitboxPosition()
