@@ -8,8 +8,6 @@ void HitboxEntity::ToggleHitBox(bool visible)
 {
 	// configure visible hitbox
 	m_hitboxVisible = visible;
-	m_hitbox.setFillColor(Color::Transparent);
-	m_hitbox.setOutlineColor(Color::Green);
 }
 
 bool HitboxEntity::CheckForIntersection(FloatRect transfrom)
@@ -20,9 +18,18 @@ bool HitboxEntity::CheckForIntersection(FloatRect transfrom)
 void HitboxEntity::draw(RenderTarget& target, RenderStates states) const
 {
 	target.draw(m_sprite);
-	if (m_hitboxVisible) target.draw(m_hitbox);
+	if (m_hitboxVisible) 
+		target.draw(m_hitbox);
+}
+
+FloatRect HitboxEntity::GetHitboxPosition() const
+{
+	return m_hitbox.getGlobalBounds();
 }
 
 HitboxEntity::HitboxEntity(const RenderWindow& renderWindowConstant) : Entity(renderWindowConstant)
 {
+	m_hitbox.setFillColor(Color::Transparent);
+	m_hitbox.setOutlineColor(Color::Green);
+	m_hitbox.setOutlineThickness(0.5);
 }

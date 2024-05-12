@@ -2,8 +2,7 @@
 
 Game::Game() : m_renderWindow(sf::VideoMode(576, 324), "SFML works!"), m_clock(), m_world(m_renderWindow)
 {
-	//m_view.move(200, 200);
-	//m_view.setViewport(FloatRect(0.25, 0, 1.f, 1.f));
+	m_renderWindow.setSize(Vector2u(1152, 648));
 	m_renderWindow.setMouseCursorVisible(false); 
 	// starts the game
 	Run();
@@ -48,12 +47,12 @@ void Game::PollEvents()
 	{
 		switch (m_event.type)
 		{
-		case Event::Resized:
+		case Event::Resized :
 			ViewResizedEvent();
 			break;
 		case Event::Closed :
 			m_renderWindow.close();
-		case Event::KeyPressed:
+		case Event::KeyPressed :
 			if (m_event.key.code == sf::Keyboard::Escape)
 			m_pause = !m_pause;
 			break;

@@ -5,7 +5,7 @@ Entity::Entity()
 {
 }
 
-FloatRect Entity::GetSpritePosition()
+FloatRect Entity::GetSpritePosition() const
 {
 	return m_sprite.getGlobalBounds();
 }

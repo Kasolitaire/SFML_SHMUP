@@ -18,3 +18,9 @@ float degreesToRadians(const float degrees)
 	return degrees * (atan(1) * 4 / 180);
 }
 
+float getAngleToTarget(const Vector2f target, const Vector2f local)
+{
+	float angleInRadians = atan2(target.y - local.y, target.x - local.x) * 180 / 3.141;
+	return angleInRadians;
+}
+

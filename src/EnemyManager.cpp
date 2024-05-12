@@ -5,10 +5,10 @@ EnemyManager::EnemyManager(Player& player) :
 	m_timer(Time())
 
 {
-	m_squadrons.push(Squadron(Time(), 5, 100, 100));
-	m_squadrons.push(Squadron(seconds(2.5), 2, 60, 100));
-	m_squadrons.push(Squadron(seconds(6), 5, 50, 100));
-	m_squadrons.push(Squadron(seconds(6), 5, 75, 100));
+	m_squadrons.push(Squadron(EnemyType::Grunt, Time(), 5, 100, 100));
+	m_squadrons.push(Squadron(EnemyType::Grunt, seconds(2.5), 2, 60, 100));
+	m_squadrons.push(Squadron(EnemyType::Grunt, seconds(6), 5, 50, 100));
+	m_squadrons.push(Squadron(EnemyType::Grunt, seconds(6), 5, 75, 100));
 }
 
 EnemyManager::~EnemyManager()
@@ -49,17 +49,24 @@ void EnemyManager::SpawnSquadron(Squadron squadron)
 	float x = 500; // placeholder !!!
 	for (int index = 0; index < squadron.m_count; index++) 
 	{
-		m_enemies.push_back(new EnemyGrunt(m_player, Vector2f(x + squadron.m_horizontalDistanceApart * index, squadron.m_spawnHeight)));
+		switch (squadron.m_enemyType)
+		{
+		case EnemyType::Grunt:
+			m_enemies.push_back(new EnemyGrunt(m_player, Vector2f(x + squadron.m_horizontalDistanceApart * index, squadron.m_spawnHeight)));
+			break;
+		default:
+			break;
+		}
 	}
 }
 
 void EnemyManager::Despawn()
 {
-	std::erase_if(m_enemies, [](Enemy* x) 
+	std::erase_if(m_enemies, [](Enemy* enemy) 
 		{
-			if (x->MarkedForDespawn()) 
+			if (enemy->MarkedForDespawn()) 
 			{
-				delete x;
+				delete enemy;
 				return true;
 			}
 			return false;

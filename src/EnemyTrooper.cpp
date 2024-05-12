@@ -20,7 +20,7 @@ void EnemyTrooper::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 	FloatRect hitboxRect = m_player.GetHitboxPosition();
 	Vector2f hitboxCenter(hitboxRect.left + hitboxRect.width / 2, hitboxRect.top + hitboxRect.height / 2);
 	
-	float angle = atan2(hitboxCenter.y - m_sprite.getPosition().y, hitboxCenter.x - m_sprite.getPosition().x) * 180 / 3.141;
+	float angle = getAngleToTarget(hitboxCenter, m_sprite.getPosition());
 	m_sprite.setRotation(angle);
 	m_hitbox.setRotation(angle);
 

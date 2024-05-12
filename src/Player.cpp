@@ -30,7 +30,7 @@ void Player::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 			new HorizontalProjectile(
 				Vector2f(m_sprite.getPosition()),
 				500, *m_renderWindowConstant,
-				totalTimeElapsed));
+				totalTimeElapsed, Direction::RIGHT));
 		m_firedTimeStamp = totalTimeElapsed;
 	}
 	
@@ -83,11 +83,7 @@ std::vector<Projectile*> Player::GetProjectiles()
 	return projectiles;
 }
 
-FloatRect Player::GetHitboxPosition()
-{
-	return m_hitbox.getGlobalBounds();
-}
-
 void Player::SpawnProjectile()
 {
+	// move spawn logic here !!!
 }

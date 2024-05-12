@@ -19,3 +19,8 @@ void consoleBool(const bool result, std::string str)
 {
 	std::cout << str << " returned" << " : " << result << std::endl;
 }
+
+void consoleFloat(const float number)
+{
+	std::cout << number << std::endl;
+}

@@ -13,9 +13,9 @@ class Entity : public Drawable
 {
 public:
 	Entity();
-	FloatRect GetSpritePosition();
 	virtual void draw(RenderTarget& target, RenderStates states) const;
 	virtual void Update(const Time& deltaTime, const Time& totalTimeElapsed);
+	FloatRect GetSpritePosition() const;
 protected:
 	Entity(const RenderWindow& renderWindowConstant);
 	Sprite m_sprite;

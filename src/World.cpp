@@ -4,7 +4,8 @@ World::World(RenderWindow& renderWindow) :
 	m_renderWindowReference(renderWindow), 
 	m_player(Vector2f(100, 100), m_renderWindowReference),
 	m_enemyManager(m_player),
-	trooper(m_player, Vector2f(200,200))
+	trooper(m_player, Vector2f(200,200)),
+	homing(m_player, Vector2f(250, 150), 100, m_renderWindowReference, seconds(0))
 {
 	View view = m_renderWindowReference.getView();
 	m_parallaxEntityMap["1"] = ParallaxEntity("1.png", view, 5, true);
@@ -48,7 +49,10 @@ void World::WorldUpdate(const Time& deltaTime, const Time& totalTimeElapsed)
 	
 	//update enemies
 	m_enemyManager.Update(deltaTime, totalTimeElapsed);
-	trooper.Update(deltaTime, totalTimeElapsed);
+
+	// test !!!
+	//trooper.Update(deltaTime, totalTimeElapsed);
+	homing.Update(deltaTime, totalTimeElapsed);
 
 	// update parallax
 	for (auto& entity : m_parallaxEntityVector) entity->Update(deltaTime, totalTimeElapsed);
@@ -64,6 +68,7 @@ void World::WorldRender()
 	m_enemyManager.draw(m_renderWindowReference, RenderStates());
 	
 	trooper.draw(m_renderWindowReference, RenderStates());
+	homing.draw(m_renderWindowReference, RenderStates());
 	
 	//m_player.draw(m_renderWindowReference, RenderStates()); // I have no idea where a render state come from or how to use it !!!
 }

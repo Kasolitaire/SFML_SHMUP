@@ -18,7 +18,6 @@ public:
 	void draw(RenderTarget& target, RenderStates states) const override;
 	void DespawnProjectiles();
 	std::vector<Projectile*> GetProjectiles(); // potentially worth making certain fucntions const within projectiles !!!
-	FloatRect GetHitboxPosition();
 private:
 	void SpawnProjectile();
 	float m_speed;

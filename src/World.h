@@ -9,6 +9,7 @@
 #include "debug.h"
 #include "EnemyManager.h"
 #include "EnemyTrooper.h"
+#include"HomingProjectile.h"
 using namespace sf;
 
 class World
@@ -30,5 +31,6 @@ private:
 
 	// test trooper
 	EnemyTrooper trooper;
+	HomingProjectile homing;
 };
 

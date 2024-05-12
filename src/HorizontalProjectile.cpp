@@ -2,10 +2,12 @@
 
 HorizontalProjectile::HorizontalProjectile(
 	const Vector2f spawnPosition,
-	const float speed,
+	float speed,
 	const RenderWindow& renderWindowConstant,
-	const Time timeStamp) : 
-	Projectile(spawnPosition, speed, renderWindowConstant, timeStamp)
+	const Time timeStamp,
+	Direction direction)
+	: 
+	Projectile(spawnPosition, speed, renderWindowConstant, timeStamp), m_direction(direction)
 {
 	Texture& texture = AssetManager::GetTexture(ASSETS_PATH + "projectile_1.png");
 	m_sprite.setTexture(texture);
@@ -21,7 +23,12 @@ void HorizontalProjectile::Update(const Time& deltaTime, const Time& totalTimeEl
 {
 	if (totalTimeElapsed.asSeconds() - m_timeStamp.asSeconds() >= 5)
 		MarkForDespawn();
-	Vector2f velocity(deltaTime.asSeconds() * m_speed, 0);
+	Vector2f velocity(deltaTime.asSeconds() * m_speed * m_direction, 0);
 	m_sprite.move(velocity);
 	m_hitbox.setPosition(m_sprite.getPosition());
+}
+
+void HorizontalProjectile::SetColor(const Color color)
+{
+	m_sprite.setColor(color);
 }
