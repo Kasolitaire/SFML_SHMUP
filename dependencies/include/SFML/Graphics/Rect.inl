@@ -146,6 +146,11 @@ sf::Vector2<T> Rect<T>::getPosition() const
 {
     return sf::Vector2<T>(left, top);
 }
+template <typename T>
+sf::Vector2<T> Rect<T>::getMiddlePosition() const
+{
+    return sf::Vector2<T>(left + width / 2, top + height / 2);
+}
 
 template <typename T>
 sf::Vector2<T> Rect<T>::getSize() const

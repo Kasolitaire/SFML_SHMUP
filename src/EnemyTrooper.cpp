@@ -26,10 +26,8 @@ EnemyTrooper::~EnemyTrooper()
 void EnemyTrooper::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 {
 	FloatRect hitboxRect = m_player.GetHitboxPosition();
-	Vector2f playerHitboxCenter(hitboxRect.left + hitboxRect.width / 2, hitboxRect.top + hitboxRect.height / 2);
-	
 	// movement logic
-	float rotation = getAngleToTarget(playerHitboxCenter, m_sprite.getPosition());
+	float rotation = getAngleToTarget(hitboxRect.getMiddlePosition(), m_sprite.getPosition());
 	float target = rotation < 0 ? 360 + rotation : rotation;
 
 	float cw_distance;

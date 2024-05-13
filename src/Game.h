@@ -14,7 +14,7 @@ private:
 	void Render();
 	void PollEvents();
 	void CalculateDeltaTime();
-	void ViewResizedEvent();
+	void ToggleFullScreen();
 	World m_world;
 	RenderWindow m_renderWindow;
 	Event m_event;
@@ -23,6 +23,7 @@ private:
 	Time m_deltaTime;
 
 	// temp pause
-	bool m_pause = false;
+	bool m_paused = false;
+	bool m_fullscreen = false;
 };
 

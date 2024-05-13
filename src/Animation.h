@@ -10,6 +10,7 @@ public:
 	Animation();
 	Animation(std::string filename, const unsigned int sectionCount, const float m_frameDuration);
 	bool Update(const Time deltaTime, Sprite& sprite);
+	Vector2f GetFrameSize() const;
 
 private:
 	unsigned int m_sectionCount;

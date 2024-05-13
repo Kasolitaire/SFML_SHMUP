@@ -38,3 +38,8 @@ bool Animation::Update(const Time deltaTime, Sprite& sprite)
 	sprite.setTextureRect(m_intRect);
 	return completed;
 }
+
+Vector2f Animation::GetFrameSize() const
+{
+	return Vector2f(m_intRect.width, m_intRect.height);
+}

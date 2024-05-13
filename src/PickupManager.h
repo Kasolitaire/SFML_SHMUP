@@ -13,6 +13,6 @@ public:
 	void Despawn();
 private:
 	RenderWindow m_renderWindowConstant;
-	HomingProjectile test;
+	HomingPickup test;
 };
 

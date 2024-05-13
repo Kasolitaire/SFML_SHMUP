@@ -1,6 +1,6 @@
 #include "PickupManager.h"
 
-PickupManager::PickupManager(Player& player, const RenderWindow& renderWindowConstant) : test(player, Vector2f(), 100, renderWindowConstant, Time())
+PickupManager::PickupManager(Player& player, const RenderWindow& renderWindowConstant) : test(player, Vector2f(), 150, 200,renderWindowConstant, Time())
 {
 
 }

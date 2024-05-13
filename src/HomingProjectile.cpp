@@ -3,16 +3,11 @@
 HomingProjectile::HomingProjectile(
 	const HitboxEntity& entity,
 	const Vector2f spawnPosition,
-	const float speed,
+	const float speed, const float rotationSpeed,
 	const RenderWindow& renderWindowConstant,
-	const Time timeStamp) : Projectile(spawnPosition, speed, renderWindowConstant, timeStamp), m_entity(entity)
+	const Time timeStamp) : Projectile(spawnPosition, speed, renderWindowConstant, timeStamp), m_entity(entity), m_rotationSpeed(rotationSpeed)
 {
-	m_hitbox.setPosition(m_sprite.getPosition());
-	m_hitbox.setSize(Vector2f(10, 10));
-	m_hitbox.setOrigin(m_hitbox.getSize().x / 2, m_hitbox.getSize().y / 2);
-	Texture& texture = AssetManager::GetTexture(ASSETS_PATH + "darkgrey_02.png");
-	m_sprite.setTexture(texture);
-	m_sprite.setOrigin(texture.getSize().x / 2, texture.getSize().y / 2);
+	
 }
 
 void HomingProjectile::Update(const Time& deltaTime, const Time& totalTimeElapsed)
@@ -23,7 +18,7 @@ void HomingProjectile::Update(const Time& deltaTime, const Time& totalTimeElapse
 
 void HomingProjectile::Movement(const Time deltaTime, const Time totalTimeElapsed)
 {
-	float rotation = getAngleToTarget(m_entity.GetHitboxPosition().getPosition(), m_sprite.getPosition());
+	float rotation = getAngleToTarget(m_entity.GetHitboxPosition().getMiddlePosition(), m_sprite.getPosition());
 	float target = rotation < 0 ? 360 + rotation : rotation;
 
 	float cw_distance;
@@ -44,7 +39,7 @@ void HomingProjectile::Movement(const Time deltaTime, const Time totalTimeElapse
 
 	if (cw_distance < ccw_distance) //move clockwise
 	{
-		float increment = (m_sprite.getRotation() - 100 * deltaTime.asSeconds());
+		float increment = (m_sprite.getRotation() - m_rotationSpeed * deltaTime.asSeconds());
 		m_sprite.setRotation(increment);
 
 		y = cosf(degreesToRadians(increment - 90)) * deltaTime.asSeconds() * m_speed;
@@ -52,7 +47,7 @@ void HomingProjectile::Movement(const Time deltaTime, const Time totalTimeElapse
 	}
 	else
 	{
-		float decrement = m_sprite.getRotation() + 100 * deltaTime.asSeconds();
+		float decrement = m_sprite.getRotation() + m_rotationSpeed * deltaTime.asSeconds();
 		m_sprite.setRotation(decrement);
 
 		y = cosf(degreesToRadians(decrement - 90)) * deltaTime.asSeconds() * m_speed;

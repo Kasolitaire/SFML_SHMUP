@@ -1,12 +1,12 @@
 #include "World.h"
 
 World::World(RenderWindow& renderWindow) : 
-	m_renderWindowReference(renderWindow), 
-	m_player(Vector2f(100, 100), m_renderWindowReference),
+	m_renderWindowPointer(&renderWindow), 
+	m_player(Vector2f(100, 100), *m_renderWindowPointer),
 	m_enemyManager(m_player, renderWindow), 
 	m_pickUpManager(m_player, renderWindow)
 {
-	View view = m_renderWindowReference.getView();
+	View view = m_renderWindowPointer->getView();
 	m_parallaxEntityMap["1"] = ParallaxEntity("1.png", view, 5, true);
 	m_parallaxEntityMap["2"] = ParallaxEntity("2.png", view, 50, true);
 	m_parallaxEntityMap["4"] = ParallaxEntity("4.png", view, 75, true);
@@ -61,16 +61,16 @@ void World::WorldUpdate(const Time& deltaTime, const Time& totalTimeElapsed)
 
 void World::WorldRender() // still don't know what states are for !!!
 {
-	for (auto& drawable : m_parallaxEntityVector) drawable->draw(m_renderWindowReference, RenderStates());
+	for (auto& drawable : m_parallaxEntityVector) drawable->draw(*m_renderWindowPointer, RenderStates());
 	
 	// draw enemies and their projectiles
-	m_enemyManager.draw(m_renderWindowReference, RenderStates());
+	m_enemyManager.draw(*m_renderWindowPointer, RenderStates());
 	
 	// draw pickups
-	m_pickUpManager.draw(m_renderWindowReference, RenderStates());
+	m_pickUpManager.draw(*m_renderWindowPointer, RenderStates());
 
 	// draw player
-	m_player.draw(m_renderWindowReference, RenderStates());
+	m_player.draw(*m_renderWindowPointer, RenderStates());
 }
 
 void World::Despawn()

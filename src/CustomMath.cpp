@@ -24,3 +24,8 @@ float getAngleToTarget(const Vector2f target, const Vector2f local)
 	return angleInRadians;
 }
 
+Vector2f getCenterOfFloatRect(const FloatRect floatRect)
+{
+	return Vector2f(floatRect.width / 2, floatRect.height / 2);
+}
+

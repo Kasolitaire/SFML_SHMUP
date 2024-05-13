@@ -2,13 +2,14 @@
 #include "HomingProjectile.h"
 #include "Pickup.h"
 #include "Animation.h"
-class HomingPickup : Pickup, HomingProjectile
+class HomingPickup : public Pickup, public HomingProjectile
 {
-private:
+public:
 	HomingPickup(
 		const HitboxEntity& entity,
 		const Vector2f spawnPosition,
 		const float speed,
+		const float rotationSpeed,
 		const RenderWindow& renderWindowConstant,
 		const Time timeStamp);
 	virtual void Update(const Time& deltaTime, const Time& totalTimeElapsed) override;

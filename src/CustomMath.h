@@ -6,3 +6,4 @@ float lerp(const float x, const float y, const float a);
 Vector2f vectorLerp(const Vector2f vector1, const Vector2f vector2, const float a);
 float degreesToRadians(const float degrees);
 float getAngleToTarget(const Vector2f target, const Vector2f local);
+Vector2f getCenterOfFloatRect(const FloatRect floatRect);

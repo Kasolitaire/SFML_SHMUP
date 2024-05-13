@@ -27,7 +27,7 @@ private:
 	Time m_firedTimeStamp;
 	bool m_fire;
 
-	// animations
+	// animations !!! should be a map
 	std::vector<Animation> m_animations;
 
 	// more variety !!!

@@ -21,7 +21,7 @@ public:
 	void WorldRender();
 	void Despawn();
 private:
-	RenderWindow& m_renderWindowReference;
+	RenderWindow* m_renderWindowPointer;
 	Player m_player;
 	
 	// managers

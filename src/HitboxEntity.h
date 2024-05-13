@@ -7,7 +7,7 @@ public:
 	virtual void ToggleHitBox(bool visible);
 	virtual bool CheckForIntersection(FloatRect transfrom);
 	virtual void draw(RenderTarget& target, RenderStates states) const override;
-	FloatRect GetHitboxPosition() const;
+	virtual FloatRect GetHitboxPosition() const;
 protected:
 	HitboxEntity(const RenderWindow& renderWindowConstant);
 	bool m_hitboxVisible;
