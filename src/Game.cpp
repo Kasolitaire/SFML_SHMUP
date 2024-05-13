@@ -4,6 +4,9 @@ Game::Game() : m_renderWindow(sf::VideoMode(576, 324), "SFML works!"), m_clock()
 {
 	m_renderWindow.setSize(Vector2u(1152, 648));
 	m_renderWindow.setMouseCursorVisible(false); 
+	/*View view = m_renderWindow.getView();
+	view.zoom(0);*/
+	/*m_renderWindow.setView(view);*/
 	// starts the game
 	Run();
 }

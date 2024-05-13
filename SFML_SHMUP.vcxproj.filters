@@ -75,9 +75,6 @@
     <ClCompile Include="src\EnemyTrooper.cpp">
       <Filter>Source Files\Enemy Implementations</Filter>
     </ClCompile>
-    <ClCompile Include="src\Squadron.cpp">
-      <Filter>Source Files\Enemy Implementations</Filter>
-    </ClCompile>
     <ClCompile Include="src\Projectile.cpp">
       <Filter>Source Files\Projectile Implementations</Filter>
     </ClCompile>
@@ -104,6 +101,12 @@
     </ClCompile>
     <ClCompile Include="src\ParallaxEntity.cpp">
       <Filter>Source Files\Entity Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="HomingPickup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Squadron.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +175,9 @@
     </ClInclude>
     <ClInclude Include="src\ParallaxEntity.h">
       <Filter>Header Files\Entity Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="HomingPickup.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

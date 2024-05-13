@@ -4,7 +4,7 @@
 class EnemyGrunt : public Enemy
 {
 public :
-	EnemyGrunt(Player& player, Vector2f spawnPosition);
+	EnemyGrunt(Player& player, Vector2f spawnPosition, const RenderWindow& renderWindowConstant);
 	virtual void Update(const Time& deltaTime, const Time& totalTimeElapsed) override;
 private:
 	std::unordered_map<std::string, Animation> m_animations;

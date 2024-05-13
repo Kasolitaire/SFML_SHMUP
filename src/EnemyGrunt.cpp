@@ -1,6 +1,6 @@
 #include "EnemyGrunt.h"
 
-EnemyGrunt::EnemyGrunt(Player& player, Vector2f spawnPosition) : Enemy(player, spawnPosition), m_alive(true)
+EnemyGrunt::EnemyGrunt(Player& player, Vector2f spawnPosition, const RenderWindow& renderWindowConstant) : Enemy(player, spawnPosition, renderWindowConstant), m_alive(true)
 {
 	Texture& texture = AssetManager::GetTexture(ASSETS_PATH + "enemy_2_1.png");
 	m_sprite.setTexture(texture);

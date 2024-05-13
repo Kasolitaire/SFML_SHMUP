@@ -5,16 +5,15 @@
 class Enemy : public HitboxEntity
 {
 public:
-	Enemy(Player& player, Vector2f spawnPosition);
+	Enemy(Player& player, Vector2f spawnPosition, const RenderWindow& renderWindowConstant);
 	~Enemy();
 	void SineMovement(const Time& deltaTime, const Time& totalTimeElapsed, const float frequency, const float amplitude, float const speed); // the speed on the x axis changes how fast we go through the sine wave
-	virtual bool MarkedForDespawn();
+	virtual bool MarkedForDespawn() const;
 	virtual void Update(const Time& deltaTime, const Time& totalTimeElapsed) override;
 protected:
 	virtual void MarkForDespawn();
 	bool CheckForProjectileIntersection();
 	Player& m_player;
-	std::vector<Projectile> m_projectiles;
 	bool m_despawn;
 };
 

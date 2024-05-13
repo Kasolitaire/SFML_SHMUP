@@ -10,16 +10,9 @@ DirectionalProjectile::DirectionalProjectile(
 	m_sprite.setTexture(texture);
 	m_sprite.setOrigin(texture.getSize().x / 2, texture.getSize().y / 2);
 	m_sprite.setRotation(rotation - 180);
-	consoleVector2f(m_hitbox.getPosition());
 	ToggleHitBox(true);
 	m_hitbox.setSize(Vector2f(5, 5));
 	
-}
-
-void DirectionalProjectile::MarkForDespawn()
-{
-	// whatever addition logic we want 
-	Projectile::MarkedForDespawn();
 }
 
 void DirectionalProjectile::Update(const Time& deltaTime, const Time& totalTimeElapsed)

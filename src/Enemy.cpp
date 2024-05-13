@@ -1,6 +1,7 @@
 #include "Enemy.h"
 
-Enemy::Enemy(Player& player, Vector2f spawnPosition) :
+Enemy::Enemy(Player& player, Vector2f spawnPosition, const RenderWindow& renderWindowConstant) :
+	HitboxEntity(renderWindowConstant),
 	m_player(player), 
 	m_despawn(false)
 {
@@ -17,14 +18,13 @@ void Enemy::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 
 void Enemy::SineMovement(const Time& deltaTime, const Time& totalTimeElapsed,const float frequency, const float amplitude, float const speed)
 {
-	//m_sprite.move(-speed * deltaTime.asSeconds(), 0);
-	/*Vector2f enemyPosition = m_sprite.getPosition();
+	Vector2f enemyPosition = m_sprite.getPosition();
 	float sin = sinf(enemyPosition.x * (std::numbers::pi / 180) * frequency) * amplitude;
 	m_sprite.setPosition(enemyPosition.x, enemyPosition.y + sin);
-	m_sprite.move(-(speed * deltaTime.asSeconds()), 0);*/
+	m_sprite.move(-(speed * deltaTime.asSeconds()), 0);
 }
 
-bool Enemy::MarkedForDespawn()
+bool Enemy::MarkedForDespawn() const
 {
 	return m_despawn;
 }

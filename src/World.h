@@ -29,8 +29,6 @@ private:
 	std::vector<Entity*> m_parallaxEntityVector;
 	std::unordered_map<string, ParallaxEntity> m_parallaxEntityMap;
 
-	// test trooper
-	EnemyTrooper trooper;
-	HomingProjectile homing;
+	// test 
 };
 

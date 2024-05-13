@@ -9,9 +9,8 @@ public:
 		const Time timeStamp,
 		 float speed,
 		 float rotation);
-	void MarkForDespawn() override;
 	void Update(const Time& deltaTime, const Time& totalTimeElapsed) override;
 private:
-	const float m_rotation;
+	float m_rotation;
 };
 
