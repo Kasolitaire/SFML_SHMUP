@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="HomingPickup.cpp" />
     <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\AssetManager.cpp" />
     <ClCompile Include="src\debug.cpp" />
@@ -30,6 +29,7 @@
     <ClCompile Include="src\EnemyTrooper.cpp" />
     <ClCompile Include="src\HitboxEntity.cpp" />
     <ClCompile Include="src\CustomMath.cpp" />
+    <ClCompile Include="src\HomingPickup.cpp" />
     <ClCompile Include="src\HomingProjectile.cpp" />
     <ClCompile Include="src\HorizontalProjectile.cpp" />
     <ClCompile Include="src\ParallaxEntity.cpp" />
@@ -44,7 +44,6 @@
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="HomingPickup.h" />
     <ClInclude Include="src\Animation.h" />
     <ClInclude Include="src\AssetManager.h" />
     <ClInclude Include="src\debug.h" />
@@ -55,6 +54,7 @@
     <ClInclude Include="src\EnemyTrooper.h" />
     <ClInclude Include="src\HitboxEntity.h" />
     <ClInclude Include="src\CustomMath.h" />
+    <ClInclude Include="src\HomingPickup.h" />
     <ClInclude Include="src\HomingProjectile.h" />
     <ClInclude Include="src\HorizontalProjectile.h" />
     <ClInclude Include="src\ParallaxEntity.h" />

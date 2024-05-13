@@ -17,6 +17,12 @@ HomingProjectile::HomingProjectile(
 
 void HomingProjectile::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 {
+	Movement(deltaTime, totalTimeElapsed);
+	m_hitbox.setPosition(m_sprite.getPosition());
+}
+
+void HomingProjectile::Movement(const Time deltaTime, const Time totalTimeElapsed)
+{
 	float rotation = getAngleToTarget(m_entity.GetHitboxPosition().getPosition(), m_sprite.getPosition());
 	float target = rotation < 0 ? 360 + rotation : rotation;
 
@@ -25,18 +31,16 @@ void HomingProjectile::Update(const Time& deltaTime, const Time& totalTimeElapse
 	float x = 0;
 	float y = 0;
 	float current = m_sprite.getRotation();
-	if (current - target > 0) 
+	if (current - target > 0)
 	{
 		cw_distance = abs(current - target);
 		ccw_distance = 360 - cw_distance;
 	}
-	else 
+	else
 	{
 		ccw_distance = abs(current - target);
 		cw_distance = 360 - ccw_distance;
 	}
-
-		
 
 	if (cw_distance < ccw_distance) //move clockwise
 	{
@@ -54,9 +58,5 @@ void HomingProjectile::Update(const Time& deltaTime, const Time& totalTimeElapse
 		y = cosf(degreesToRadians(decrement - 90)) * deltaTime.asSeconds() * m_speed;
 		x = -sinf(degreesToRadians(decrement - 90)) * deltaTime.asSeconds() * m_speed;
 	}
-
-	
-	
 	m_sprite.move(x, y);
-	m_hitbox.setPosition(m_sprite.getPosition());
 }

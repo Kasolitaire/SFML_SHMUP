@@ -3,7 +3,8 @@
 World::World(RenderWindow& renderWindow) : 
 	m_renderWindowReference(renderWindow), 
 	m_player(Vector2f(100, 100), m_renderWindowReference),
-	m_enemyManager(m_player, renderWindow)
+	m_enemyManager(m_player, renderWindow), 
+	m_pickUpManager(m_player, renderWindow)
 {
 	View view = m_renderWindowReference.getView();
 	m_parallaxEntityMap["1"] = ParallaxEntity("1.png", view, 5, true);
@@ -42,31 +43,34 @@ void World::HandleEvents(const Event& event)
 
 void World::WorldUpdate(const Time& deltaTime, const Time& totalTimeElapsed)
 {
-	//update player
+	// update player
 	m_player.Update(deltaTime, totalTimeElapsed);
 	
-	//update enemies
+	// update enemies
 	m_enemyManager.Update(deltaTime, totalTimeElapsed);
 
-	// test !!!
-	//homing.Update(deltaTime, totalTimeElapsed);
+	//update pickups
+	m_pickUpManager.Update(deltaTime, totalTimeElapsed);
 
-	// update parallax
+	// update parallax background
 	for (auto& entity : m_parallaxEntityVector) entity->Update(deltaTime, totalTimeElapsed);
 
 	// must always be the last function executed
 	Despawn();
 }
 
-void World::WorldRender()
+void World::WorldRender() // still don't know what states are for !!!
 {
 	for (auto& drawable : m_parallaxEntityVector) drawable->draw(m_renderWindowReference, RenderStates());
-	for (auto& drawable : m_LayerZeroDrawables) drawable->draw(m_renderWindowReference, RenderStates());
+	
+	// draw enemies and their projectiles
 	m_enemyManager.draw(m_renderWindowReference, RenderStates());
 	
-	//homing.draw(m_renderWindowReference, RenderStates());
-	
-	//m_player.draw(m_renderWindowReference, RenderStates()); // I have no idea where a render state come from or how to use it !!!
+	// draw pickups
+	m_pickUpManager.draw(m_renderWindowReference, RenderStates());
+
+	// draw player
+	m_player.draw(m_renderWindowReference, RenderStates());
 }
 
 void World::Despawn()

@@ -4,12 +4,11 @@
 #include <string>;
 #include "SFML/Graphics.hpp";
 #include "Player.h";
-#include "Entity.h";
 #include "ParallaxEntity.h";
 #include "debug.h"
 #include "EnemyManager.h"
 #include "EnemyTrooper.h"
-#include"HomingProjectile.h"
+#include"PickupManager.h"
 using namespace sf;
 
 class World
@@ -24,7 +23,11 @@ public:
 private:
 	RenderWindow& m_renderWindowReference;
 	Player m_player;
+	
+	// managers
 	EnemyManager m_enemyManager;
+	PickupManager m_pickUpManager;
+
 	std::vector<Entity*> m_LayerZeroDrawables;
 	std::vector<Entity*> m_parallaxEntityVector;
 	std::unordered_map<string, ParallaxEntity> m_parallaxEntityMap;
