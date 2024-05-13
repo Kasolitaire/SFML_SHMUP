@@ -1,8 +1,8 @@
 #include "Game.h"
 
-Game::Game() : m_renderWindow(sf::VideoMode(576, 324), "SFML works!", sf::Style::Fullscreen), m_clock(), m_world(m_renderWindow)
+Game::Game() : m_renderWindow(VideoMode(576, 324), "SFML works!"), m_clock(), m_world(m_renderWindow)
 {
-	m_renderWindow.setSize(Vector2u(1920, 1080));
+	m_renderWindow.setSize(Vector2u(1152, 648));
 	View view = View(FloatRect(0, 0, 576, 324));
 	m_renderWindow.setView(view);
 	m_renderWindow.setMouseCursorVisible(false); 
@@ -30,9 +30,6 @@ void Game::Run()
 
 void Game::Update()
 {
-	if (m_fullscreen)
-		ToggleFullScreen();
-
 	if (!m_paused) 
 	{
 		// real time inputs
@@ -58,15 +55,21 @@ void Game::PollEvents()
 	{
 		switch (m_event.type)
 		{
-			break;
 		case Event::Closed :
 			m_renderWindow.close();
 		case Event::KeyPressed :
-			if (m_event.key.code == sf::Keyboard::Escape)
+			switch (m_event.key.code)
+			{
+			case sf::Keyboard::Escape:
 				m_paused = !m_paused;
-			if (m_event.key.code == sf::Keyboard::F11)
-				m_fullscreen != m_fullscreen;
-			break;
+				break;
+			case sf::Keyboard::F11:
+				m_fullscreen = !m_fullscreen;
+				ToggleFullScreen();
+				break;
+			default:
+				break;
+			}
 		}
 		
 		// handles all events relevant to gameplay
@@ -82,5 +85,20 @@ void Game::CalculateDeltaTime()
 
 void Game::ToggleFullScreen()
 {
-	//m_renderWindow = RenderWindow(sf::VideoMode(576, 324), "SFML works!", sf::Style::Fullscreen)
+	if (m_fullscreen) 
+	{
+		m_renderWindow.create(VideoMode(576, 324), "SFML works!", Style::Fullscreen);
+		View view = View(FloatRect(0, 0, 576, 324));
+		m_renderWindow.setView(view);
+		m_renderWindow.setSize(Vector2u(1920, 1080));
+	}
+	else 
+	{
+		m_renderWindow.create(VideoMode(576, 324), "SFML works!");
+		View view = View(FloatRect(0, 0, 576, 324));
+		m_renderWindow.setView(view);
+		m_renderWindow.setSize(Vector2u(1152, 648));
+
+
+	}
 }
