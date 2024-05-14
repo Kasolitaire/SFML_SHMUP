@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game() : m_renderWindow(VideoMode(576, 324), "SFML works!"), m_clock(), m_world(m_renderWindow)
+Game::Game() : m_renderWindow(VideoMode(576, 324), "SFML works!"), m_clock(), m_world(m_renderWindow), m_pauseMenu(m_renderWindow)
 {
 	m_renderWindow.setSize(Vector2u(1152, 648));
 	View view = View(FloatRect(0, 0, 576, 324));
@@ -45,6 +45,7 @@ void Game::Render()
 	m_renderWindow.clear();
 	// all necessary draw calls
 	m_world.WorldRender();
+	m_pauseMenu.draw(m_renderWindow, RenderStates());
 	// display all changes
 	m_renderWindow.display();
 }

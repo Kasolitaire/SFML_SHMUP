@@ -1,10 +1,10 @@
 #pragma once
-#include <vector>;
-#include <unordered_map>;
-#include <string>;
-#include "SFML/Graphics.hpp";
-#include "Player.h";
-#include "ParallaxEntity.h";
+#include <vector>
+#include <unordered_map>
+#include <string>
+#include "SFML/Graphics.hpp"
+#include "Player.h"
+#include "ParallaxEntity.h"
 #include "debug.h"
 #include "EnemyManager.h"
 #include "EnemyTrooper.h"
@@ -29,9 +29,8 @@ private:
 	PickupManager m_pickUpManager;
 	EventManager m_eventManager;
 
+	// parallax
 	std::vector<Entity*> m_parallaxEntityVector;
 	std::unordered_map<string, ParallaxEntity> m_parallaxEntityMap;
-
-	// test 
 };
 

@@ -59,7 +59,8 @@ void World::WorldRender() // still don't know what states are for !!!
 {
 	for (auto& drawable : m_parallaxEntityVector) drawable->draw(*m_renderWindowPointer, RenderStates());
 	
-	// draw enemies and their projectiles
+	// draw ene
+	// mies and their projectiles
 	m_enemyManager.draw(*m_renderWindowPointer, RenderStates());
 	
 	// draw pickups
