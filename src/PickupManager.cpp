@@ -11,8 +11,11 @@ void PickupManager::Update(const Time deltaTime, const Time totalTimeElapsed)
 	{
 		pickup->Update(deltaTime, totalTimeElapsed);
 		
-		if (pickup->CheckForIntersection(m_player.GetHitboxPosition()))
+		if (pickup->CheckForIntersection(m_player.GetHitboxPosition())) 
+		{
 			PickupCollisionEvent(pickup);
+			pickup->MarkForDespawn();
+		}
 	}
 }
 
@@ -24,6 +27,15 @@ void PickupManager::draw(RenderTarget& target, RenderStates states) const
 
 void PickupManager::Despawn()
 {
+	std::erase_if(m_homingPickups, [](HomingPickup* pickup)
+		{
+			if (pickup->MarkedForDespawn())
+			{
+				delete pickup;
+				return true;
+			}
+			return false;
+		});
 }
 
 void PickupManager::CreatePickup(const PickupType type, const Vector2f spawnPosition) // should also get time stamp !!!

@@ -73,4 +73,5 @@ void World::Despawn()
 {
 	m_player.DespawnProjectiles(); 
 	m_enemyManager.Despawn();
+	m_pickUpManager.Despawn();
 }
