@@ -1,3 +1,4 @@
+#include "Rect.hpp"
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
@@ -150,6 +151,13 @@ template <typename T>
 sf::Vector2<T> Rect<T>::getMiddlePosition() const
 {
     return sf::Vector2<T>(left + width / 2, top + height / 2);
+}
+
+//not really a true origin
+template <typename T>
+sf::Vector2<T> Rect<T>::getOrigin() const
+{
+    return sf::Vector2<T>(width / 2, top / 2);
 }
 
 template <typename T>

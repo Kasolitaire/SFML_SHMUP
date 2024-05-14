@@ -21,7 +21,7 @@ EnemyGrunt::EnemyGrunt(
 
 void EnemyGrunt::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 {
-	m_sprite.move(-100 * deltaTime.asSeconds(), 0);
+	m_sprite.move(-100 * deltaTime.asSeconds(), 0); 
 	
 	if (!m_dead && CheckForProjectileIntersection())
 		MarkAsDead();
@@ -29,7 +29,7 @@ void EnemyGrunt::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 	{
 		if (m_animations["explosion"].Update(deltaTime, m_sprite))
 			MarkForDespawn();
-		// should take damage or die here		
+		// should take damage or die here		!!!
 	}
 	else 
 	{

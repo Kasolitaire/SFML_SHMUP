@@ -1,7 +1,8 @@
 #pragma once
-#include "SFML/Graphics.hpp";
-#include "World.h";
-#include <iostream>;
+#include "SFML/Graphics.hpp"
+#include "World.h"
+#include <iostream>
+#include "PauseMenu.h"
 using namespace sf;
 
 class Game
@@ -23,6 +24,8 @@ private:
 	Time m_deltaTime;
 
 	// temp pause
+	// pause menu
+	PauseMenu m_pauseMenu;
 	bool m_paused = false;
 	bool m_fullscreen = false;
 };

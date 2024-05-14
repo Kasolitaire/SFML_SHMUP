@@ -9,7 +9,10 @@ public :
 	virtual void Update(const Time& deltaTime, const Time& totalTimeElapsed) override;
 	void draw(RenderTarget& target, RenderStates states) const override;
 	void DespawnProjectiles();
+	void MarkProjectilesForDespawn(const Time deltaTime, const Time totalTimeElapsed);
 private :
+	void Movement();
+	std::unordered_map<std::string, Animation> m_animations;
 	std::vector<DirectionalProjectile> m_directionalProjectiles;
 	Time m_firedTimeStamp;
 	float m_speed;

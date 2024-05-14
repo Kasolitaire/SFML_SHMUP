@@ -164,6 +164,7 @@ public:
     
      //get the middle position of a rectangle
     sf::Vector2<T> getMiddlePosition() const;
+    sf::Vector2<T> getOrigin() const;
     ////////////////////////////////////////////////////////////
     /// \brief Get the size of the rectangle
     ///
