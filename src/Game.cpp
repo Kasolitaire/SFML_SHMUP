@@ -98,7 +98,6 @@ void Game::ToggleFullScreen()
 		View view = View(FloatRect(0, 0, 576, 324));
 		m_renderWindow.setView(view);
 		m_renderWindow.setSize(Vector2u(1152, 648));
-
-
 	}
+	m_renderWindow.setMouseCursorVisible(false);
 }

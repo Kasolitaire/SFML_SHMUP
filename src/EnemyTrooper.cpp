@@ -16,6 +16,8 @@ EnemyTrooper::EnemyTrooper(Player& player, Vector2f spawnPosition, const RenderW
 	m_hitbox.setFillColor(Color::Transparent);
 	m_hitbox.setOutlineThickness(0.5f);
 	m_hitbox.setOutlineColor(Color::Green);
+
+	m_animations.insert({ "explosion", Animation(ASSETS_PATH + "explosion-spritesheet.png", 8, 0.1f) });
 }
 
 EnemyTrooper::~EnemyTrooper()
@@ -26,6 +28,7 @@ EnemyTrooper::~EnemyTrooper()
 void EnemyTrooper::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 {
 	FloatRect hitboxRect = m_player.GetHitboxPosition();
+	
 	// movement logic
 	float rotation = getAngleToTarget(hitboxRect.getMiddlePosition(), m_sprite.getPosition());
 	float target = rotation < 0 ? 360 + rotation : rotation;
@@ -36,18 +39,18 @@ void EnemyTrooper::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 	float x = 0;
 	float y = 0;
 	float current = m_sprite.getRotation();
-	if (current - target > 0)
+	if (current - target > 0) // maintain distance direction
 	{
 		cw_distance = abs(current - target);
 		ccw_distance = 360 - cw_distance;
 	}
-	else
+	else // maintain distance direction
 	{
 		ccw_distance = abs(current - target);
 		cw_distance = 360 - ccw_distance;
 	}
 
-	if (cw_distance < ccw_distance) //move clockwise
+	if (cw_distance < ccw_distance) // rotate clockwise
 	{
 		increment = (m_sprite.getRotation() - m_rotationSpeed * deltaTime.asSeconds());
 		m_sprite.setRotation(increment);
@@ -55,7 +58,7 @@ void EnemyTrooper::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 		y = cosf(degreesToRadians(increment - 90)) * deltaTime.asSeconds() * m_speed;
 		x = -sinf(degreesToRadians(increment - 90)) * deltaTime.asSeconds() * m_speed;
 	}
-	else
+	else // rotate counter clockwise
 	{
 		increment = m_sprite.getRotation() + m_rotationSpeed * deltaTime.asSeconds();
 		m_sprite.setRotation(increment);
@@ -80,7 +83,34 @@ void EnemyTrooper::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 			));
 	}
 
-	for (DirectionalProjectile& projectile : m_directionalProjectiles) 
+	MarkProjectilesForDespawn(deltaTime, totalTimeElapsed);
+
+	// mark as despawn logic
+	if (!m_dead && CheckForProjectileIntersection())
+		MarkAsDead();
+	if (m_dead)
+	{
+		if (m_animations["explosion"].Update(deltaTime, m_sprite))
+			MarkForDespawn();
+		// should take damage or die here		!!!
+	}
+	
+}
+
+void EnemyTrooper::draw(RenderTarget& target, RenderStates states) const
+{
+	for (const DirectionalProjectile& projectile : m_directionalProjectiles) projectile.draw(target, states);
+	Enemy::draw(target, states);
+}
+
+void EnemyTrooper::DespawnProjectiles()
+{
+	std::erase_if(m_directionalProjectiles, [](DirectionalProjectile& projectile) {return projectile.MarkedForDespawn();});
+}
+
+void EnemyTrooper::MarkProjectilesForDespawn(const Time deltaTime, const Time totalTimeElapsed)
+{
+	for (DirectionalProjectile& projectile : m_directionalProjectiles)
 	{
 		projectile.Update(deltaTime, totalTimeElapsed);
 		if (projectile.CheckForIntersection(m_player.GetHitboxPosition()))
@@ -93,13 +123,7 @@ void EnemyTrooper::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 	}
 }
 
-void EnemyTrooper::draw(RenderTarget& target, RenderStates states) const
+void EnemyTrooper::Movement()
 {
-	for (const DirectionalProjectile& projectile : m_directionalProjectiles) projectile.draw(target, states);
-	Enemy::draw(target, states);
-}
 
-void EnemyTrooper::DespawnProjectiles()
-{
-	std::erase_if(m_directionalProjectiles, [](DirectionalProjectile& projectile) {return projectile.MarkedForDespawn();});
 }
