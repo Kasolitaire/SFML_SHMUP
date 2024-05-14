@@ -33,7 +33,7 @@ void Button::OnClick()
 {
 }
 
-ButtonType Button::GetButtonType()
+ButtonType Button::GetButtonType() const
 {
 	return m_buttonType;
 }

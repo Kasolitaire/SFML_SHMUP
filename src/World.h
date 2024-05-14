@@ -9,9 +9,10 @@
 #include "EnemyManager.h"
 #include "EnemyTrooper.h"
 #include"PickupManager.h"
+#include "Despawnable.h"
 using namespace sf;
 
-class World
+class World : public Despawnable
 {
 public:
 	World(RenderWindow& renderWindow);

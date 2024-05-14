@@ -4,7 +4,7 @@
 EnemyManager::EnemyManager(Player& player, const RenderWindow& renderWindowConstant, PickupManager& pickupManager) : 
 	m_player(player),
 	m_renderWindowConstant(renderWindowConstant),
-	m_pickupManager(pickupManager),
+	m_pickupManager(&pickupManager),
 	m_timer(seconds(0))
 {
 	m_squadrons.push(Squadron(EnemyType::Trooper, seconds(0), 5, Vector2f(0, 60), 100));
@@ -36,7 +36,7 @@ void EnemyManager::Update(const Time deltaTime, const Time totalTimeElapsed)
 		if (enemy->MarkedAsDead() && !enemy->MarkedAsIgnore()) 
 		{
 			enemy->MarkAsIgnore();
-			m_pickupManager.CreatePickup(PickupType::BATTERY, enemy->GetHitboxPosition().getMiddlePosition());
+			m_pickupManager->CreatePickup(PickupType::BATTERY, enemy->GetHitboxPosition().getMiddlePosition());
 		}
 	}
 }

@@ -25,5 +25,5 @@ private:
 	std::vector<Enemy*> m_enemies;
 	Time m_timer;
 	Player& m_player;
-	PickupManager& m_pickupManager;
+	PickupManager* m_pickupManager;
 };

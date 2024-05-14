@@ -12,7 +12,7 @@ public:
 	virtual void OnHoverExit();
 	virtual bool GetHoverStatus();
 	virtual void OnClick();
-	ButtonType GetButtonType();
+	ButtonType GetButtonType() const;
 	virtual void draw(RenderTarget& target, RenderStates states) const override;
 protected:
 	Text m_text;

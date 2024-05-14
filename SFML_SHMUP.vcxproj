@@ -23,6 +23,7 @@
     <ClCompile Include="src\AssetManager.cpp" />
     <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\debug.cpp" />
+    <ClCompile Include="src\Despawnable.cpp" />
     <ClCompile Include="src\DirectionalProjectile.cpp" />
     <ClCompile Include="src\Enemy.cpp" />
     <ClCompile Include="src\EnemyGrunt.cpp" />
@@ -51,6 +52,7 @@
     <ClInclude Include="src\AssetManager.h" />
     <ClInclude Include="src\Button.h" />
     <ClInclude Include="src\debug.h" />
+    <ClInclude Include="src\Despawnable.h" />
     <ClInclude Include="src\DirectionalProjectile.h" />
     <ClInclude Include="src\Enemy.h" />
     <ClInclude Include="src\EnemyGrunt.h" />

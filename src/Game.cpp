@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game() : m_renderWindow(VideoMode(576, 324), "SFML works!"), m_clock(), m_world(m_renderWindow), m_pauseMenu(m_renderWindow)
+Game::Game() : m_renderWindow(VideoMode(576, 324), "SFML works!"), m_clock(), m_world(new World(m_renderWindow)), m_pauseMenu(m_renderWindow)
 {
 	m_renderWindow.setSize(Vector2u(1152, 648));
 	View view = View(FloatRect(0, 0, 576, 324));
@@ -11,6 +11,11 @@ Game::Game() : m_renderWindow(VideoMode(576, 324), "SFML works!"), m_clock(), m_
 	/*m_renderWindow.setView(view);*/
 	// starts the game
 	Run();
+}
+
+Game::~Game()
+{
+	delete m_world;
 }
 
 void Game::Run()
@@ -25,6 +30,9 @@ void Game::Run()
 		Update();
 		// renders the game
 		Render();
+
+		if (m_world->MarkedForDespawn()) // really don't like this
+			ReloadWorld();
 	}
 }
 
@@ -33,9 +41,9 @@ void Game::Update()
 	if (!m_paused) 
 	{
 		// real time inputs
-		m_world.HandleInputs(); 
+		m_world->HandleInputs(); 
 		// frame by frame logic
-		m_world.WorldUpdate(m_deltaTime, m_totalTimeElapsed);
+		m_world->WorldUpdate(m_deltaTime, m_totalTimeElapsed);
 	}
 }
 
@@ -44,8 +52,8 @@ void Game::Render()
 	// clear view
 	m_renderWindow.clear();
 	// all necessary draw calls
-	m_world.WorldRender();
-	m_pauseMenu.draw(m_renderWindow, RenderStates());
+	m_world->WorldRender();
+	//m_pauseMenu.draw(m_renderWindow, RenderStates());
 	// display all changes
 	m_renderWindow.display();
 }
@@ -74,7 +82,7 @@ void Game::PollEvents()
 		}
 		
 		// handles all events relevant to gameplay
-		if (!m_paused)m_world.HandleEvents(m_event);
+		if (!m_paused)m_world->HandleEvents(m_event);
 	}
 }
 
@@ -92,7 +100,6 @@ void Game::ToggleFullScreen()
 		View view = View(FloatRect(0, 0, 576, 324));
 		m_renderWindow.setView(view);
 		m_renderWindow.setSize(Vector2u(VideoMode::getDesktopMode().width, VideoMode::getDesktopMode().height));
-		m_renderWindow.setMouseCursorVisible(false);
 	}
 	else 
 	{
@@ -100,8 +107,15 @@ void Game::ToggleFullScreen()
 		View view = View(FloatRect(0, 0, 576, 324));
 		m_renderWindow.setView(view);
 		m_renderWindow.setSize(Vector2u(1152, 648));
-
-
 	}
 	m_renderWindow.setMouseCursorVisible(false);
+}
+
+void Game::ReloadWorld()
+{
+	if (m_world->MarkedForDespawn())
+	{
+		delete m_world;
+		m_world = new World(m_renderWindow);
+	}
 }

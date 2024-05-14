@@ -3,7 +3,9 @@
 Player::Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowConstant) :
 	HitboxEntity(renderWindowConstant),
 	m_speed(5),
-	m_fire(false)
+	m_fire(false),
+	m_lives(3),
+	m_gracePeriod(seconds(2))
 {
 	m_hitbox.setFillColor(Color::Transparent);
 	m_hitbox.setOutlineColor(Color::Green);
@@ -12,7 +14,7 @@ Player::Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowCo
 	m_sprite.setScale(0.8, 0.8);
 	m_sprite.setPosition(spawnPosition);
 	
-	m_animations.push_back(Animation(ASSETS_PATH + "spacecraft_sheet.png", 4, 0.1f));
+	m_animations.insert({"idle", Animation(ASSETS_PATH + "spacecraft_sheet.png", 4, 0.1f)});
 }
 
 void Player::HandleInputs()
@@ -34,17 +36,18 @@ void Player::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 		m_firedTimeStamp = totalTimeElapsed;
 	}
 	
-	//
+	// player movement
 	Vector2f viewSize = m_renderWindowConstant->getView().getSize();
 	Vector2f lerp = vectorLerp(m_sprite.getPosition(), m_mousePosition, m_speed * deltaTime.asSeconds());
 	m_sprite.setPosition(std::clamp(lerp.x, 0.0f, viewSize.x), std::clamp(lerp.y, 0.0f, viewSize.y));
 	m_hitbox.setPosition(m_sprite.getPosition());
 
 	// update projectiles
-	for (auto& projectile : m_horizontalProjectiles) projectile->Update(deltaTime, totalTimeElapsed);
+	for (auto& projectile : m_horizontalProjectiles) 
+		projectile->Update(deltaTime, totalTimeElapsed);
 
 	//update animations
-	for (auto& animation : m_animations) animation.Update(deltaTime, m_sprite); // this doesn't make any sense this would just play all the animations !!!
+	m_animations["idle"].Update(deltaTime, m_sprite);
 }
 
 void Player::HandleEvents(const Event& event)
@@ -72,6 +75,17 @@ void Player::DespawnProjectiles()
 			}
 			return false;
 		});
+}
+
+void Player::DecrementLives(const Time totalTimeElapsed)
+{
+	if (totalTimeElapsed - m_damagedTimeStamp >= m_gracePeriod) 
+	{
+		m_lives--;
+		m_damagedTimeStamp = totalTimeElapsed;
+	}
+	if (m_lives == 0) std::cout << "you suck" << std::endl;
+	consoleFloat(m_lives);
 }
 
 std::vector<Projectile*> Player::GetProjectiles()

@@ -113,8 +113,11 @@ void EnemyTrooper::MarkProjectilesForDespawn(const Time deltaTime, const Time to
 	for (DirectionalProjectile& projectile : m_directionalProjectiles)
 	{
 		projectile.Update(deltaTime, totalTimeElapsed);
-		if (projectile.CheckForIntersection(m_player.GetHitboxPosition()))
+		if (projectile.CheckForIntersection(m_player.GetHitboxPosition())) 
+		{
 			projectile.MarkForDespawn();
+			m_player.DecrementLives(totalTimeElapsed);
+		}
 
 		View view = m_renderWindowConstant->getView();
 		FloatRect floatRectWindow = FloatRect(0, 0, view.getSize().x, view.getSize().y);

@@ -1,6 +1,7 @@
 #pragma once
 #include "Player.h"
-class EventManager
+#include "Despawnable.h"
+class EventManager : public Despawnable
 {
 public:
 	EventManager(Player& player);

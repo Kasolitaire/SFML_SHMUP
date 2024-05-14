@@ -31,6 +31,7 @@ void World::HandleEvents(const Event& event)
 		break;
 	case Keyboard::Num2:
 		m_player.ToggleHitBox(false);
+		MarkForDespawn();
 		break;
 	}
 

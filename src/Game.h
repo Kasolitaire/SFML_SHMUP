@@ -9,6 +9,7 @@ class Game
 {
 public:
 	Game();
+	~Game();
 private:
 	void Run();
 	void Update();
@@ -16,7 +17,8 @@ private:
 	void PollEvents();
 	void CalculateDeltaTime();
 	void ToggleFullScreen();
-	World m_world;
+	void ReloadWorld();
+	World* m_world;
 	RenderWindow m_renderWindow;
 	Event m_event;
 	Clock m_clock;

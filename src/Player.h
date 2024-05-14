@@ -5,6 +5,7 @@
 #include "CustomMath.h"
 #include "Projectile.h"
 #include <vector>
+#include <unordered_map>
 #include "HorizontalProjectile.h"
 
 using namespace sf;
@@ -17,20 +18,19 @@ public:
 	void HandleEvents(const Event& event);
 	void draw(RenderTarget& target, RenderStates states) const override;
 	void DespawnProjectiles();
+	void DecrementLives(const Time totalTimeElapsed);
 	std::vector<Projectile*> GetProjectiles(); // potentially worth making certain fucntions const within projectiles !!!
 private:
 	void SpawnProjectile();
 	float m_speed;
 	Vector2f m_mousePosition;
 	
-	// for fire logic
 	Time m_firedTimeStamp;
+	Time m_damagedTimeStamp;
+	Time m_gracePeriod;
 	bool m_fire;
-
-	// animations !!! should be a map
-	std::vector<Animation> m_animations;
-
-	// more variety !!!
+	unsigned int m_lives;
+	std::unordered_map<string, Animation> m_animations;
 	std::vector<HorizontalProjectile*> m_horizontalProjectiles;
 };
 
