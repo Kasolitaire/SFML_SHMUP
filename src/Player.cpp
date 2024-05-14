@@ -17,6 +17,12 @@ Player::Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowCo
 	m_animations.insert({"idle", Animation(ASSETS_PATH + "spacecraft_sheet.png", 4, 0.1f)});
 }
 
+Player::~Player()
+{
+	for (HorizontalProjectile* projectile : m_horizontalProjectiles)
+		delete projectile;
+}
+
 void Player::HandleInputs()
 {	
 	m_mousePosition = Vector2f(m_renderWindowConstant->mapPixelToCoords(Mouse::getPosition(*m_renderWindowConstant)));

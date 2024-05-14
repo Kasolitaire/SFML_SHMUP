@@ -18,6 +18,10 @@ EnemyManager::EnemyManager(Player& player, const RenderWindow& renderWindowConst
 
 EnemyManager::~EnemyManager()
 {
+	for (Enemy* enemy : m_enemies) 
+	{
+		delete enemy;
+	}
 }
 
 void EnemyManager::Update(const Time deltaTime, const Time totalTimeElapsed)

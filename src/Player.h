@@ -13,6 +13,7 @@ class Player : public HitboxEntity
 {
 public:
 	Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowConstant);
+	~Player();
 	void HandleInputs();
 	void Update(const Time& deltaTime, const Time& totalTimeElapsed) override;
 	void HandleEvents(const Event& event);
