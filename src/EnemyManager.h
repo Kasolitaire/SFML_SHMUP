@@ -6,10 +6,11 @@
 #include "Player.h"
 #include "EnemyGrunt.h"
 #include "EnemyTrooper.h"
+#include "PickupManager.h"
 class EnemyManager : public Drawable // I intend for this class to have a bunch of information about the states of other objects 
 {
 public:
-	EnemyManager(Player& player, const RenderWindow& renderWindowConstant);
+	EnemyManager(Player& player, const RenderWindow& renderWindowConstant, PickupManager& pickupManager);
 	~EnemyManager();
 	void Update(const Time deltaTime, const Time totalTimeElapsed);
 	void draw(RenderTarget& target, RenderStates states) const override;
@@ -24,4 +25,5 @@ private:
 	std::vector<Enemy*> m_enemies;
 	Time m_timer;
 	Player& m_player;
+	PickupManager& m_pickupManager;
 };

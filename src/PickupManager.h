@@ -4,15 +4,20 @@
 #include <vector>
 #include "Player.h"
 #include "HomingPickup.h"
+#include "EventManager.h"
+#include "vector";
 class PickupManager : public Drawable
 {
 public:
-	PickupManager(Player& player, const RenderWindow& renderWindowConstant);
+	PickupManager(Player& player, const RenderWindow& renderWindowConstant, EventManager& eventManager);
 	void Update(const Time deltaTime, const Time totalTimeElapsed);
 	void draw(RenderTarget& target, RenderStates states) const override;
 	void Despawn();
+	void CreatePickup(const PickupType type, const Vector2f spawnPosition);
 private:
-	RenderWindow m_renderWindowConstant;
-	HomingPickup test;
+	void PickupCollisionEvent(Pickup* pickup);
+	const RenderWindow* m_renderWindowConstant;
+	std::vector<HomingPickup*> m_homingPickups;
+	Player& m_player;
+	EventManager& m_eventManager;
 };
-

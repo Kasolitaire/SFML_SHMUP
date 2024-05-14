@@ -12,7 +12,7 @@ public:
 		const Vector2f spawnPosition,
 		float speed,
 		const RenderWindow& renderWindowConstant,
-		const Time timeStamp,
+		const Time timeStamp, 
 		Direction direction);
 	 void Update(const Time& deltaTime, const Time& totalTimeElapsed) override;
 	 void SetColor(const Color color);

@@ -1,10 +1,11 @@
-#include "EnemyManager.h";
+#include "EnemyManager.h"
+#include "PickupManager.h"
 
-EnemyManager::EnemyManager(Player& player, const RenderWindow& renderWindowConstant) : 
+EnemyManager::EnemyManager(Player& player, const RenderWindow& renderWindowConstant, PickupManager& pickupManager) : 
 	m_player(player),
 	m_renderWindowConstant(renderWindowConstant),
-	m_timer(Time())
-
+	m_pickupManager(pickupManager),
+	m_timer(seconds(0))
 {
 	m_squadrons.push(Squadron(EnemyType::Trooper, seconds(0), 5, Vector2f(0, 60), 100));
 	m_squadrons.push(Squadron(EnemyType::Grunt, Time(), 5, Vector2f(0, 50), 100));
@@ -13,7 +14,6 @@ EnemyManager::EnemyManager(Player& player, const RenderWindow& renderWindowConst
 	m_squadrons.push(Squadron(EnemyType::Grunt, seconds(6), 5, Vector2f(0, 60), 100));
 	m_squadrons.push(Squadron(EnemyType::Trooper, seconds(6), 5, Vector2f(0, 20), 100));
 	m_squadrons.push(Squadron(EnemyType::Grunt, seconds(6), 5, Vector2f(0, 60), 100));
-
 }
 
 EnemyManager::~EnemyManager()
@@ -33,6 +33,11 @@ void EnemyManager::Update(const Time deltaTime, const Time totalTimeElapsed)
 	for (Enemy* enemy : m_enemies) 
 	{
 		enemy->Update(deltaTime, totalTimeElapsed);
+		if (enemy->MarkedAsDead() && !enemy->MarkedAsIgnore()) 
+		{
+			enemy->MarkAsIgnore();
+			m_pickupManager.CreatePickup(PickupType::BATTERY, enemy->GetHitboxPosition().getMiddlePosition());
+		}
 	}
 }
 

@@ -1,13 +1,13 @@
 #include "HomingProjectile.h"
 
 HomingProjectile::HomingProjectile(
-	const HitboxEntity& entity,
+	const HitboxEntity& hitboxEntity,
 	const Vector2f spawnPosition,
 	const float speed, const float rotationSpeed,
 	const RenderWindow& renderWindowConstant,
-	const Time timeStamp) : Projectile(spawnPosition, speed, renderWindowConstant, timeStamp), m_entity(entity), m_rotationSpeed(rotationSpeed)
+	const Time timeStamp) : Projectile(spawnPosition, speed, renderWindowConstant, timeStamp), m_entity(hitboxEntity), m_rotationSpeed(rotationSpeed)
 {
-	
+	m_sprite.setRotation(getAngleToTarget(m_entity.GetHitboxPosition().getMiddlePosition(), m_sprite.getPosition()));
 }
 
 void HomingProjectile::Update(const Time& deltaTime, const Time& totalTimeElapsed)

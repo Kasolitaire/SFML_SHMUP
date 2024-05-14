@@ -27,6 +27,7 @@
     <ClCompile Include="src\EnemyGrunt.cpp" />
     <ClCompile Include="src\EnemyManager.cpp" />
     <ClCompile Include="src\EnemyTrooper.cpp" />
+    <ClCompile Include="src\EventManager.cpp" />
     <ClCompile Include="src\HitboxEntity.cpp" />
     <ClCompile Include="src\CustomMath.cpp" />
     <ClCompile Include="src\HomingPickup.cpp" />
@@ -52,6 +53,7 @@
     <ClInclude Include="src\EnemyGrunt.h" />
     <ClInclude Include="src\EnemyManager.h" />
     <ClInclude Include="src\EnemyTrooper.h" />
+    <ClInclude Include="src\EventManager.h" />
     <ClInclude Include="src\HitboxEntity.h" />
     <ClInclude Include="src\CustomMath.h" />
     <ClInclude Include="src\HomingPickup.h" />

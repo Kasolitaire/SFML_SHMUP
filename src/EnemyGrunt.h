@@ -8,6 +8,5 @@ public :
 	virtual void Update(const Time& deltaTime, const Time& totalTimeElapsed) override;
 private:
 	std::unordered_map<std::string, Animation> m_animations;
-	bool m_alive;
 };
 

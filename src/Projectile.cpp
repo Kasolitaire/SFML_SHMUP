@@ -3,6 +3,7 @@ Projectile::Projectile(Vector2f spawnPosition, float speed, const RenderWindow& 
 	HitboxEntity(renderWindowConstant),
 	m_speed(speed),
 	m_alive(true),
+	m_despawn(false),
 	m_timeStamp(timeStamp)
 {
 	// setting up projectile

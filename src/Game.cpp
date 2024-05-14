@@ -90,7 +90,7 @@ void Game::ToggleFullScreen()
 		m_renderWindow.create(VideoMode(576, 324), "SFML works!", Style::Fullscreen);
 		View view = View(FloatRect(0, 0, 576, 324));
 		m_renderWindow.setView(view);
-		m_renderWindow.setSize(Vector2u(1920, 1080));
+		m_renderWindow.setSize(Vector2u(VideoMode::getDesktopMode().width, VideoMode::getDesktopMode().height));
 	}
 	else 
 	{

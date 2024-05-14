@@ -10,5 +10,6 @@ public:
 protected:
 	float m_speed;
 	bool m_alive;
+	bool m_despawn;
 	Time m_timeStamp;
 };

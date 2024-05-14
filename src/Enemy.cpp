@@ -3,7 +3,9 @@
 Enemy::Enemy(Player& player, Vector2f spawnPosition, const RenderWindow& renderWindowConstant) :
 	HitboxEntity(renderWindowConstant),
 	m_player(player), 
-	m_despawn(false)
+	m_despawn(false),
+	m_dead(false),
+	m_ignore(false)
 {
 }
 
@@ -27,6 +29,26 @@ void Enemy::SineMovement(const Time& deltaTime, const Time& totalTimeElapsed,con
 bool Enemy::MarkedForDespawn() const
 {
 	return m_despawn;
+}
+
+bool Enemy::MarkedAsDead()
+{
+	return m_dead;
+}
+
+bool Enemy::MarkedAsIgnore()
+{
+	return m_ignore;
+}
+
+void Enemy::MarkAsIgnore()
+{
+	m_ignore = true;
+}
+
+void Enemy::MarkAsDead()
+{
+	m_dead = true;
 }
 
 void Enemy::MarkForDespawn()

@@ -3,22 +3,19 @@
 World::World(RenderWindow& renderWindow) : 
 	m_renderWindowPointer(&renderWindow), 
 	m_player(Vector2f(100, 100), *m_renderWindowPointer),
-	m_enemyManager(m_player, renderWindow), 
-	m_pickUpManager(m_player, renderWindow)
+	m_eventManager(m_player),
+	m_pickUpManager(m_player, renderWindow, m_eventManager), //pickup manager requires event manager
+	m_enemyManager(m_player, renderWindow, m_pickUpManager) // enemy manager requires pickup manager
 {
 	View view = m_renderWindowPointer->getView();
 	m_parallaxEntityMap["1"] = ParallaxEntity("1.png", view, 5, true);
 	m_parallaxEntityMap["2"] = ParallaxEntity("2.png", view, 50, true);
 	m_parallaxEntityMap["4"] = ParallaxEntity("4.png", view, 75, true);
 	
-	m_LayerZeroDrawables.push_back(&m_player);
 
 	m_parallaxEntityVector.push_back(&m_parallaxEntityMap["1"]);
 	m_parallaxEntityVector.push_back(&m_parallaxEntityMap["2"]);
 	m_parallaxEntityVector.push_back(&m_parallaxEntityMap["4"]);
-
-
-	
 }
 void World::HandleInputs()
 {
@@ -38,7 +35,6 @@ void World::HandleEvents(const Event& event)
 	}
 
 	m_player.HandleEvents(event);
-
 }
 
 void World::WorldUpdate(const Time& deltaTime, const Time& totalTimeElapsed)
