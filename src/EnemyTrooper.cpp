@@ -27,62 +27,6 @@ EnemyTrooper::~EnemyTrooper()
 
 void EnemyTrooper::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 {
-	FloatRect hitboxRect = m_player.GetHitboxPosition();
-	
-	// movement logic
-	float rotation = getAngleToTarget(hitboxRect.getMiddlePosition(), m_sprite.getPosition());
-	float target = rotation < 0 ? 360 + rotation : rotation;
-
-	float cw_distance;
-	float ccw_distance;
-	float increment;
-	float x = 0;
-	float y = 0;
-	float current = m_sprite.getRotation();
-	if (current - target > 0) // maintain distance direction
-	{
-		cw_distance = abs(current - target);
-		ccw_distance = 360 - cw_distance;
-	}
-	else // maintain distance direction
-	{
-		ccw_distance = abs(current - target);
-		cw_distance = 360 - ccw_distance;
-	}
-
-	if (cw_distance < ccw_distance) // rotate clockwise
-	{
-		increment = (m_sprite.getRotation() - m_rotationSpeed * deltaTime.asSeconds());
-		m_sprite.setRotation(increment);
-
-		y = cosf(degreesToRadians(increment - 90)) * deltaTime.asSeconds() * m_speed;
-		x = -sinf(degreesToRadians(increment - 90)) * deltaTime.asSeconds() * m_speed;
-	}
-	else // rotate counter clockwise
-	{
-		increment = m_sprite.getRotation() + m_rotationSpeed * deltaTime.asSeconds();
-		m_sprite.setRotation(increment);
-
-		y = cosf(degreesToRadians(increment - 90)) * deltaTime.asSeconds() * m_speed;
-		x = -sinf(degreesToRadians(increment - 90)) * deltaTime.asSeconds() * m_speed;
-	}
-
-	m_sprite.move(x, y);
-
-	// shooting logic
-	if (totalTimeElapsed - m_firedTimeStamp >= seconds(0.4f))
-	{
-		m_firedTimeStamp = totalTimeElapsed;
-		m_directionalProjectiles.push_back(
-			DirectionalProjectile(
-				m_sprite.getPosition(),
-				*m_renderWindowConstant,
-				totalTimeElapsed,
-				150 + m_speed,
-				increment - 90
-			));
-	}
-
 	MarkProjectilesForDespawn(deltaTime, totalTimeElapsed);
 
 	// mark as despawn logic
@@ -92,9 +36,28 @@ void EnemyTrooper::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 	{
 		if (m_animations["explosion"].Update(deltaTime, m_sprite))
 			MarkForDespawn();
+		m_sprite.move(-100 * deltaTime.asSeconds(), 0);
 		// should take damage or die here		!!!
 	}
+	else 
+	{
+		Movement(deltaTime, totalTimeElapsed);
+		// shooting logic
+		if (totalTimeElapsed - m_firedTimeStamp >= seconds(0.4f))
+		{
+			m_firedTimeStamp = totalTimeElapsed;
+			m_directionalProjectiles.push_back(
+				DirectionalProjectile(
+					m_sprite.getPosition(),
+					*m_renderWindowConstant,
+					totalTimeElapsed,
+					150 + m_speed,
+					m_increment - 90
+				));
+		}
+	}
 	
+	m_hitbox.setPosition(m_sprite.getPosition());
 }
 
 void EnemyTrooper::draw(RenderTarget& target, RenderStates states) const
@@ -126,7 +89,45 @@ void EnemyTrooper::MarkProjectilesForDespawn(const Time deltaTime, const Time to
 	}
 }
 
-void EnemyTrooper::Movement()
+void EnemyTrooper::Movement(const Time deltaTime, const Time totalTimeElapsed)
 {
+	FloatRect hitboxRect = m_player.GetHitboxPosition();
 
+	// movement logic
+	float rotation = getAngleToTarget(hitboxRect.getMiddlePosition(), m_sprite.getPosition());
+	float target = rotation < 0 ? 360 + rotation : rotation;
+	float cw_distance;
+	float ccw_distance;
+	float x = 0;
+	float y = 0;
+	float current = m_sprite.getRotation();
+	if (current - target > 0) // maintain distance direction
+	{
+		cw_distance = abs(current - target);
+		ccw_distance = 360 - cw_distance;
+	}
+	else // maintain distance direction
+	{
+		ccw_distance = abs(current - target);
+		cw_distance = 360 - ccw_distance;
+	}
+
+	if (cw_distance < ccw_distance) // rotate clockwise
+	{
+		m_increment = (m_sprite.getRotation() - m_rotationSpeed * deltaTime.asSeconds());
+		m_sprite.setRotation(m_increment);
+
+		y = cosf(degreesToRadians(m_increment - 90)) * deltaTime.asSeconds() * m_speed;
+		x = -sinf(degreesToRadians(m_increment - 90)) * deltaTime.asSeconds() * m_speed;
+	}
+	else // rotate counter clockwise
+	{
+		m_increment = m_sprite.getRotation() + m_rotationSpeed * deltaTime.asSeconds();
+		m_sprite.setRotation(m_increment);
+
+		y = cosf(degreesToRadians(m_increment - 90)) * deltaTime.asSeconds() * m_speed;
+		x = -sinf(degreesToRadians(m_increment - 90)) * deltaTime.asSeconds() * m_speed;
+	}
+
+	m_sprite.move(x, y);
 }

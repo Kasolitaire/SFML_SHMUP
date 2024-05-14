@@ -11,11 +11,12 @@ public :
 	void DespawnProjectiles();
 	void MarkProjectilesForDespawn(const Time deltaTime, const Time totalTimeElapsed);
 private :
-	void Movement();
+	void Movement(const Time deltaTime, const Time totalTimeElapsed); // change as soon as possible !!!
 	std::unordered_map<std::string, Animation> m_animations;
 	std::vector<DirectionalProjectile> m_directionalProjectiles;
 	Time m_firedTimeStamp;
 	float m_speed;
 	float m_rotationSpeed;
+	float m_increment;
 };
 
