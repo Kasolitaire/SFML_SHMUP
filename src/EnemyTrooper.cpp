@@ -28,8 +28,11 @@ void EnemyTrooper::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 	MarkProjectilesForDespawn(deltaTime, totalTimeElapsed);
 
 	// mark as despawn logic
-	if (!m_dead && CheckForProjectileIntersection())
+	if (!m_dead && CheckForProjectileIntersection()) 
+	{
+		m_sounds.at("explosion").play();
 		MarkAsDead();
+	}
 	if (m_dead)
 	{
 		if (m_animations["explosion"].Update(deltaTime, m_sprite))

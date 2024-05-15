@@ -2,7 +2,7 @@
 #include "HitboxEntity.h"
 #include "Player.h"
 #include <numbers>
-class Enemy : public HitboxEntity
+class Enemy : public HitboxEntity, public Listenable
 {
 public:
 	Enemy(Player& player, Vector2f spawnPosition, const RenderWindow& renderWindowConstant);
