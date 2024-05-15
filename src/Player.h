@@ -24,6 +24,7 @@ public:
 	void DecrementLives(const Time totalTimeElapsed);
 	std::vector<Projectile*> GetProjectiles(); // potentially worth making certain fucntions const within projectiles !!!
 private:
+	void RemoveGrace(const Time totalTimeElapsed);
 	void SpawnProjectile();
 	float m_speed;
 	Vector2f m_mousePosition;
@@ -31,7 +32,7 @@ private:
 	Time m_firedTimeStamp;
 	Time m_damagedTimeStamp;
 	Time m_gracePeriod;
-	bool m_graceActive;
+	bool m_grace;
 	bool m_fire;
 	unsigned int m_lives;
 	std::unordered_map<string, Animation> m_animations;

@@ -3,7 +3,7 @@
 Player::Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowConstant) :
 	HitboxEntity(renderWindowConstant),
 	m_fire(false),
-	m_graceActive(false),
+	m_grace(false),
 	m_speed(5),
 	m_lives(3),
 	m_gracePeriod(seconds(2))
@@ -55,6 +55,9 @@ void Player::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 
 	//update animations
 	m_animations["idle"].Update(deltaTime, m_sprite);
+
+	// expires grace after alloted period
+	RemoveGrace(totalTimeElapsed);
 }
 
 void Player::HandleEvents(const Event& event)
@@ -86,7 +89,7 @@ void Player::DespawnProjectiles()
 
 bool Player::UnderGrace() const
 {
-	return m_graceActive;
+	return m_grace;
 }
 
 float Player::GetLives() const
@@ -99,16 +102,13 @@ void Player::DecrementLives(const Time totalTimeElapsed)
 	if (m_lives == 0)
 	{
 		return;
-		m_graceActive = false;
-
 	}
 	else if (totalTimeElapsed - m_damagedTimeStamp >= m_gracePeriod)
 	{
 		m_lives--;
 		m_damagedTimeStamp = totalTimeElapsed;
-		m_graceActive = false;
+		m_grace = true;
 	}
-	else m_graceActive = false;
 }
 
 std::vector<Projectile*> Player::GetProjectiles()
@@ -118,6 +118,12 @@ std::vector<Projectile*> Player::GetProjectiles()
 		projectiles.push_back(projectile);
 
 	return projectiles;
+}
+
+void Player::RemoveGrace(const Time totalTimeElapsed)
+{
+	if (totalTimeElapsed - m_damagedTimeStamp >= m_gracePeriod)
+		m_grace = false;
 }
 
 void Player::SpawnProjectile()

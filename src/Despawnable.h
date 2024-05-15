@@ -3,8 +3,8 @@ class Despawnable
 {
 public:
 	bool MarkedForDespawn() const;
-protected:
 	void MarkForDespawn();
+protected:
 	bool m_despawn = false;
 };
 
