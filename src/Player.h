@@ -25,7 +25,7 @@ public:
 	std::vector<Projectile*> GetProjectiles(); // potentially worth making certain fucntions const within projectiles !!!
 private:
 	void RemoveGrace(const Time totalTimeElapsed);
-	void SpawnProjectile();
+	void SpawnProjectile( const Time totalTimeElapsed);
 	float m_speed;
 	Vector2f m_mousePosition;
 	

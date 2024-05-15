@@ -33,21 +33,13 @@ void Player::HandleInputs()
 
 void Player::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 {
-	if (totalTimeElapsed.asSeconds() - m_firedTimeStamp.asSeconds() >= 0.2 && m_fire) 
-	{
-		m_horizontalProjectiles.push_back(
-			new HorizontalProjectile(
-				Vector2f(m_sprite.getPosition()),
-				500, *m_renderWindowConstant,
-				totalTimeElapsed, Direction::RIGHT));
-		m_firedTimeStamp = totalTimeElapsed;
-	}
-	
 	// player movement
 	Vector2f viewSize = m_renderWindowConstant->getView().getSize();
 	Vector2f lerp = vectorLerp(m_sprite.getPosition(), m_mousePosition, m_speed * deltaTime.asSeconds());
 	m_sprite.setPosition(std::clamp(lerp.x, 0.0f, viewSize.x), std::clamp(lerp.y, 0.0f, viewSize.y));
 	m_hitbox.setPosition(m_sprite.getPosition());
+
+	SpawnProjectile(totalTimeElapsed);
 
 	// update projectiles
 	for (auto& projectile : m_horizontalProjectiles) 
@@ -75,12 +67,12 @@ void Player::draw(RenderTarget& target, RenderStates states) const
 void Player::DespawnProjectiles()
 {
 	
-	std::erase_if(m_horizontalProjectiles, [](HorizontalProjectile* x) 
+	std::erase_if(m_horizontalProjectiles, [](HorizontalProjectile* projectile) 
 		{
-			x->MarkedForDespawn();
-			if (x->MarkedForDespawn())
+			projectile->MarkedForDespawn();
+			if (projectile->MarkedForDespawn())
 			{
-				delete x;
+				delete projectile;
 				return true;
 			}
 			return false;
@@ -126,7 +118,15 @@ void Player::RemoveGrace(const Time totalTimeElapsed)
 		m_grace = false;
 }
 
-void Player::SpawnProjectile()
+void Player::SpawnProjectile(const Time totalTimeElapsed)
 {
-	// move spawn logic here !!!
+	if (totalTimeElapsed.asSeconds() - m_firedTimeStamp.asSeconds() >= 0.2 && m_fire)
+	{
+		m_horizontalProjectiles.push_back(
+			new HorizontalProjectile(
+				Vector2f(m_sprite.getPosition()),
+				500, *m_renderWindowConstant,
+				totalTimeElapsed, Direction::RIGHT));
+		m_firedTimeStamp = totalTimeElapsed;
+	}
 }
