@@ -76,7 +76,7 @@ void EnemyTrooper::MarkProjectilesForDespawn(const Time deltaTime, const Time to
 	for (DirectionalProjectile& projectile : m_directionalProjectiles)
 	{
 		projectile.Update(deltaTime, totalTimeElapsed);
-		if (projectile.CheckForIntersection(m_player.GetHitboxPosition())) 
+		if (!m_player.UnderGrace() && projectile.CheckForIntersection(m_player.GetHitboxPosition())) 
 		{
 			projectile.MarkForDespawn();
 			m_player.DecrementLives(totalTimeElapsed);

@@ -2,8 +2,9 @@
 
 Player::Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowConstant) :
 	HitboxEntity(renderWindowConstant),
-	m_speed(5),
 	m_fire(false),
+	m_graceActive(false),
+	m_speed(5),
 	m_lives(3),
 	m_gracePeriod(seconds(2))
 {
@@ -83,15 +84,31 @@ void Player::DespawnProjectiles()
 		});
 }
 
+bool Player::UnderGrace() const
+{
+	return m_graceActive;
+}
+
+float Player::GetLives() const
+{
+	return m_lives;
+}
+
 void Player::DecrementLives(const Time totalTimeElapsed)
 {
-	if (totalTimeElapsed - m_damagedTimeStamp >= m_gracePeriod) 
+	if (m_lives == 0)
+	{
+		return;
+		m_graceActive = false;
+
+	}
+	else if (totalTimeElapsed - m_damagedTimeStamp >= m_gracePeriod)
 	{
 		m_lives--;
 		m_damagedTimeStamp = totalTimeElapsed;
+		m_graceActive = false;
 	}
-	if (m_lives == 0) std::cout << "you suck" << std::endl;
-	consoleFloat(m_lives);
+	else m_graceActive = false;
 }
 
 std::vector<Projectile*> Player::GetProjectiles()

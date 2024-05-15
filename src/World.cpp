@@ -42,16 +42,14 @@ void World::WorldUpdate(const Time& deltaTime, const Time& totalTimeElapsed)
 {
 	// update player
 	m_player.Update(deltaTime, totalTimeElapsed);
-	
 	// update enemies
 	m_enemyManager.Update(deltaTime, totalTimeElapsed);
-
 	//update pickups
 	m_pickUpManager.Update(deltaTime, totalTimeElapsed);
 
+	m_eventManager.Update(deltaTime, totalTimeElapsed);
 	// update parallax background
 	for (auto& entity : m_parallaxEntityVector) entity->Update(deltaTime, totalTimeElapsed);
-
 	// must always be the last function executed
 	Despawn();
 }
@@ -76,4 +74,6 @@ void World::Despawn()
 	m_player.DespawnProjectiles(); 
 	m_enemyManager.Despawn();
 	m_pickUpManager.Despawn();
+	if (m_eventManager.MarkedForDespawn())
+		MarkForDespawn();
 }
