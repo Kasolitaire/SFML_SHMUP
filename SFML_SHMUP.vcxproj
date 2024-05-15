@@ -35,6 +35,7 @@
     <ClCompile Include="src\HomingPickup.cpp" />
     <ClCompile Include="src\HomingProjectile.cpp" />
     <ClCompile Include="src\HorizontalProjectile.cpp" />
+    <ClCompile Include="src\Listenable.cpp" />
     <ClCompile Include="src\ParallaxEntity.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\Game.cpp" />
@@ -64,6 +65,7 @@
     <ClInclude Include="src\HomingPickup.h" />
     <ClInclude Include="src\HomingProjectile.h" />
     <ClInclude Include="src\HorizontalProjectile.h" />
+    <ClInclude Include="src\Listenable.h" />
     <ClInclude Include="src\ParallaxEntity.h" />
     <ClInclude Include="src\Entity.h" />
     <ClInclude Include="src\Game.h" />

@@ -18,6 +18,8 @@ Player::Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowCo
 	m_hitbox.setSize(Vector2f(frameSize.x * reduce, frameSize.y*reduce));
 	m_sprite.setOrigin(frameSize.x / 2, frameSize.y / 2);
 	m_hitbox.setOrigin(frameSize.x / 2 * reduce, frameSize.y / 2 * reduce);
+
+m_sounds.insert({ "fire", Sound(AssetManager::GetSoundBuffer(ASSETS_PATH + "laser gun.wav")) });
 }
 
 Player::~Player()
@@ -124,6 +126,7 @@ void Player::SpawnProjectile(const Time totalTimeElapsed)
 {
 	if (totalTimeElapsed.asSeconds() - m_firedTimeStamp.asSeconds() >= 0.2 && m_fire)
 	{
+		m_sounds.at("fire").play();
 		m_horizontalProjectiles.push_back(
 			new HorizontalProjectile(
 				Vector2f(m_sprite.getPosition()),

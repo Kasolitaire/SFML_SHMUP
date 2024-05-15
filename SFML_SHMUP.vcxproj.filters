@@ -37,6 +37,12 @@
     <Filter Include="Source Files\Entity Implementation">
       <UniqueIdentifier>{925a5897-0e98-4cc9-81e2-d7c7d0e7457e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Interface Headers">
+      <UniqueIdentifier>{5bd31008-a4ec-46a7-9fe1-dcc8dca52175}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interface Implementations">
+      <UniqueIdentifier>{9ff98e3c-2ede-4de5-bd50-7fb66bc1d574}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -102,11 +108,26 @@
     <ClCompile Include="src\ParallaxEntity.cpp">
       <Filter>Source Files\Entity Implementation</Filter>
     </ClCompile>
-    <ClCompile Include="HomingPickup.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Squadron.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EventManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HomingPickup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PauseMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Despawnable.cpp">
+      <Filter>Source Files\Interface Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Listenable.cpp">
+      <Filter>Source Files\Interface Implementations</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -176,8 +197,23 @@
     <ClInclude Include="src\ParallaxEntity.h">
       <Filter>Header Files\Entity Headers</Filter>
     </ClInclude>
-    <ClInclude Include="HomingPickup.h">
+    <ClInclude Include="src\Button.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EventManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HomingPickup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PauseMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Despawnable.h">
+      <Filter>Header Files\Interface Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Listenable.h">
+      <Filter>Header Files\Interface Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

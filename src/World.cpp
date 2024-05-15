@@ -19,6 +19,7 @@ World::World(RenderWindow& renderWindow) :
 
 	m_music.openFromFile(ASSETS_PATH + "Shovel Knight OST - Strike the Earth! Plains of Passage.mp3");
 	m_music.play();
+	m_music.setVolume(50);
 }
 void World::HandleInputs()
 {

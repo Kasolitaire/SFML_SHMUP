@@ -7,9 +7,10 @@
 #include <vector>
 #include <unordered_map>
 #include "HorizontalProjectile.h"
+#include "Listenable.h"
 
 using namespace sf;
-class Player : public HitboxEntity
+class Player : public HitboxEntity, public Listenable
 {
 public:
 	Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowConstant);
