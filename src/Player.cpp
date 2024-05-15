@@ -20,7 +20,8 @@ Player::Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowCo
 	m_sprite.setOrigin(frameSize.x / 2, frameSize.y / 2);
 	m_hitbox.setOrigin(frameSize.x / 2 * reduce, frameSize.y / 2 * reduce);
 
-m_sounds.insert({ "fire", Sound(AssetManager::GetSoundBuffer(ASSETS_PATH + "laser_gun.wav")) });
+	m_sounds.insert({ "fire", Sound(AssetManager::GetSoundBuffer(ASSETS_PATH + "laser_gun.wav")) });
+	m_sounds.insert({ "damaged", Sound(AssetManager::GetSoundBuffer(ASSETS_PATH + "damaged.wav")) });
 }
 
 Player::~Player()
@@ -55,6 +56,15 @@ void Player::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 
 	// expires grace after alloted period
 	RemoveGrace(totalTimeElapsed);
+
+	if (m_grace) 
+	{
+		m_sprite.setColor(Color(0, 0 ,0 ,100));
+	}
+	else 
+	{
+		m_sprite.setColor(Color(255, 255, 255, 255));
+	}
 
 	if (m_lives == 0) 
 		m_eventManager.MarkPlayerAsDead();
@@ -112,6 +122,7 @@ void Player::DecrementLives(const Time totalTimeElapsed)
 		m_lives--;
 		m_damagedTimeStamp = totalTimeElapsed;
 		m_grace = true;
+		m_sounds["damaged"].play();
 	}
 }
 

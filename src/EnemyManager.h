@@ -26,4 +26,5 @@ private:
 	Time m_timer;
 	Player& m_player;
 	PickupManager* m_pickupManager;
+	void Spawner(const Time deltaTime, const Time totalTimeElapsed); // only for demonstration purposes
 };
