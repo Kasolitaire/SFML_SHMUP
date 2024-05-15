@@ -1,10 +1,10 @@
 #include "World.h"
 
-World::World(RenderWindow& renderWindow) : 
+World::World(RenderWindow& renderWindow, EventManager& eventManager) :
 	m_renderWindowPointer(&renderWindow), 
-	m_player(Vector2f(100, 100), *m_renderWindowPointer),
-	m_eventManager(m_player),
-	m_pickUpManager(m_player, renderWindow, m_eventManager), //pickup manager requires event manager
+	m_eventManager(eventManager),
+	m_player(Vector2f(100, 100), *m_renderWindowPointer, eventManager),
+	m_pickUpManager(m_player, renderWindow, eventManager), //pickup manager requires event manager
 	m_enemyManager(m_player, renderWindow, m_pickUpManager) // enemy manager requires pickup manager
 {
 	View view = m_renderWindowPointer->getView();

@@ -8,12 +8,13 @@
 #include <unordered_map>
 #include "HorizontalProjectile.h"
 #include "Listenable.h"
+#include "EventManager.h"
 
 using namespace sf;
 class Player : public HitboxEntity, public Listenable
 {
 public:
-	Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowConstant);
+	Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowConstant, EventManager& eventManager);
 	~Player();
 	void HandleInputs();
 	void Update(const Time& deltaTime, const Time& totalTimeElapsed) override;
@@ -29,7 +30,7 @@ private:
 	void SpawnProjectile( const Time totalTimeElapsed);
 	float m_speed;
 	Vector2f m_mousePosition;
-	
+	EventManager& m_eventManager;
 	Time m_firedTimeStamp;
 	Time m_damagedTimeStamp;
 	Time m_gracePeriod;

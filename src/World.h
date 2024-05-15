@@ -15,7 +15,7 @@ using namespace sf;
 class World : public Despawnable
 {
 public:
-	World(RenderWindow& renderWindow);
+	World(RenderWindow& renderWindow, EventManager& eventManager);
 	void HandleInputs();
 	void HandleEvents(const Event& event);
 	void WorldUpdate(const Time& deltaTime, const Time& totalTimeElapsed);
@@ -26,9 +26,9 @@ private:
 	Player m_player;
 	
 	// managers
-	EnemyManager m_enemyManager;
+	EventManager& m_eventManager;
 	PickupManager m_pickUpManager;
-	EventManager m_eventManager;
+	EnemyManager m_enemyManager;
 
 	// parallax
 	std::vector<Entity*> m_parallaxEntityVector;

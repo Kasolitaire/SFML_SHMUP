@@ -1,6 +1,7 @@
 #include "Player.h"
 
-Player::Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowConstant) :
+Player::Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowConstant, EventManager& eventManager) :
+	m_eventManager(eventManager),
 	HitboxEntity(renderWindowConstant),
 	m_fire(false),
 	m_grace(false),
@@ -19,7 +20,7 @@ Player::Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowCo
 	m_sprite.setOrigin(frameSize.x / 2, frameSize.y / 2);
 	m_hitbox.setOrigin(frameSize.x / 2 * reduce, frameSize.y / 2 * reduce);
 
-m_sounds.insert({ "fire", Sound(AssetManager::GetSoundBuffer(ASSETS_PATH + "laser gun.wav")) });
+m_sounds.insert({ "fire", Sound(AssetManager::GetSoundBuffer(ASSETS_PATH + "laser_gun.wav")) });
 }
 
 Player::~Player()
@@ -54,10 +55,17 @@ void Player::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 
 	// expires grace after alloted period
 	RemoveGrace(totalTimeElapsed);
+
+	if (m_lives == 0) 
+		m_eventManager.MarkPlayerAsDead();
 }
 
 void Player::HandleEvents(const Event& event)
 {
+	if (m_eventManager.GetPausedStatus()) 
+	{
+		PauseSounds();
+	}
 }
 
 void Player::draw(RenderTarget& target, RenderStates states) const

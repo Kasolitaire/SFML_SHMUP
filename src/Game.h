@@ -3,6 +3,7 @@
 #include "World.h"
 #include <iostream>
 #include "PauseMenu.h"
+#include "EventManager.h"
 using namespace sf;
 
 class Game
@@ -18,6 +19,7 @@ private:
 	void CalculateDeltaTime();
 	void ToggleFullScreen();
 	void ReloadWorld();
+	EventManager m_eventManager;
 	World* m_world;
 	RenderWindow m_renderWindow;
 	Event m_event;
@@ -28,7 +30,6 @@ private:
 	// temp pause
 	// pause menu
 	PauseMenu m_pauseMenu;
-	bool m_paused = false;
 	bool m_fullscreen = false;
 };
 

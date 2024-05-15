@@ -1,11 +1,13 @@
 #include "Game.h"
+#include "Player.h"
 
-Game::Game() : m_renderWindow(VideoMode(576, 324), "SFML works!"), m_clock(), m_world(new World(m_renderWindow)), m_pauseMenu(m_renderWindow)
+Game::Game() : m_renderWindow(VideoMode(576, 324), "SFML works!"), m_clock(), m_world(new World(m_renderWindow, m_eventManager)), m_pauseMenu(m_renderWindow)
 {
 	m_renderWindow.setSize(Vector2u(1152, 648));
 	View view = View(FloatRect(0, 0, 576, 324));
 	m_renderWindow.setView(view);
 	m_renderWindow.setMouseCursorVisible(false); 
+	m_renderWindow.setKeyRepeatEnabled(false);
 	/*View view = m_renderWindow.getView();
 	view.zoom(0);*/
 	/*m_renderWindow.setView(view);*/
@@ -37,8 +39,8 @@ void Game::Run()
 }
 
 void Game::Update()
-{
-	if (!m_paused) 
+{	
+	if (!m_pauseMenu.GetPausedStatus()) 
 	{
 		// real time inputs
 		m_world->HandleInputs(); 
@@ -53,7 +55,7 @@ void Game::Render()
 	m_renderWindow.clear();
 	// all necessary draw calls
 	m_world->WorldRender();
-	//m_pauseMenu.draw(m_renderWindow, RenderStates());
+	m_pauseMenu.draw(m_renderWindow, RenderStates());
 	// display all changes
 	m_renderWindow.display();
 }
@@ -69,9 +71,6 @@ void Game::PollEvents()
 		case Event::KeyPressed :
 			switch (m_event.key.code)
 			{
-			case sf::Keyboard::Escape:
-				m_paused = !m_paused;
-				break;
 			case sf::Keyboard::F11:
 				m_fullscreen = !m_fullscreen;
 				ToggleFullScreen();
@@ -80,9 +79,11 @@ void Game::PollEvents()
 				break;
 			}
 		}
-		
+		m_eventManager.SetPausedStatus(m_pauseMenu.GetPausedStatus());
 		// handles all events relevant to gameplay
-		if (!m_paused)m_world->HandleEvents(m_event);
+		if (!m_pauseMenu.GetPausedStatus())m_world->HandleEvents(m_event);
+		//handles all events related to the pause menu
+		m_pauseMenu.HandleEvents(m_event);
 	}
 }
 
@@ -108,7 +109,8 @@ void Game::ToggleFullScreen()
 		m_renderWindow.setView(view);
 		m_renderWindow.setSize(Vector2u(1152, 648));
 	}
-	//m_renderWindow.setMouseCursorVisible(false);
+	m_renderWindow.setMouseCursorVisible(false);
+	m_renderWindow.setKeyRepeatEnabled(false);
 }
 
 void Game::ReloadWorld()
@@ -116,6 +118,6 @@ void Game::ReloadWorld()
 	if (m_world->MarkedForDespawn())
 	{
 		delete m_world;
-		m_world = new World(m_renderWindow);
+		m_world = new World(m_renderWindow, m_eventManager);
 	}
 }

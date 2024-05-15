@@ -8,6 +8,8 @@ public:
 	PauseMenu(const RenderWindow& m_renderWindowConstant);
 	void Update(const Time deltaTime, const Time totalTimeElapsed);
 	void draw(RenderTarget& target, RenderStates states) const override;
+	void HandleEvents(Event& event);
+	bool GetPausedStatus();
 
 private:
 	const RenderWindow* m_renderWindowConstant;
@@ -15,5 +17,6 @@ private:
 	Button m_resumeButton;
 	Button m_exitButton;
 	bool m_paused;
+	bool m_keyReleased;
 };
 
