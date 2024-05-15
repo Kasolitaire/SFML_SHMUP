@@ -108,7 +108,7 @@ void Game::ToggleFullScreen()
 		m_renderWindow.setView(view);
 		m_renderWindow.setSize(Vector2u(1152, 648));
 	}
-	m_renderWindow.setMouseCursorVisible(false);
+	//m_renderWindow.setMouseCursorVisible(false);
 }
 
 void Game::ReloadWorld()

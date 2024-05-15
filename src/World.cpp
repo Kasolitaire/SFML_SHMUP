@@ -16,6 +16,9 @@ World::World(RenderWindow& renderWindow) :
 	m_parallaxEntityVector.push_back(&m_parallaxEntityMap["1"]);
 	m_parallaxEntityVector.push_back(&m_parallaxEntityMap["2"]);
 	m_parallaxEntityVector.push_back(&m_parallaxEntityMap["4"]);
+
+	m_music.openFromFile(ASSETS_PATH + "Shovel Knight OST - Strike the Earth! Plains of Passage.mp3");
+	m_music.play();
 }
 void World::HandleInputs()
 {

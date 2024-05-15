@@ -8,14 +8,16 @@ Player::Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowCo
 	m_lives(3),
 	m_gracePeriod(seconds(2))
 {
-	m_hitbox.setFillColor(Color::Transparent);
-	m_hitbox.setOutlineColor(Color::Green);
-	m_hitbox.setOutlineThickness(0.5);
-	m_hitbox.setSize(Vector2f(28, 12));
+	// setting up the player (hardcoded values subject to change)
 	m_sprite.setScale(0.8, 0.8);
 	m_sprite.setPosition(spawnPosition);
 	
 	m_animations.insert({"idle", Animation(ASSETS_PATH + "spacecraft_sheet.png", 4, 0.1f)});
+	Vector2f frameSize = m_animations["idle"].GetFrameSize();
+	float reduce = 0.5;
+	m_hitbox.setSize(Vector2f(frameSize.x * reduce, frameSize.y*reduce));
+	m_sprite.setOrigin(frameSize.x / 2, frameSize.y / 2);
+	m_hitbox.setOrigin(frameSize.x / 2 * reduce, frameSize.y / 2 * reduce);
 }
 
 Player::~Player()
@@ -75,12 +77,12 @@ void Player::draw(RenderTarget& target, RenderStates states) const
 void Player::DespawnProjectiles()
 {
 	
-	std::erase_if(m_horizontalProjectiles, [](HorizontalProjectile* x) 
+	std::erase_if(m_horizontalProjectiles, [](HorizontalProjectile* projectile) 
 		{
-			x->MarkedForDespawn();
-			if (x->MarkedForDespawn())
+			projectile->MarkedForDespawn();
+			if (projectile->MarkedForDespawn())
 			{
-				delete x;
+				delete projectile;
 				return true;
 			}
 			return false;
