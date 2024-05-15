@@ -60,7 +60,7 @@ void PickupManager::PickupCollisionEvent(Pickup* pickup)
 	{
 	case PickupType::BATTERY :
 		//event manager logic
-		m_eventManager.SomeEvent();
+		m_eventManager.IncreaseScore();
 		break;
 	}
 }

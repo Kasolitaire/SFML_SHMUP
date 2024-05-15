@@ -35,5 +35,6 @@ private:
 	std::unordered_map<string, ParallaxEntity> m_parallaxEntityMap;
 
 	Music m_music;
+	Text m_score;
 };
 

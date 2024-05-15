@@ -7,7 +7,7 @@ EnemyTrooper::EnemyTrooper(Player& player, Vector2f spawnPosition, const RenderW
 {
 	m_sprite.setRotation(getAngleToTarget(m_player.GetHitboxPosition().getMiddlePosition(), m_sprite.getPosition()));
 	m_sprite.setPosition(spawnPosition);
-	ToggleHitBox(true);
+	//ToggleHitBox(true);
 	m_animations.insert({ "explosion", Animation(ASSETS_PATH + "explosion-spritesheet.png", 8, 0.1f) });
 	Texture& texture = AssetManager::GetTexture(ASSETS_PATH + "darkgrey_02.png");
 	m_sprite.setTexture(texture);
@@ -44,7 +44,7 @@ void EnemyTrooper::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 	{
 		Movement(deltaTime, totalTimeElapsed);
 		// shooting logic
-		if (totalTimeElapsed - m_firedTimeStamp >= seconds(0.4f))
+		if (totalTimeElapsed - m_firedTimeStamp >= seconds(0.8f))
 		{
 			m_firedTimeStamp = totalTimeElapsed;
 			m_directionalProjectiles.push_back(

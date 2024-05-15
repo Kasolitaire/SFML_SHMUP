@@ -8,12 +8,20 @@ void EventManager::Update(const Time deltaTime, const Time totalTimeElapsed)
 		m_playerDead = false;
 	}
 	if (m_playerDead) 
+	{
 		MarkForDespawn();
+		m_score = 0;
+	}
 }
 
-void EventManager::SomeEvent()
+void EventManager::IncreaseScore()
 {
-	std::cout << "event triggered" << std::endl;
+	m_score += 50;
+}
+
+int EventManager::GetScore()
+{
+	return m_score;
 }
 
 bool EventManager::GetPausedStatus()

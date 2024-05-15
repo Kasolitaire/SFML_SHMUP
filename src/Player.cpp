@@ -22,6 +22,8 @@ Player::Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowCo
 
 	m_sounds.insert({ "fire", Sound(AssetManager::GetSoundBuffer(ASSETS_PATH + "laser_gun.wav")) });
 	m_sounds.insert({ "damaged", Sound(AssetManager::GetSoundBuffer(ASSETS_PATH + "damaged.wav")) });
+	m_sounds["damaged"].setVolume(20);
+	m_sounds["fire"].setVolume(20);
 }
 
 Player::~Player()

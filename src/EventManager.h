@@ -7,12 +7,14 @@ class EventManager : public Despawnable
 {
 public:
 	void Update(const Time deltaTime, const Time totalTimeElapsed);
-	void SomeEvent();
+	void IncreaseScore();
+	int GetScore();
 	bool GetPausedStatus();
 	void SetPausedStatus(const bool status);
 	void MarkPlayerAsDead();
 private:
 	bool m_paused = false;
 	bool m_playerDead = false;
+	float m_score;
 };
 

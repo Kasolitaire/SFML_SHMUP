@@ -18,7 +18,7 @@ EnemyGrunt::EnemyGrunt(
 	m_hitbox.setOrigin(frameSize.x / 2 * reduceMultiplier, frameSize.y / 2 * reduceMultiplier);
 
 	m_hitbox.setPosition(m_sprite.getPosition());
-	ToggleHitBox(true);
+	//ToggleHitBox(true);
 }
 
 void EnemyGrunt::Update(const Time& deltaTime, const Time& totalTimeElapsed)

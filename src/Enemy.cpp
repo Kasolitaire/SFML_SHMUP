@@ -8,6 +8,7 @@ Enemy::Enemy(Player& player, Vector2f spawnPosition, const RenderWindow& renderW
 	m_ignore(false)
 {
 	m_sounds.insert({ "explosion", Sound(AssetManager::GetSoundBuffer(ASSETS_PATH + "explosion.wav")) });
+	m_sounds.at("explosion").setVolume(30);
 }
 
 Enemy::~Enemy()

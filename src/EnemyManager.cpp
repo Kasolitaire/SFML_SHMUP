@@ -107,8 +107,8 @@ void EnemyManager::Spawner(const Time deltaTime, const Time totalTimeElapsed)
 {
 	std::random_device rd;
 	uniform_int_distribution<int> distHeight(0, 324);
-	uniform_int_distribution<int> distTime(0.5, 2);
-	uniform_int_distribution<int> distCount(2, 4);
+	uniform_real_distribution<float> distTime(0, 2.5);
+	uniform_real_distribution<float> distCount(2, 4);
 	uniform_int_distribution<int> distType(0, 1);
 	uniform_int_distribution<int> distDistance(40, 60);
 	float height = distHeight(rd);
