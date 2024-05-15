@@ -20,7 +20,6 @@ EnemyTrooper::EnemyTrooper(Player& player, Vector2f spawnPosition, const RenderW
 
 EnemyTrooper::~EnemyTrooper()
 {
-	std::cout << "enemy trooper destructor" << endl;
 }
 
 void EnemyTrooper::Update(const Time& deltaTime, const Time& totalTimeElapsed)

@@ -31,7 +31,6 @@ void PauseMenu::HandleEvents(Event& event)
 	{
 		m_paused = !m_paused;
 		m_keyReleased = false;
-		std::cout << "sfsfsf";
 	}
 	else if (event.type == Event::KeyReleased)
 		m_keyReleased = true;

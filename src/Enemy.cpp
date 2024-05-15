@@ -13,7 +13,6 @@ Enemy::Enemy(Player& player, Vector2f spawnPosition, const RenderWindow& renderW
 
 Enemy::~Enemy()
 {
-	std::cout << "enemy destroyed" << endl;
 }
 
 void Enemy::Update(const Time& deltaTime, const Time& totalTimeElapsed)
