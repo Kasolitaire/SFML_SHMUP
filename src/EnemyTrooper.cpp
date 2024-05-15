@@ -5,19 +5,17 @@ EnemyTrooper::EnemyTrooper(Player& player, Vector2f spawnPosition, const RenderW
 	m_speed(speed),
 	m_rotationSpeed(rotationSpeed)
 {
-	Texture& texture = AssetManager::GetTexture(ASSETS_PATH + "darkgrey_02.png");
-	m_sprite.setTexture(texture);
-	m_sprite.setOrigin(texture.getSize().x / 2, texture.getSize().y / 2);
-	m_hitbox.setSize(Vector2f(texture.getSize().x, texture.getSize().y));
+	m_sprite.setRotation(getAngleToTarget(m_player.GetHitboxPosition().getMiddlePosition(), m_sprite.getPosition()));
 	m_sprite.setPosition(spawnPosition);
 	ToggleHitBox(true);
-	m_hitbox.setPosition(m_sprite.getPosition());
-	m_hitbox.setOrigin(m_hitbox.getSize().x / 2, m_hitbox.getSize().y / 2);
-	m_hitbox.setFillColor(Color::Transparent);
-	m_hitbox.setOutlineThickness(0.5f);
-	m_hitbox.setOutlineColor(Color::Green);
-
 	m_animations.insert({ "explosion", Animation(ASSETS_PATH + "explosion-spritesheet.png", 8, 0.1f) });
+	Texture& texture = AssetManager::GetTexture(ASSETS_PATH + "darkgrey_02.png");
+	m_sprite.setTexture(texture);
+	Vector2f textureSize = Vector2f(texture.getSize());
+	float reduce = 0.5;
+	m_hitbox.setSize(Vector2f(textureSize.x * reduce, textureSize.y * reduce));
+	m_sprite.setOrigin(textureSize.x / 2, textureSize.y / 2);
+	m_hitbox.setOrigin(textureSize.x / 2 * reduce, textureSize.y / 2 * reduce);
 }
 
 EnemyTrooper::~EnemyTrooper()
