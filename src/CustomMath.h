@@ -7,3 +7,4 @@ Vector2f vectorLerp(const Vector2f vector1, const Vector2f vector2, const float 
 float degreesToRadians(const float degrees);
 float getAngleToTarget(const Vector2f target, const Vector2f local);
 Vector2f getCenterOfFloatRect(const FloatRect floatRect);
+float getDistanceBetweenVectors(const Vector2f first, const Vector2f second);

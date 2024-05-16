@@ -94,3 +94,8 @@ void World::Despawn()
 	if (m_eventManager.MarkedForDespawn())
 		MarkForDespawn();
 }
+
+void World::PreDespawn()
+{
+	m_player.PreDespawn();
+}

@@ -126,8 +126,14 @@
     <ClCompile Include="src\Despawnable.cpp">
       <Filter>Source Files\Interface Implementations</Filter>
     </ClCompile>
-    <ClCompile Include="src\Listenable.cpp">
+    <ClCompile Include="src\Audible.cpp">
       <Filter>Source Files\Interface Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Trackable.cpp">
+      <Filter>Source Files\Interface Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HomingMissile.cpp">
+      <Filter>Source Files\Projectile Implementations</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -212,7 +218,13 @@
     <ClInclude Include="src\Despawnable.h">
       <Filter>Header Files\Interface Headers</Filter>
     </ClInclude>
-    <ClInclude Include="src\Listenable.h">
+    <ClInclude Include="src\Audible.h">
+      <Filter>Header Files\Interface Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HomingMissile.h">
+      <Filter>Header Files\Projectile Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Trackable.h">
       <Filter>Header Files\Interface Headers</Filter>
     </ClInclude>
   </ItemGroup>

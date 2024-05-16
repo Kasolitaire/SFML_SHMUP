@@ -1,6 +1,7 @@
 #pragma once
 #include <unordered_map>
 #include "Enemy.h"
+#include "Trackable.h"
 class EnemyGrunt : public Enemy
 {
 public :

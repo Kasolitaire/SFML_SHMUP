@@ -27,7 +27,22 @@ EnemyManager::~EnemyManager()
 
 void EnemyManager::Update(const Time deltaTime, const Time totalTimeElapsed)
 {
+	Trackable* closestTrackable = nullptr;
+	float smallestDistance = 0;
 	Spawner(deltaTime, totalTimeElapsed);
+	auto homingMissiles = m_player.GetNonTrackingHomingMissiles();
+	for (HomingMissile* const homingMissile : homingMissiles)
+	{
+		for (Enemy* enemy : m_enemies) 
+		{
+			float distance = getDistanceBetweenVectors(homingMissile->GetHitboxPosition().getMiddlePosition(), enemy->GetTrackablePosition().getMiddlePosition());
+			if (distance < smallestDistance)
+				closestTrackable = enemy;
+		}
+			closestTrackable->MarkAsTracked();
+
+		homingMissile->SetTrackable(closestTrackable);
+	}
 	
 	m_timer += deltaTime;
 	if (!m_squadrons.empty() && m_timer >= m_squadrons.front().m_timeStamp)
@@ -45,6 +60,7 @@ void EnemyManager::Update(const Time deltaTime, const Time totalTimeElapsed)
 			enemy->MarkAsIgnore();
 			m_pickupManager->CreatePickup(PickupType::BATTERY, enemy->GetHitboxPosition().getMiddlePosition());
 		}
+		AssignTrackables(enemy);
 	}
 }
 
@@ -81,6 +97,11 @@ void EnemyManager::Despawn()
 	DespawnEnemies();
 	DespawnEnemyProjectiles();
 }
+void EnemyManager::AssignTrackables(Enemy* enemy)
+{
+	
+}
+
 void EnemyManager::DespawnEnemies()
 {
 	std::erase_if(m_enemies, [](Enemy* enemy)

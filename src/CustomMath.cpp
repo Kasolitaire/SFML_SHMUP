@@ -29,3 +29,10 @@ Vector2f getCenterOfFloatRect(const FloatRect floatRect)
 	return Vector2f(floatRect.width / 2, floatRect.height / 2);
 }
 
+float getDistanceBetweenVectors(const Vector2f first, const Vector2f second)
+{
+	return sqrtf(pow(first.x + second.x, 2) + pow(first.y + second.y, 2));
+}
+
+
+

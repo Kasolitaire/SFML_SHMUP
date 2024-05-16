@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include <string>
 using namespace sf;
-class Listenable
+class Audible
 {
 public:
 	void SetVolume(const unsigned int volume);

@@ -1,5 +1,7 @@
 #pragma once 
 #include "HomingProjectile.h"
+#include "Trackable.h"
+
 class HomingMissile : public HomingProjectile, public Despawnable
 {
 public:
@@ -9,7 +11,15 @@ public:
 		const float speed, const float rotationSpeed,
 		const RenderWindow& renderWindowConstant,
 		const Time timeStamp);
-
+	bool TrackingStatus() const;
+	void PreDespawn();
+	void SetTrackable(Trackable* trackable);
 private:
+	virtual void Update(const Time& deltaTime, const Time& totalTimeElapsed) override;
+	void TrackingMovement(const Time deltaTime, const Time totalTimeElapsed);
+	void NonTrackingMovement(const Time deltaTime, const Time totalTimeElapsed);
+	Trackable* m_trackable;
+	bool m_tracking;
+
 };
 

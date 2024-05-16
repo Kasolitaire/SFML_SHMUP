@@ -18,8 +18,9 @@ public:
 	World(RenderWindow& renderWindow, EventManager& eventManager);
 	void HandleInputs();
 	void HandleEvents(const Event& event);
-	void WorldUpdate(const Time& deltaTime, const Time& totalTimeElapsed);
 	void WorldRender();
+	void WorldUpdate(const Time& deltaTime, const Time& totalTimeElapsed); // marking for despawn or dead or despawn should only happen here
+	void PreDespawn(); // check if something is about to be despawned
 	void Despawn();
 private:
 	RenderWindow* m_renderWindowPointer;

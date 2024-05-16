@@ -72,6 +72,14 @@ void Player::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 		m_eventManager.MarkPlayerAsDead();
 }
 
+void Player::PreDespawn()
+{
+	for (HomingMissile* homingMissile : m_homingMissiles) 
+	{
+		//homingMissile->PreDespawn()
+	}
+}
+
 void Player::HandleEvents(const Event& event)
 {
 	if (m_eventManager.GetPausedStatus()) 
@@ -111,6 +119,17 @@ bool Player::UnderGrace() const
 float Player::GetLives() const
 {
 	return m_lives;
+}
+
+std::vector<HomingMissile*> Player::GetNonTrackingHomingMissiles()
+{
+	std::vector<HomingMissile*> nonTrackingHomingMissiles;
+	for (HomingMissile* homingMissile : m_homingMissiles) 
+	{
+		if(!homingMissile->TrackingStatus())
+			nonTrackingHomingMissiles.push_back(homingMissile);
+	}
+	return nonTrackingHomingMissiles;
 }
 
 void Player::DecrementLives(const Time totalTimeElapsed)

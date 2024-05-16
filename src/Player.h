@@ -7,22 +7,26 @@
 #include <vector>
 #include <unordered_map>
 #include "HorizontalProjectile.h"
-#include "Listenable.h"
+#include "Audible.h"
 #include "EventManager.h"
+#include "HomingMissile.h"
 
 using namespace sf;
-class Player : public HitboxEntity, public Listenable
+class Player : public HitboxEntity, public Audible, public Trackable
 {
 public:
 	Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowConstant, EventManager& eventManager);
 	~Player();
 	void HandleInputs();
 	void Update(const Time& deltaTime, const Time& totalTimeElapsed) override;
+	void PreDespawn();
 	void HandleEvents(const Event& event);
 	void draw(RenderTarget& target, RenderStates states) const override;
 	void DespawnProjectiles();
 	bool UnderGrace() const;
 	float GetLives() const;
+	std::vector<HomingMissile*> GetNonTrackingHomingMissiles();
+
 	void DecrementLives(const Time totalTimeElapsed);
 	std::vector<Projectile*> GetProjectiles(); // potentially worth making certain fucntions const within projectiles !!!
 private:
@@ -39,5 +43,6 @@ private:
 	unsigned int m_lives;
 	std::unordered_map<string, Animation> m_animations;
 	std::vector<HorizontalProjectile*> m_horizontalProjectiles;
+	std::vector<HomingMissile*> m_homingMissiles;
 };
 

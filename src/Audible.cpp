@@ -1,21 +1,21 @@
 
-#include "Listenable.h"
+#include "Audible.h"
 
-void Listenable::SetVolume(const unsigned int volume)
+void Audible::SetVolume(const unsigned int volume)
 {
     for (auto& sound: m_sounds) {
         sound.second.setVolume(volume);
     }
 }
 
-void Listenable::PauseSounds()
+void Audible::PauseSounds()
 {
     for (auto& sound : m_sounds) {
         sound.second.pause();
     }
 }
 
-void Listenable::UnpauseSounds()
+void Audible::UnpauseSounds()
 {
     for (auto& sound : m_sounds) {
         sound.second.play();

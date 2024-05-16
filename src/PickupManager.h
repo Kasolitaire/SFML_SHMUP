@@ -6,7 +6,7 @@
 #include "HomingPickup.h"
 #include "EventManager.h"
 #include "vector";
-class PickupManager : public Drawable, public Listenable // will be made non listenable in the future !!!
+class PickupManager : public Drawable, public Audible // will be made non listenable in the future !!!
 {
 public:
 	PickupManager(Player& player, const RenderWindow& renderWindowConstant, EventManager& eventManager);

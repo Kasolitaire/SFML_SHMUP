@@ -16,6 +16,7 @@ public:
 	void draw(RenderTarget& target, RenderStates states) const override;
 	void SpawnSquadron(Squadron squadron);
 	void Despawn();
+	void AssignTrackables(Enemy* enemy);
 	
 private:
 	void DespawnEnemies();
