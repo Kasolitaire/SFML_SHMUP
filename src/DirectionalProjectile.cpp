@@ -25,7 +25,6 @@ void DirectionalProjectile::Update(const Time& deltaTime, const Time& totalTimeE
 		m_sprite.move(-100 * deltaTime.asSeconds(), 0);
 		if (m_animations["explosion"].Update(deltaTime, m_sprite))
 		{
-			consoleBool(true, "anim");
 			MarkForDespawn();
 		}
 

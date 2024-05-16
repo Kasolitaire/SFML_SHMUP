@@ -1,5 +1,6 @@
 #include "EnemyManager.h"
 #include "PickupManager.h"
+#include "random"
 
 EnemyManager::EnemyManager(Player& player, const RenderWindow& renderWindowConstant, PickupManager& pickupManager) : 
 	m_player(player),
@@ -7,13 +8,13 @@ EnemyManager::EnemyManager(Player& player, const RenderWindow& renderWindowConst
 	m_pickupManager(&pickupManager),
 	m_timer(seconds(0))
 {
-	m_squadrons.push(Squadron(EnemyType::Trooper, seconds(0), 5, Vector2f(0, 60), 100));
+	/*m_squadrons.push(Squadron(EnemyType::Trooper, seconds(0), 5, Vector2f(0, 60), 100));
 	m_squadrons.push(Squadron(EnemyType::Grunt, Time(), 5, Vector2f(0, 50), 100));
 	m_squadrons.push(Squadron(EnemyType::Grunt, seconds(2.5), 2, Vector2f(0, 60), 100));
 	m_squadrons.push(Squadron(EnemyType::Grunt, seconds(6), 5, Vector2f(0, 75), 100));
 	m_squadrons.push(Squadron(EnemyType::Grunt, seconds(6), 5, Vector2f(0, 60), 100));
 	m_squadrons.push(Squadron(EnemyType::Trooper, seconds(6), 5, Vector2f(0, 20), 100));
-	m_squadrons.push(Squadron(EnemyType::Grunt, seconds(6), 5, Vector2f(0, 60), 100));
+	m_squadrons.push(Squadron(EnemyType::Grunt, seconds(6), 5, Vector2f(0, 60), 100));*/
 }
 
 EnemyManager::~EnemyManager()
@@ -26,6 +27,8 @@ EnemyManager::~EnemyManager()
 
 void EnemyManager::Update(const Time deltaTime, const Time totalTimeElapsed)
 {
+	Spawner(deltaTime, totalTimeElapsed);
+	
 	m_timer += deltaTime;
 	if (!m_squadrons.empty() && m_timer >= m_squadrons.front().m_timeStamp)
 	{
@@ -55,18 +58,18 @@ void EnemyManager::draw(RenderTarget& target, RenderStates states) const
 
 void EnemyManager::SpawnSquadron(Squadron squadron)
 {
-	float x = 500; // placeholder !!!
+	
 	for (int index = 0; index < squadron.m_count; index++) 
 	{
 		switch (squadron.m_enemyType)
 		{
 		case EnemyType::Grunt:
-			m_enemies.push_back(new EnemyGrunt(m_player, Vector2f(x + squadron.m_horizontalDistanceApart * index, squadron.m_spawnPosition.y), m_renderWindowConstant));
+			m_enemies.push_back(new EnemyGrunt(m_player, Vector2f(squadron.m_spawnPosition.x + squadron.m_horizontalDistanceApart * index, squadron.m_spawnPosition.y), m_renderWindowConstant));
 			break;
 		case EnemyType::Trooper: // should really have it's own squadron type this is very messy
 			float trooperSpeed = 100;
 			float trooperRotationSpeed = 100;
-			Vector2f f = Vector2f(x + squadron.m_horizontalDistanceApart * index, squadron.m_spawnPosition.y);
+			Vector2f f = Vector2f(squadron.m_spawnPosition.x + squadron.m_horizontalDistanceApart * index, squadron.m_spawnPosition.y);
 			m_enemies.push_back(new EnemyTrooper(m_player, f, m_renderWindowConstant, trooperSpeed, trooperRotationSpeed));
 			break;
 		}
@@ -98,5 +101,27 @@ void EnemyManager::DespawnEnemyProjectiles()
 		if (typeid(*enemy) == typeid(EnemyTrooper))
 			dynamic_cast<EnemyTrooper*>(enemy)->DespawnProjectiles();
 	}
+}
+
+void EnemyManager::Spawner(const Time deltaTime, const Time totalTimeElapsed)
+{
+	std::random_device rd;
+	uniform_int_distribution<int> distHeight(0, 324);
+	uniform_real_distribution<float> distTime(0, 2.5);
+	uniform_real_distribution<float> distCount(2, 4);
+	uniform_int_distribution<int> distType(0, 1);
+	uniform_int_distribution<int> distDistance(40, 60);
+	float height = distHeight(rd);
+	float time = distTime(rd);
+	float distance = distDistance(rd);
+	float count = distCount(rd);
+	EnemyType type;
+	if (distType(rd) == 1)
+	{
+		type = EnemyType::Trooper;
+	}
+	else
+		type = EnemyType::Grunt;
+	m_squadrons.push(Squadron(type, seconds(time), count, Vector2f(600, height), distance));
 }
 

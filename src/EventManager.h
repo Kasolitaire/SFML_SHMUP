@@ -1,13 +1,20 @@
 #pragma once
-#include "Player.h"
 #include "Despawnable.h"
+#include "SFML/Graphics.hpp"
+#include <iostream>
+using namespace sf;
 class EventManager : public Despawnable
 {
 public:
-	EventManager(Player& player);
 	void Update(const Time deltaTime, const Time totalTimeElapsed);
-	void SomeEvent();
+	void IncreaseScore();
+	int GetScore();
+	bool GetPausedStatus();
+	void SetPausedStatus(const bool status);
+	void MarkPlayerAsDead();
 private:
-	Player& m_player;
+	bool m_paused = false;
+	bool m_playerDead = false;
+	float m_score;
 };
 

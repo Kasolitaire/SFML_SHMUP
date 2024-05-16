@@ -1,6 +1,7 @@
 #include "Player.h"
 
-Player::Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowConstant) :
+Player::Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowConstant, EventManager& eventManager) :
+	m_eventManager(eventManager),
 	HitboxEntity(renderWindowConstant),
 	m_fire(false),
 	m_grace(false),
@@ -18,6 +19,11 @@ Player::Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowCo
 	m_hitbox.setSize(Vector2f(frameSize.x * reduce, frameSize.y*reduce));
 	m_sprite.setOrigin(frameSize.x / 2, frameSize.y / 2);
 	m_hitbox.setOrigin(frameSize.x / 2 * reduce, frameSize.y / 2 * reduce);
+
+	m_sounds.insert({ "fire", Sound(AssetManager::GetSoundBuffer(ASSETS_PATH + "laser_gun.wav")) });
+	m_sounds.insert({ "damaged", Sound(AssetManager::GetSoundBuffer(ASSETS_PATH + "damaged.wav")) });
+	m_sounds["damaged"].setVolume(20);
+	m_sounds["fire"].setVolume(20);
 }
 
 Player::~Player()
@@ -35,21 +41,13 @@ void Player::HandleInputs()
 
 void Player::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 {
-	if (totalTimeElapsed.asSeconds() - m_firedTimeStamp.asSeconds() >= 0.2 && m_fire) 
-	{
-		m_horizontalProjectiles.push_back(
-			new HorizontalProjectile(
-				Vector2f(m_sprite.getPosition()),
-				500, *m_renderWindowConstant,
-				totalTimeElapsed, Direction::RIGHT));
-		m_firedTimeStamp = totalTimeElapsed;
-	}
-	
 	// player movement
 	Vector2f viewSize = m_renderWindowConstant->getView().getSize();
 	Vector2f lerp = vectorLerp(m_sprite.getPosition(), m_mousePosition, m_speed * deltaTime.asSeconds());
 	m_sprite.setPosition(std::clamp(lerp.x, 0.0f, viewSize.x), std::clamp(lerp.y, 0.0f, viewSize.y));
 	m_hitbox.setPosition(m_sprite.getPosition());
+
+	SpawnProjectile(totalTimeElapsed);
 
 	// update projectiles
 	for (auto& projectile : m_horizontalProjectiles) 
@@ -60,10 +58,26 @@ void Player::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 
 	// expires grace after alloted period
 	RemoveGrace(totalTimeElapsed);
+
+	if (m_grace) 
+	{
+		m_sprite.setColor(Color(0, 0 ,0 ,100));
+	}
+	else 
+	{
+		m_sprite.setColor(Color(255, 255, 255, 255));
+	}
+
+	if (m_lives == 0) 
+		m_eventManager.MarkPlayerAsDead();
 }
 
 void Player::HandleEvents(const Event& event)
 {
+	if (m_eventManager.GetPausedStatus()) 
+	{
+		PauseSounds();
+	}
 }
 
 void Player::draw(RenderTarget& target, RenderStates states) const
@@ -110,6 +124,7 @@ void Player::DecrementLives(const Time totalTimeElapsed)
 		m_lives--;
 		m_damagedTimeStamp = totalTimeElapsed;
 		m_grace = true;
+		m_sounds["damaged"].play();
 	}
 }
 
@@ -128,7 +143,16 @@ void Player::RemoveGrace(const Time totalTimeElapsed)
 		m_grace = false;
 }
 
-void Player::SpawnProjectile()
+void Player::SpawnProjectile(const Time totalTimeElapsed)
 {
-	// move spawn logic here !!!
+	if (totalTimeElapsed.asSeconds() - m_firedTimeStamp.asSeconds() >= 0.2 && m_fire)
+	{
+		m_sounds.at("fire").play();
+		m_horizontalProjectiles.push_back(
+			new HorizontalProjectile(
+				Vector2f(m_sprite.getPosition()),
+				500, *m_renderWindowConstant,
+				totalTimeElapsed, Direction::RIGHT));
+		m_firedTimeStamp = totalTimeElapsed;
+	}
 }

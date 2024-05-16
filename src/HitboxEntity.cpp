@@ -2,6 +2,9 @@
 
 HitboxEntity::HitboxEntity()
 {
+	m_hitbox.setFillColor(Color::Transparent);
+	m_hitbox.setOutlineColor(Color::Green);
+	m_hitbox.setOutlineThickness(0.5);
 }
 
 void HitboxEntity::ToggleHitBox(bool visible)

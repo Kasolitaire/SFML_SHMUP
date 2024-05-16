@@ -5,7 +5,7 @@ enum ButtonType{RESUME, EXIT};
 class Button : public Drawable
 {
 public:
-	Button(ButtonType type, FloatRect box);
+	Button(ButtonType type, const std::string buttonContent , FloatRect box);
 	virtual void Update(const Time deltaTime, const Time totalTimeElapsed);
 
 	virtual void OnHoverEnter();

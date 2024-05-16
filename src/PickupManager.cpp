@@ -3,6 +3,7 @@
 PickupManager::PickupManager(Player& player, const RenderWindow& renderWindowConstant, EventManager& eventManager) :
 	m_player(player), m_renderWindowConstant(&renderWindowConstant), m_eventManager(eventManager)
 {
+	m_sounds.insert({"collect", Sound(AssetManager::GetSoundBuffer(ASSETS_PATH + "collect.wav")) });
 }
 
 void PickupManager::Update(const Time deltaTime, const Time totalTimeElapsed)
@@ -27,6 +28,8 @@ void PickupManager::draw(RenderTarget& target, RenderStates states) const
 
 void PickupManager::Despawn()
 {
+			
+	int size = m_homingPickups.size();
 	std::erase_if(m_homingPickups, [](HomingPickup* pickup)
 		{
 			if (pickup->MarkedForDespawn())
@@ -36,9 +39,12 @@ void PickupManager::Despawn()
 			}
 			return false;
 		});
+	
+	if(size > m_homingPickups.size())
+		m_sounds.at("collect").play(); // this is horrible change asap!!!
 }
 
-void PickupManager::CreatePickup(const PickupType type, const Vector2f spawnPosition) // should also get time stamp !!!
+void PickupManager::CreatePickup(const PickupType type, const Vector2f spawnPosition)
 {
 	switch (type)
 	{
@@ -54,7 +60,7 @@ void PickupManager::PickupCollisionEvent(Pickup* pickup)
 	{
 	case PickupType::BATTERY :
 		//event manager logic
-		m_eventManager.SomeEvent();
+		m_eventManager.IncreaseScore();
 		break;
 	}
 }

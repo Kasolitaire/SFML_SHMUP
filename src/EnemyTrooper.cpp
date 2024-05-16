@@ -7,7 +7,7 @@ EnemyTrooper::EnemyTrooper(Player& player, Vector2f spawnPosition, const RenderW
 {
 	m_sprite.setRotation(getAngleToTarget(m_player.GetHitboxPosition().getMiddlePosition(), m_sprite.getPosition()));
 	m_sprite.setPosition(spawnPosition);
-	ToggleHitBox(true);
+	//ToggleHitBox(true);
 	m_animations.insert({ "explosion", Animation(ASSETS_PATH + "explosion-spritesheet.png", 8, 0.1f) });
 	Texture& texture = AssetManager::GetTexture(ASSETS_PATH + "darkgrey_02.png");
 	m_sprite.setTexture(texture);
@@ -20,7 +20,6 @@ EnemyTrooper::EnemyTrooper(Player& player, Vector2f spawnPosition, const RenderW
 
 EnemyTrooper::~EnemyTrooper()
 {
-	std::cout << "enemy trooper destructor" << endl;
 }
 
 void EnemyTrooper::Update(const Time& deltaTime, const Time& totalTimeElapsed)
@@ -28,8 +27,11 @@ void EnemyTrooper::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 	MarkProjectilesForDespawn(deltaTime, totalTimeElapsed);
 
 	// mark as despawn logic
-	if (!m_dead && CheckForProjectileIntersection())
+	if (!m_dead && CheckForProjectileIntersection()) 
+	{
+		m_sounds.at("explosion").play();
 		MarkAsDead();
+	}
 	if (m_dead)
 	{
 		if (m_animations["explosion"].Update(deltaTime, m_sprite))
@@ -41,7 +43,7 @@ void EnemyTrooper::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 	{
 		Movement(deltaTime, totalTimeElapsed);
 		// shooting logic
-		if (totalTimeElapsed - m_firedTimeStamp >= seconds(0.4f))
+		if (totalTimeElapsed - m_firedTimeStamp >= seconds(0.8f))
 		{
 			m_firedTimeStamp = totalTimeElapsed;
 			m_directionalProjectiles.push_back(

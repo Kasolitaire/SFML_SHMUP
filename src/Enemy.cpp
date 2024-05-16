@@ -7,11 +7,12 @@ Enemy::Enemy(Player& player, Vector2f spawnPosition, const RenderWindow& renderW
 	m_dead(false),
 	m_ignore(false)
 {
+	m_sounds.insert({ "explosion", Sound(AssetManager::GetSoundBuffer(ASSETS_PATH + "explosion.wav")) });
+	m_sounds.at("explosion").setVolume(30);
 }
 
 Enemy::~Enemy()
 {
-	std::cout << "enemy destroyed" << endl;
 }
 
 void Enemy::Update(const Time& deltaTime, const Time& totalTimeElapsed)

@@ -1,10 +1,10 @@
 #include "World.h"
 
-World::World(RenderWindow& renderWindow) : 
+World::World(RenderWindow& renderWindow, EventManager& eventManager) :
 	m_renderWindowPointer(&renderWindow), 
-	m_player(Vector2f(100, 100), *m_renderWindowPointer),
-	m_eventManager(m_player),
-	m_pickUpManager(m_player, renderWindow, m_eventManager), //pickup manager requires event manager
+	m_eventManager(eventManager),
+	m_player(Vector2f(100, 100), *m_renderWindowPointer, eventManager),
+	m_pickUpManager(m_player, renderWindow, eventManager), //pickup manager requires event manager
 	m_enemyManager(m_player, renderWindow, m_pickUpManager) // enemy manager requires pickup manager
 {
 	View view = m_renderWindowPointer->getView();
@@ -19,6 +19,15 @@ World::World(RenderWindow& renderWindow) :
 
 	m_music.openFromFile(ASSETS_PATH + "Shovel Knight OST - Strike the Earth! Plains of Passage.mp3");
 	m_music.play();
+	m_music.setVolume(5);
+
+	m_score.setFont(AssetManager::GetFont(ASSETS_PATH + "Vermin Vibes 1989.ttf"));
+	m_score.setString("score: 0");
+	m_score.setScale(0.5, 0.5);
+	m_score.setPosition(Vector2f(30, 10));
+	m_score.setOutlineThickness(1);
+	m_score.setOutlineColor(Color::Black);
+	m_score.setLetterSpacing(5);
 }
 void World::HandleInputs()
 {
@@ -39,6 +48,8 @@ void World::HandleEvents(const Event& event)
 	}
 
 	m_player.HandleEvents(event);
+
+	m_score.setString("SCORE: " + std::to_string(m_eventManager.GetScore()));
 }
 
 void World::WorldUpdate(const Time& deltaTime, const Time& totalTimeElapsed)
@@ -53,7 +64,8 @@ void World::WorldUpdate(const Time& deltaTime, const Time& totalTimeElapsed)
 	m_eventManager.Update(deltaTime, totalTimeElapsed);
 	// update parallax background
 	for (auto& entity : m_parallaxEntityVector) entity->Update(deltaTime, totalTimeElapsed);
-	// must always be the last function executed
+	// must always be the last function executedp
+
 	Despawn();
 }
 
@@ -70,6 +82,8 @@ void World::WorldRender() // still don't know what states are for !!!
 
 	// draw player
 	m_player.draw(*m_renderWindowPointer, RenderStates());
+
+	m_renderWindowPointer->draw(m_score);
 }
 
 void World::Despawn()
