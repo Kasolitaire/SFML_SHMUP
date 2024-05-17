@@ -29,11 +29,13 @@ void HomingMissile::PreDespawn()
 void HomingMissile::SetTrackable(Trackable* trackable)
 {
 	m_trackable = trackable;
+	m_tracking = true;
 }
 
 void HomingMissile::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 {
-	consoleVector2f(GetHitboxPosition().getMiddlePosition());
+	consoleBool(m_trackable != nullptr, "");
+	
 	if (m_tracking)
 		TrackingMovement(deltaTime, totalTimeElapsed);
 	else

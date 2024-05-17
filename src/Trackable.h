@@ -9,6 +9,7 @@ public:
 	void MarkAsUntracked();
 	void MarkAsTracked();
 	bool MarkedAsUntrackable();
+	bool MarkedAsTracked();
 protected:
 	void MarkAsUntrackable();
 	void UpdateTrackablePosition(FloatRect position);

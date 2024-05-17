@@ -182,6 +182,6 @@ void Player::SpawnProjectile(const Time totalTimeElapsed)
 
 	if (Keyboard::isKeyPressed(Keyboard::Space)) //super stupid memory leak !!! should remove entity from projectile
 	{
-		m_homingMissiles.push_back(new HomingMissile(*this, m_sprite.getPosition(), 50, 50, *m_renderWindowConstant, seconds(0)));
+		m_homingMissiles.push_back(new HomingMissile(*this, m_sprite.getPosition(), 200, 1000, *m_renderWindowConstant, seconds(0)));
 	}
 }

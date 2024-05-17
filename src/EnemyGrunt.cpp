@@ -35,6 +35,7 @@ void EnemyGrunt::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 	if (m_dead)
 	{
 		if (m_animations["explosion"].Update(deltaTime, m_sprite))
+			
 			MarkForDespawn();
 		// should take damage or die here		!!!
 	}

@@ -24,22 +24,24 @@ void EnemyManager::Update(const Time deltaTime, const Time totalTimeElapsed)
 	float smallestDistance = 0;
 	Spawner(deltaTime, totalTimeElapsed);
 	auto homingMissiles = m_player.GetNonTrackingHomingMissiles();
- 	for (HomingMissile* const homingMissile : homingMissiles)
+ 	for (HomingMissile* homingMissile : homingMissiles)
 	{
 		for (Enemy* enemy : m_enemies) 
 		{
 			float distance = getDistanceBetweenVectors(homingMissile->GetHitboxPosition().getMiddlePosition(), enemy->GetTrackablePosition().getMiddlePosition());
-			if (distance < smallestDistance || smallestDistance == 0) 
+			if (!enemy->MarkedAsTracked() && (distance > smallestDistance || smallestDistance == 0)) 
 			{
 				closestTrackable = enemy;
 				smallestDistance = distance;
 			}
 		}
-		if (closestTrackable != nullptr)
+		if (homingMissile->TrackingStatus() == false && closestTrackable != nullptr)
 		{
+			bool t = homingMissile->TrackingStatus();
 			closestTrackable->MarkAsTracked();
 			homingMissile->SetTrackable(closestTrackable);
 		}
+		closestTrackable = nullptr;
 	}
 	
 	m_timer += deltaTime;
@@ -84,7 +86,7 @@ void EnemyManager::SpawnSquadron(Squadron squadron)
 			float trooperSpeed = 100;
 			float trooperRotationSpeed = 100;
 			Vector2f f = Vector2f(squadron.m_spawnPosition.x + squadron.m_horizontalDistanceApart * index, squadron.m_spawnPosition.y);
-			m_enemies.push_back(new EnemyTrooper(m_player, f, m_renderWindowConstant, trooperSpeed, trooperRotationSpeed));
+			//m_enemies.push_back(new EnemyTrooper(m_player, f, m_renderWindowConstant, trooperSpeed, trooperRotationSpeed));
 			break;
 		}
 	}

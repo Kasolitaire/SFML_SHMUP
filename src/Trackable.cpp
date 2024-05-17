@@ -24,6 +24,11 @@ bool Trackable::MarkedAsUntrackable()
     return m_trackable;
 }
 
+bool Trackable::MarkedAsTracked()
+{
+    return m_tracked;
+}
+
 void Trackable::MarkAsUntrackable()
 {
     m_trackable = false;
