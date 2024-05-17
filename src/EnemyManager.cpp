@@ -8,13 +8,6 @@ EnemyManager::EnemyManager(Player& player, const RenderWindow& renderWindowConst
 	m_pickupManager(&pickupManager),
 	m_timer(seconds(0))
 {
-	/*m_squadrons.push(Squadron(EnemyType::Trooper, seconds(0), 5, Vector2f(0, 60), 100));
-	m_squadrons.push(Squadron(EnemyType::Grunt, Time(), 5, Vector2f(0, 50), 100));
-	m_squadrons.push(Squadron(EnemyType::Grunt, seconds(2.5), 2, Vector2f(0, 60), 100));
-	m_squadrons.push(Squadron(EnemyType::Grunt, seconds(6), 5, Vector2f(0, 75), 100));
-	m_squadrons.push(Squadron(EnemyType::Grunt, seconds(6), 5, Vector2f(0, 60), 100));
-	m_squadrons.push(Squadron(EnemyType::Trooper, seconds(6), 5, Vector2f(0, 20), 100));
-	m_squadrons.push(Squadron(EnemyType::Grunt, seconds(6), 5, Vector2f(0, 60), 100));*/
 }
 
 EnemyManager::~EnemyManager()
@@ -27,21 +20,26 @@ EnemyManager::~EnemyManager()
 
 void EnemyManager::Update(const Time deltaTime, const Time totalTimeElapsed)
 {
-	Trackable* closestTrackable = nullptr;
+	Enemy* closestTrackable = nullptr;
 	float smallestDistance = 0;
 	Spawner(deltaTime, totalTimeElapsed);
 	auto homingMissiles = m_player.GetNonTrackingHomingMissiles();
-	for (HomingMissile* const homingMissile : homingMissiles)
+ 	for (HomingMissile* const homingMissile : homingMissiles)
 	{
 		for (Enemy* enemy : m_enemies) 
 		{
 			float distance = getDistanceBetweenVectors(homingMissile->GetHitboxPosition().getMiddlePosition(), enemy->GetTrackablePosition().getMiddlePosition());
-			if (distance < smallestDistance)
+			if (distance < smallestDistance || smallestDistance == 0) 
+			{
 				closestTrackable = enemy;
+				smallestDistance = distance;
+			}
 		}
+		if (closestTrackable != nullptr)
+		{
 			closestTrackable->MarkAsTracked();
-
-		homingMissile->SetTrackable(closestTrackable);
+			homingMissile->SetTrackable(closestTrackable);
+		}
 	}
 	
 	m_timer += deltaTime;
@@ -128,7 +126,7 @@ void EnemyManager::Spawner(const Time deltaTime, const Time totalTimeElapsed)
 {
 	std::random_device rd;
 	uniform_int_distribution<int> distHeight(0, 324);
-	uniform_real_distribution<float> distTime(0, 2.5);
+	uniform_real_distribution<float> distTime(0, 3);
 	uniform_real_distribution<float> distCount(2, 4);
 	uniform_int_distribution<int> distType(0, 1);
 	uniform_int_distribution<int> distDistance(40, 60);

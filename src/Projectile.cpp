@@ -8,6 +8,7 @@ Projectile::Projectile(Vector2f spawnPosition, float speed, const RenderWindow& 
 {
 	// setting up projectile
 	m_sprite.setPosition(spawnPosition);
+	m_hitbox.setPosition(spawnPosition);
 }
 
 void Projectile::Update(const Time& deltaTime, const Time& totalTimeElapsed)

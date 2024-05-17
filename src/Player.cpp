@@ -52,6 +52,8 @@ void Player::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 	// update projectiles
 	for (auto& projectile : m_horizontalProjectiles) 
 		projectile->Update(deltaTime, totalTimeElapsed);
+	for (auto& projectile : m_homingMissiles)
+		projectile->Update(deltaTime, totalTimeElapsed);
 
 	//update animations
 	m_animations["idle"].Update(deltaTime, m_sprite);
@@ -76,7 +78,7 @@ void Player::PreDespawn()
 {
 	for (HomingMissile* homingMissile : m_homingMissiles) 
 	{
-		//homingMissile->PreDespawn()
+		homingMissile->PreDespawn();
 	}
 }
 
@@ -94,6 +96,9 @@ void Player::draw(RenderTarget& target, RenderStates states) const
 	if(m_hitboxVisible) target.draw(m_hitbox);
 	
 	for (HorizontalProjectile* projectile : m_horizontalProjectiles) projectile->draw(target, states);
+	for (HomingMissile* projectile : m_homingMissiles) projectile->draw(target, states);
+
+
 }
 
 void Player::DespawnProjectiles()
@@ -173,5 +178,10 @@ void Player::SpawnProjectile(const Time totalTimeElapsed)
 				500, *m_renderWindowConstant,
 				totalTimeElapsed, Direction::RIGHT));
 		m_firedTimeStamp = totalTimeElapsed;
+	}
+
+	if (Keyboard::isKeyPressed(Keyboard::Space)) //super stupid memory leak !!! should remove entity from projectile
+	{
+		m_homingMissiles.push_back(new HomingMissile(*this, m_sprite.getPosition(), 50, 50, *m_renderWindowConstant, seconds(0)));
 	}
 }

@@ -31,7 +31,9 @@ Vector2f getCenterOfFloatRect(const FloatRect floatRect)
 
 float getDistanceBetweenVectors(const Vector2f first, const Vector2f second)
 {
-	return sqrtf(pow(first.x + second.x, 2) + pow(first.y + second.y, 2));
+	float d = first.x;
+	float distance = std::sqrt(std::pow((first.x - second.x), 2) + std::pow(first.y - second.y, 2));
+	return distance;
 }
 
 

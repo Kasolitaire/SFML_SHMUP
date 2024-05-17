@@ -1,5 +1,9 @@
 #include "Trackable.h"
 
+Trackable::Trackable() : m_trackable(true), m_tracked(false)
+{
+}
+
 FloatRect Trackable::GetTrackablePosition() const
 {
     return m_trackablePosition;

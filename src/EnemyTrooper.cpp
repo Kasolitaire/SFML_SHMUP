@@ -16,6 +16,7 @@ EnemyTrooper::EnemyTrooper(Player& player, Vector2f spawnPosition, const RenderW
 	m_hitbox.setSize(Vector2f(textureSize.x * reduce, textureSize.y * reduce));
 	m_sprite.setOrigin(textureSize.x / 2, textureSize.y / 2);
 	m_hitbox.setOrigin(textureSize.x / 2 * reduce, textureSize.y / 2 * reduce);
+	MarkAsUntrackable();
 }
 
 EnemyTrooper::~EnemyTrooper()

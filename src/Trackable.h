@@ -4,6 +4,7 @@ using namespace sf;
 class Trackable
 {
 public:
+	Trackable();
 	FloatRect GetTrackablePosition() const;
 	void MarkAsUntracked();
 	void MarkAsTracked();
@@ -12,7 +13,7 @@ protected:
 	void MarkAsUntrackable();
 	void UpdateTrackablePosition(FloatRect position);
 	FloatRect m_trackablePosition;
-private:
 	bool m_tracked;
 	bool m_trackable;
+private:
 };

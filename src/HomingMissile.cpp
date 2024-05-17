@@ -6,8 +6,10 @@ HomingMissile::HomingMissile(
 	const float speed,
 	const float rotationSpeed,
 	const RenderWindow& renderWindowConstant,
-	const Time timeStamp) : HomingProjectile(entity, spawnPosition, speed, rotationSpeed, renderWindowConstant, timeStamp)
+	const Time timeStamp) : HomingProjectile(entity, spawnPosition, speed, rotationSpeed, renderWindowConstant, timeStamp), m_trackable(nullptr)
 {
+	Texture& texture = AssetManager::GetTexture(ASSETS_PATH + "Arrow.png");
+	m_sprite.setTexture(texture);
 }
 
 bool HomingMissile::TrackingStatus() const
@@ -31,21 +33,21 @@ void HomingMissile::SetTrackable(Trackable* trackable)
 
 void HomingMissile::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 {
-	
-	
+	consoleVector2f(GetHitboxPosition().getMiddlePosition());
 	if (m_tracking)
 		TrackingMovement(deltaTime, totalTimeElapsed);
 	else
 		NonTrackingMovement(deltaTime, totalTimeElapsed);
+	m_hitbox.setPosition(m_sprite.getPosition());
 }
 
 void HomingMissile::TrackingMovement(const Time deltaTime, const Time totalTimeElapsed)
 {
+	std::cout << "dd";
 	float rotation = getAngleToTarget(
 		m_trackable->GetTrackablePosition().getMiddlePosition(), m_sprite.getGlobalBounds().getMiddlePosition());
 	
 	float target = rotation < 0 ? 360 + rotation : rotation;
-
 	float cw_distance;
 	float ccw_distance;
 	float x = 0;
@@ -83,4 +85,5 @@ void HomingMissile::TrackingMovement(const Time deltaTime, const Time totalTimeE
 
 void HomingMissile::NonTrackingMovement(const Time deltaTime, const Time totalTimeElapsed)
 {
+	//std::cout << "sfs";
 }

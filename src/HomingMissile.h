@@ -14,12 +14,12 @@ public:
 	bool TrackingStatus() const;
 	void PreDespawn();
 	void SetTrackable(Trackable* trackable);
-private:
 	virtual void Update(const Time& deltaTime, const Time& totalTimeElapsed) override;
+private:
 	void TrackingMovement(const Time deltaTime, const Time totalTimeElapsed);
 	void NonTrackingMovement(const Time deltaTime, const Time totalTimeElapsed);
 	Trackable* m_trackable;
-	bool m_tracking;
+	bool m_tracking = false;
 
 };
 
