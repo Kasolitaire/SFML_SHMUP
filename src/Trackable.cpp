@@ -29,6 +29,16 @@ bool Trackable::MarkedAsTracked()
     return m_tracked;
 }
 
+void Trackable::MarkAsCollided()
+{
+    m_collided = true;
+}
+
+bool Trackable::MarkedAsCollided()
+{
+    return m_collided;
+}
+
 void Trackable::MarkAsUntrackable()
 {
     m_trackable = false;

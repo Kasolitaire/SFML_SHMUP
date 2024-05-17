@@ -127,7 +127,7 @@ void EnemyManager::DespawnEnemyProjectiles()
 void EnemyManager::Spawner(const Time deltaTime, const Time totalTimeElapsed)
 {
 	std::random_device rd;
-	uniform_int_distribution<int> distHeight(100, 200);
+	uniform_int_distribution<int> distHeight(0, 324);
 	uniform_real_distribution<float> distTime(0, 3);
 	uniform_real_distribution<float> distCount(2, 4);
 	uniform_int_distribution<int> distType(0, 1);

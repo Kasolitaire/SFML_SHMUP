@@ -20,11 +20,11 @@ bool HomingMissile::TrackingStatus() const
 
 void HomingMissile::PreDespawn()
 {
-	/*if (m_trackable->MarkedAsUntrackable())
+	if (m_trackable->MarkedAsUntrackable())
 	{
 		m_trackable = nullptr;
 		m_tracking = false;
-	}*/
+	}
 }
 
 void HomingMissile::SetTrackable(Trackable* trackable)
@@ -35,10 +35,12 @@ void HomingMissile::SetTrackable(Trackable* trackable)
 
 void HomingMissile::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 {
-	consoleBool(m_trackable != nullptr, "");
-	
-	if (m_tracking)
+	if (m_tracking) 
+	{
 		TrackingMovement(deltaTime, totalTimeElapsed);
+		//if (CheckForIntersection(m_trackable))
+
+	}
 	else
 		NonTrackingMovement(deltaTime, totalTimeElapsed);
 	m_hitbox.setPosition(m_sprite.getPosition());
