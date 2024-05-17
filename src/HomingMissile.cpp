@@ -6,7 +6,8 @@ HomingMissile::HomingMissile(
 	const float speed,
 	const float rotationSpeed,
 	const RenderWindow& renderWindowConstant,
-	const Time timeStamp) : HomingProjectile(entity, spawnPosition, speed, rotationSpeed, renderWindowConstant, timeStamp), m_trackable(nullptr)
+	const Time timeStamp) : 
+	HomingProjectile(entity, spawnPosition, speed, rotationSpeed, renderWindowConstant, timeStamp), m_trackable(nullptr)
 {
 	Texture& texture = AssetManager::GetTexture(ASSETS_PATH + "Arrow.png");
 	m_sprite.setTexture(texture);
@@ -14,16 +15,16 @@ HomingMissile::HomingMissile(
 
 bool HomingMissile::TrackingStatus() const
 {
-	return false;
+	return m_tracking;
 }
 
 void HomingMissile::PreDespawn()
 {
-	if (m_trackable->MarkedAsUntrackable())
+	/*if (m_trackable->MarkedAsUntrackable())
 	{
 		m_trackable = nullptr;
 		m_tracking = false;
-	}
+	}*/
 }
 
 void HomingMissile::SetTrackable(Trackable* trackable)

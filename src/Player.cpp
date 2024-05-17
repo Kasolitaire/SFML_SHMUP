@@ -171,6 +171,10 @@ void Player::SpawnProjectile(const Time totalTimeElapsed)
 {
 	if (totalTimeElapsed.asSeconds() - m_firedTimeStamp.asSeconds() >= 0.2 && m_fire)
 	{
+		m_homingMissiles.push_back(new HomingMissile(*this, m_sprite.getPosition(), 200, 200, *m_renderWindowConstant, seconds(0)));
+	}
+	if (totalTimeElapsed.asSeconds() - m_firedTimeStamp.asSeconds() >= 0.2 && m_fire)
+	{
 		m_sounds.at("fire").play();
 		m_horizontalProjectiles.push_back(
 			new HorizontalProjectile(
@@ -180,8 +184,4 @@ void Player::SpawnProjectile(const Time totalTimeElapsed)
 		m_firedTimeStamp = totalTimeElapsed;
 	}
 
-	if (Keyboard::isKeyPressed(Keyboard::Space)) //super stupid memory leak !!! should remove entity from projectile
-	{
-		m_homingMissiles.push_back(new HomingMissile(*this, m_sprite.getPosition(), 200, 1000, *m_renderWindowConstant, seconds(0)));
-	}
 }
