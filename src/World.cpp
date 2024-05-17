@@ -88,6 +88,7 @@ void World::WorldRender() // still don't know what states are for !!!
 
 void World::Despawn()
 {
+	PreDespawn();
 	m_player.DespawnProjectiles(); 
 	m_enemyManager.Despawn();
 	m_pickUpManager.Despawn();

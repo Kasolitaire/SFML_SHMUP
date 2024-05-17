@@ -4,7 +4,7 @@ using namespace sf;
 class Trackable
 {
 public:
-	Trackable();
+	Trackable(RectangleShape& trackableHitbox);
 	FloatRect GetTrackablePosition() const;
 	void MarkAsUntracked();
 	void MarkAsTracked();
@@ -14,10 +14,11 @@ public:
 protected:
 	bool MarkedAsCollided();
 	void MarkAsUntrackable();
-	void UpdateTrackablePosition(FloatRect position);
+	void SetTrackableHitbox(RectangleShape& hitbox);
 private:
 	FloatRect m_trackablePosition;
 	bool m_tracked;
-	bool m_trackable;
+	bool m_untrackable;
 	bool m_collided;
+	RectangleShape& m_trackableHitbox;
 };

@@ -23,10 +23,9 @@ EnemyGrunt::EnemyGrunt(
 
 void EnemyGrunt::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 {
-	UpdateTrackablePosition(GetHitboxPosition());
 	m_sprite.move(-100 * deltaTime.asSeconds(), 0); 
 	
-	if (!m_dead && CheckForProjectileIntersection()) 
+	if (!m_dead && (CheckForProjectileIntersection() || MarkedAsCollided())) 
 	{
 		MarkAsDead();
 		MarkAsUntrackable();

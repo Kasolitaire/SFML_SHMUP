@@ -1,12 +1,12 @@
 #include "Trackable.h"
 
-Trackable::Trackable() : m_trackable(true), m_tracked(false)
+Trackable::Trackable(RectangleShape& hitbox) : m_untrackable(false), m_tracked(false), m_collided(false), m_trackableHitbox(hitbox)
 {
 }
 
 FloatRect Trackable::GetTrackablePosition() const
 {
-    return m_trackablePosition;
+    return m_trackableHitbox.getGlobalBounds();
 }
 
 void Trackable::MarkAsUntracked()
@@ -21,7 +21,7 @@ void Trackable::MarkAsTracked()
 
 bool Trackable::MarkedAsUntrackable()
 {
-    return m_trackable;
+    return m_untrackable;
 }
 
 bool Trackable::MarkedAsTracked()
@@ -41,10 +41,11 @@ bool Trackable::MarkedAsCollided()
 
 void Trackable::MarkAsUntrackable()
 {
-    m_trackable = false;
+    m_untrackable = true;
 }
 
-void Trackable::UpdateTrackablePosition(FloatRect position)
+void Trackable::SetTrackableHitbox(RectangleShape& hitbox)
 {
-    m_trackablePosition = position;
+    m_trackableHitbox = hitbox;
 }
+

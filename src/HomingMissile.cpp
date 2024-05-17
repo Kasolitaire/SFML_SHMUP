@@ -11,6 +11,8 @@ HomingMissile::HomingMissile(
 {
 	Texture& texture = AssetManager::GetTexture(ASSETS_PATH + "Arrow.png");
 	m_sprite.setTexture(texture);
+	m_hitbox.setSize(Vector2f(texture.getSize()));
+	ToggleHitBox(true);
 }
 
 bool HomingMissile::TrackingStatus() const
@@ -20,7 +22,7 @@ bool HomingMissile::TrackingStatus() const
 
 void HomingMissile::PreDespawn()
 {
-	if (m_trackable->MarkedAsUntrackable())
+	if (m_trackable != nullptr && m_trackable->MarkedAsUntrackable())
 	{
 		m_trackable = nullptr;
 		m_tracking = false;
@@ -37,8 +39,9 @@ void HomingMissile::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 {
 	if (m_tracking) 
 	{
+		if (CheckForIntersection(m_trackable->GetTrackablePosition()))
+			m_trackable->MarkAsCollided();
 		TrackingMovement(deltaTime, totalTimeElapsed);
-		//if (CheckForIntersection(m_trackable))
 
 	}
 	else
@@ -86,6 +89,7 @@ void HomingMissile::TrackingMovement(const Time deltaTime, const Time totalTimeE
 		x = -sinf(degreesToRadians(decrement - 90)) * deltaTime.asSeconds() * m_speed;
 	}
 	m_sprite.move(x, y);
+	m_hitbox.setPosition(m_sprite.getPosition());
 }
 
 void HomingMissile::NonTrackingMovement(const Time deltaTime, const Time totalTimeElapsed)

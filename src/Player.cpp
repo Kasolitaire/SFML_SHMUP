@@ -3,6 +3,7 @@
 Player::Player(const Vector2f& spawnPosition, const RenderWindow& renderWindowConstant, EventManager& eventManager) :
 	m_eventManager(eventManager),
 	HitboxEntity(renderWindowConstant),
+	Trackable(m_hitbox),
 	m_fire(false),
 	m_grace(false),
 	m_speed(5),

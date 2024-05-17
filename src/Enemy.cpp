@@ -2,6 +2,7 @@
 
 Enemy::Enemy(Player& player, Vector2f spawnPosition, const RenderWindow& renderWindowConstant) :
 	HitboxEntity(renderWindowConstant),
+	Trackable(m_hitbox),
 	m_player(player), 
 	m_despawn(false),
 	m_dead(false),
