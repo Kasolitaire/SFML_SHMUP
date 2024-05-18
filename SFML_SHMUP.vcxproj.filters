@@ -135,6 +135,9 @@
     <ClCompile Include="src\HomingMissile.cpp">
       <Filter>Source Files\Projectile Implementations</Filter>
     </ClCompile>
+    <ClCompile Include="src\Animatable.cpp">
+      <Filter>Source Files\Interface Implementations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AssetManager.h">
@@ -225,6 +228,9 @@
       <Filter>Header Files\Projectile Headers</Filter>
     </ClInclude>
     <ClInclude Include="src\Trackable.h">
+      <Filter>Header Files\Interface Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animatable.h">
       <Filter>Header Files\Interface Headers</Filter>
     </ClInclude>
   </ItemGroup>

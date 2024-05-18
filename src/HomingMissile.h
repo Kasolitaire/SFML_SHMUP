@@ -1,8 +1,9 @@
 #pragma once 
 #include "HomingProjectile.h"
 #include "Trackable.h"
+#include "Animatable.h"
 
-class HomingMissile : public HomingProjectile
+class HomingMissile : public HomingProjectile, public Animatable
 {
 public:
 	HomingMissile(

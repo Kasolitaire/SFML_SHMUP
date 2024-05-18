@@ -9,9 +9,8 @@ HomingMissile::HomingMissile(
 	const Time timeStamp) : 
 	HomingProjectile(entity, spawnPosition, speed, rotationSpeed, renderWindowConstant, timeStamp), m_trackable(nullptr)
 {
-	Texture& texture = AssetManager::GetTexture(ASSETS_PATH + "Arrow.png");
-	m_sprite.setTexture(texture);
-	m_hitbox.setSize(Vector2f(texture.getSize()));
+	m_animations.insert({ "missile", Animation(ASSETS_PATH + "missile_sheet.png", 3 , 0.1) });
+	m_hitbox.setSize(m_animations["missile"].GetFrameSize());
 	//ToggleHitBox(true);
 }
 
@@ -44,6 +43,7 @@ void HomingMissile::SetTrackable(Trackable* trackable)
 void HomingMissile::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 {
 	
+	m_animations["missile"].Update(deltaTime, m_sprite);
 	if (totalTimeElapsed - m_timeStamp > seconds(10))
 		MarkForDespawn();
 	if (m_tracking) 

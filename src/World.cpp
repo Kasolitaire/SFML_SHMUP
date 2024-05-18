@@ -19,7 +19,7 @@ World::World(RenderWindow& renderWindow, EventManager& eventManager) :
 
 	m_music.openFromFile(ASSETS_PATH + "Shovel Knight OST - Strike the Earth! Plains of Passage.mp3");
 	m_music.play();
-	m_music.setVolume(20);
+	m_music.setVolume(10);
 
 	m_score.setFont(AssetManager::GetFont(ASSETS_PATH + "Vermin Vibes 1989.ttf"));
 	m_score.setString("score: 0");
@@ -36,16 +36,16 @@ void World::HandleInputs()
 
 void World::HandleEvents(const Event& event)
 {
-	switch (event.key.code) // test code !!!
-	{
-	case Keyboard::Num1:
-		m_player.ToggleHitBox(true);
-		break;
-	case Keyboard::Num2:
-		m_player.ToggleHitBox(false);
-		//MarkForDespawn();
-		break;
-	}
+	//switch (event.key.code) // test code !!!
+	//{
+	//case Keyboard::Num1:
+	//	m_player.ToggleHitBox(true);
+	//	break;
+	//case Keyboard::Num2:
+	//	m_player.ToggleHitBox(false);
+	//	//MarkForDespawn();
+	//	break;
+	//}
 
 	m_player.HandleEvents(event);
 

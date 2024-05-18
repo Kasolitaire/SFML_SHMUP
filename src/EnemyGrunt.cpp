@@ -55,8 +55,8 @@ void EnemyGrunt::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 void EnemyGrunt::draw(RenderTarget& target, RenderStates states) const
 {
 	HitboxEntity::draw(target, states);
-	for (HorizontalProjectile* projectile : m_horizontalProjectiles)
-		projectile->draw(target, states);
+	/*for (HorizontalProjectile* projectile : m_horizontalProjectiles)
+		projectile->draw(target, states);*/
 }
 
 void EnemyGrunt::SpawnProjectile(const Time deltaTime, const Time totalTimeElapsed)
