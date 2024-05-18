@@ -2,7 +2,7 @@
 #include "HomingProjectile.h"
 #include "Trackable.h"
 
-class HomingMissile : public HomingProjectile, public Despawnable
+class HomingMissile : public HomingProjectile
 {
 public:
 	HomingMissile(
@@ -13,6 +13,7 @@ public:
 		const Time timeStamp);
 	bool TrackingStatus() const;
 	void PreDespawn();
+	bool CollidedWithTarget();
 	void SetTrackable(Trackable* trackable);
 	virtual void Update(const Time& deltaTime, const Time& totalTimeElapsed) override;
 private:

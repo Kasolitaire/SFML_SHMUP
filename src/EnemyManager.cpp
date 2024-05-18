@@ -86,7 +86,7 @@ void EnemyManager::SpawnSquadron(Squadron squadron)
 			float trooperSpeed = 100;
 			float trooperRotationSpeed = 100;
 			Vector2f f = Vector2f(squadron.m_spawnPosition.x + squadron.m_horizontalDistanceApart * index, squadron.m_spawnPosition.y);
-			//m_enemies.push_back(new EnemyTrooper(m_player, f, m_renderWindowConstant, trooperSpeed, trooperRotationSpeed));
+			m_enemies.push_back(new EnemyTrooper(m_player, f, m_renderWindowConstant, trooperSpeed, trooperRotationSpeed));
 			break;
 		}
 	}
@@ -128,7 +128,7 @@ void EnemyManager::Spawner(const Time deltaTime, const Time totalTimeElapsed)
 {
 	std::random_device rd;
 	uniform_int_distribution<int> distHeight(0, 324);
-	uniform_real_distribution<float> distTime(0, 0.5);
+	uniform_real_distribution<float> distTime(0, 1);
 	uniform_real_distribution<float> distCount(2, 4);
 	uniform_int_distribution<int> distType(0, 1);
 	uniform_int_distribution<int> distDistance(40, 60);

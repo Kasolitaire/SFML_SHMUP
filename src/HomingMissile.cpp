@@ -12,7 +12,7 @@ HomingMissile::HomingMissile(
 	Texture& texture = AssetManager::GetTexture(ASSETS_PATH + "Arrow.png");
 	m_sprite.setTexture(texture);
 	m_hitbox.setSize(Vector2f(texture.getSize()));
-	ToggleHitBox(true);
+	//ToggleHitBox(true);
 }
 
 bool HomingMissile::TrackingStatus() const
@@ -29,6 +29,12 @@ void HomingMissile::PreDespawn()
 	}
 }
 
+bool HomingMissile::CollidedWithTarget()
+{
+	if (m_tracking)
+		return m_trackable->MarkedAsCollided();
+}
+
 void HomingMissile::SetTrackable(Trackable* trackable)
 {
 	m_trackable = trackable;
@@ -39,10 +45,12 @@ void HomingMissile::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 {
 	if (m_tracking) 
 	{
-		if (CheckForIntersection(m_trackable->GetTrackablePosition()))
+		if (CheckForIntersection(m_trackable->GetTrackablePosition())) 
+		{
 			m_trackable->MarkAsCollided();
+			MarkForDespawn();
+		}
 		TrackingMovement(deltaTime, totalTimeElapsed);
-
 	}
 	else
 		NonTrackingMovement(deltaTime, totalTimeElapsed);
@@ -52,8 +60,7 @@ void HomingMissile::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 void HomingMissile::TrackingMovement(const Time deltaTime, const Time totalTimeElapsed)
 {
 	std::cout << "dd";
-	float rotation = getAngleToTarget(
-		m_trackable->GetTrackablePosition().getMiddlePosition(), m_sprite.getGlobalBounds().getMiddlePosition());
+	float rotation = getAngleToTarget(m_trackable->GetTrackablePosition().getMiddlePosition(), m_sprite.getGlobalBounds().getMiddlePosition());
 	
 	float target = rotation < 0 ? 360 + rotation : rotation;
 	float cw_distance;

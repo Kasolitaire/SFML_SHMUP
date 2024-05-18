@@ -16,7 +16,6 @@ EnemyTrooper::EnemyTrooper(Player& player, Vector2f spawnPosition, const RenderW
 	m_hitbox.setSize(Vector2f(textureSize.x * reduce, textureSize.y * reduce));
 	m_sprite.setOrigin(textureSize.x / 2, textureSize.y / 2);
 	m_hitbox.setOrigin(textureSize.x / 2 * reduce, textureSize.y / 2 * reduce);
-	MarkAsUntrackable();
 }
 
 EnemyTrooper::~EnemyTrooper()
@@ -28,15 +27,20 @@ void EnemyTrooper::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 	MarkProjectilesForDespawn(deltaTime, totalTimeElapsed);
 
 	// mark as despawn logic
-	if (!m_dead && CheckForProjectileIntersection()) 
+	if (!m_dead && (CheckForProjectileIntersection() || MarkedAsCollided())) 
 	{
 		m_sounds.at("explosion").play();
 		MarkAsDead();
+		MarkAsCollided();
 	}
 	if (m_dead)
 	{
-		if (m_animations["explosion"].Update(deltaTime, m_sprite))
+		if (m_animations["explosion"].Update(deltaTime, m_sprite)) 
+		{
 			MarkForDespawn();
+			MarkAsUntrackable();
+		}
+
 		m_sprite.move(-100 * deltaTime.asSeconds(), 0);
 		// should take damage or die here		!!!
 	}

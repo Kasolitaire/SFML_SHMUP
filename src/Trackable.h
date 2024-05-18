@@ -11,8 +11,8 @@ public:
 	bool MarkedAsUntrackable();
 	bool MarkedAsTracked();
 	void MarkAsCollided();
-protected:
 	bool MarkedAsCollided();
+protected:
 	void MarkAsUntrackable();
 	void SetTrackableHitbox(RectangleShape& hitbox);
 private:
