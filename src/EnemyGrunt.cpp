@@ -40,9 +40,37 @@ void EnemyGrunt::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 	}
 	else 
 	{
+		SpawnProjectile(deltaTime, totalTimeElapsed);
 		m_animations["grunt"].Update(deltaTime, m_sprite);
 		if (m_player.GetHitboxPosition().intersects(m_hitbox.getGlobalBounds()))
 			m_player.DecrementLives(totalTimeElapsed);
+		for (HorizontalProjectile* projectile : m_horizontalProjectiles) 
+		{
+			projectile->Update(deltaTime, totalTimeElapsed);
+		}
 	}
 	m_hitbox.setPosition(m_sprite.getPosition());
 }
+
+void EnemyGrunt::draw(RenderTarget& target, RenderStates states) const
+{
+	HitboxEntity::draw(target, states);
+	for (HorizontalProjectile* projectile : m_horizontalProjectiles)
+		projectile->draw(target, states);
+}
+
+void EnemyGrunt::SpawnProjectile(const Time deltaTime, const Time totalTimeElapsed)
+{
+	if (totalTimeElapsed - m_firedTimeStamp > seconds(2)) 
+	{
+		m_firedTimeStamp = totalTimeElapsed;
+		m_horizontalProjectiles.push_back(
+			new HorizontalProjectile(
+				Vector2f(m_sprite.getPosition()),
+				500, *m_renderWindowConstant,
+				totalTimeElapsed, Direction::LEFT));
+		m_firedTimeStamp = totalTimeElapsed;
+		m_horizontalProjectiles.back()->SetColor(Color::Red);
+	}
+}
+

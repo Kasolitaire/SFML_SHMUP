@@ -182,7 +182,7 @@ void Player::SpawnProjectile(const Time totalTimeElapsed)
 {
 	if (totalTimeElapsed.asSeconds() - m_firedTimeStamp.asSeconds() >= 0.2 && m_fire)
 	{
-		m_homingMissiles.push_back(new HomingMissile(*this, m_sprite.getPosition(), 200, 200, *m_renderWindowConstant, seconds(0)));
+		m_homingMissiles.push_back(new HomingMissile(*this, m_sprite.getPosition(), 200, 200, *m_renderWindowConstant, totalTimeElapsed));
 	}
 	if (totalTimeElapsed.asSeconds() - m_firedTimeStamp.asSeconds() >= 0.2 && m_fire)
 	{

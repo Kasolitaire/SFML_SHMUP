@@ -19,7 +19,7 @@ World::World(RenderWindow& renderWindow, EventManager& eventManager) :
 
 	m_music.openFromFile(ASSETS_PATH + "Shovel Knight OST - Strike the Earth! Plains of Passage.mp3");
 	m_music.play();
-	m_music.setVolume(5);
+	m_music.setVolume(20);
 
 	m_score.setFont(AssetManager::GetFont(ASSETS_PATH + "Vermin Vibes 1989.ttf"));
 	m_score.setString("score: 0");

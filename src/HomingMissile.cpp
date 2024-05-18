@@ -43,6 +43,9 @@ void HomingMissile::SetTrackable(Trackable* trackable)
 
 void HomingMissile::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 {
+	
+	if (totalTimeElapsed - m_timeStamp > seconds(10))
+		MarkForDespawn();
 	if (m_tracking) 
 	{
 		if (CheckForIntersection(m_trackable->GetTrackablePosition())) 
@@ -59,7 +62,6 @@ void HomingMissile::Update(const Time& deltaTime, const Time& totalTimeElapsed)
 
 void HomingMissile::TrackingMovement(const Time deltaTime, const Time totalTimeElapsed)
 {
-	std::cout << "dd";
 	float rotation = getAngleToTarget(m_trackable->GetTrackablePosition().getMiddlePosition(), m_sprite.getGlobalBounds().getMiddlePosition());
 	
 	float target = rotation < 0 ? 360 + rotation : rotation;
@@ -101,5 +103,9 @@ void HomingMissile::TrackingMovement(const Time deltaTime, const Time totalTimeE
 
 void HomingMissile::NonTrackingMovement(const Time deltaTime, const Time totalTimeElapsed)
 {
-	//std::cout << "sfs";
+	float increment = (m_sprite.getRotation() - m_rotationSpeed * deltaTime.asSeconds());
+	m_sprite.setRotation(increment);
+	float y = cosf(degreesToRadians(increment - 90)) * deltaTime.asSeconds() * m_speed;
+	float x = -sinf(degreesToRadians(increment - 90)) * deltaTime.asSeconds() * m_speed;
+	m_sprite.move(x, y);
 }
