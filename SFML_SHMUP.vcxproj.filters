@@ -43,6 +43,9 @@
     <Filter Include="Source Files\Interface Implementations">
       <UniqueIdentifier>{9ff98e3c-2ede-4de5-bd50-7fb66bc1d574}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\thor">
+      <UniqueIdentifier>{4b6a7c91-f77e-4c64-81f5-2ffb7d7f3ecc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -137,6 +140,87 @@
     </ClCompile>
     <ClCompile Include="src\Animatable.cpp">
       <Filter>Source Files\Interface Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\Action.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\ActionOperations.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\Affectors.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\Arrow.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\BigSprite.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\BigTexture.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\CallbackTimer.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\ColorAnimation.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\ColorGradient.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\ConcaveShape.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\Connection.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\Distributions.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\Emitters.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\FadeAnimation.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\FrameAnimation.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\InputNames.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\Joystick.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\Particle.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\ParticleSystem.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\Random.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\Shapes.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\StopWatch.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\Timer.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\ToString.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\Triangulation.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\Trigonometry.cpp">
+      <Filter>Source Files\thor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thor-src\UniformAccess.cpp">
+      <Filter>Source Files\thor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

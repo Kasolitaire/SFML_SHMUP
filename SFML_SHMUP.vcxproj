@@ -48,6 +48,33 @@
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Projectile.cpp" />
     <ClCompile Include="src\Squadron.cpp" />
+    <ClCompile Include="src\thor-src\Action.cpp" />
+    <ClCompile Include="src\thor-src\ActionOperations.cpp" />
+    <ClCompile Include="src\thor-src\Affectors.cpp" />
+    <ClCompile Include="src\thor-src\Arrow.cpp" />
+    <ClCompile Include="src\thor-src\BigSprite.cpp" />
+    <ClCompile Include="src\thor-src\BigTexture.cpp" />
+    <ClCompile Include="src\thor-src\CallbackTimer.cpp" />
+    <ClCompile Include="src\thor-src\ColorAnimation.cpp" />
+    <ClCompile Include="src\thor-src\ColorGradient.cpp" />
+    <ClCompile Include="src\thor-src\ConcaveShape.cpp" />
+    <ClCompile Include="src\thor-src\Connection.cpp" />
+    <ClCompile Include="src\thor-src\Distributions.cpp" />
+    <ClCompile Include="src\thor-src\Emitters.cpp" />
+    <ClCompile Include="src\thor-src\FadeAnimation.cpp" />
+    <ClCompile Include="src\thor-src\FrameAnimation.cpp" />
+    <ClCompile Include="src\thor-src\InputNames.cpp" />
+    <ClCompile Include="src\thor-src\Joystick.cpp" />
+    <ClCompile Include="src\thor-src\Particle.cpp" />
+    <ClCompile Include="src\thor-src\ParticleSystem.cpp" />
+    <ClCompile Include="src\thor-src\Random.cpp" />
+    <ClCompile Include="src\thor-src\Shapes.cpp" />
+    <ClCompile Include="src\thor-src\StopWatch.cpp" />
+    <ClCompile Include="src\thor-src\Timer.cpp" />
+    <ClCompile Include="src\thor-src\ToString.cpp" />
+    <ClCompile Include="src\thor-src\Triangulation.cpp" />
+    <ClCompile Include="src\thor-src\Trigonometry.cpp" />
+    <ClCompile Include="src\thor-src\UniformAccess.cpp" />
     <ClCompile Include="src\Trackable.cpp" />
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
@@ -142,7 +169,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SFML_STATIC;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\include;%(AdditionalIncludeDirectories);C:\Users\kasol\source\repos\Kasolitaire\SFML_SHMUP\dependencies\include\Thor;C:\Users\kasol\source\repos\Kasolitaire\SFML_SHMUP\dependencies\include\Aurora</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -160,7 +187,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SFML_STATIC;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\include;%(AdditionalIncludeDirectories);C:\Users\kasol\source\repos\Kasolitaire\SFML_SHMUP\dependencies\include\Thor;C:\Users\kasol\source\repos\Kasolitaire\SFML_SHMUP\dependencies\include\Aurora</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -179,6 +206,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>;C:\Users\kasol\source\repos\Kasolitaire\SFML_SHMUP\dependencies\include\Thor;C:\Users\kasol\source\repos\Kasolitaire\SFML_SHMUP\dependencies\include\Aurora</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -195,6 +223,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SFML_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>;C:\Users\kasol\source\repos\Kasolitaire\SFML_SHMUP\dependencies\include\Thor;C:\Users\kasol\source\repos\Kasolitaire\SFML_SHMUP\dependencies\include\Aurora</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
